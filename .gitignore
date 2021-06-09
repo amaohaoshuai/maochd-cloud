@@ -1,23 +1,34 @@
-# Windows thumbnail cache files
+# Windows image file caches
 Thumbs.db
 ehthumbs.db
-ehthumbs_vista.db
-
-# Dump file
-*.stackdump
 
 # Folder config file
-[Dd]esktop.ini
+Desktop.ini
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# java class file
+*.class
 
-# Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
+# Package Files #
+*.war
+*.ear
+/target
+/.settings
+/.classpath
+/.project
+/.idea
 
-# Windows shortcuts
-*.lnk
+# ignore Maven generated target folders
+target
+out
+
+# ignore eclipse files
+.project
+.classpath
+.settings
+.factorypath
+.metadata
+.idea
+*.iml
+
+# ignore log files
+*.log
