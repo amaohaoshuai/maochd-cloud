@@ -1,9 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.watertek.system.api.factory.RemoteUserFallbackFactory,\
-  com.watertek.system.api.factory.RemoteLogFallbackFactory,\
-  com.watertek.system.api.factory.RemoteFileFallbackFactory,\
-  com.watertek.company.api.factory.RemoteCompanyFallbackFactory,\
-  com.watertek.customer.api.factory.RemoteCustomerFallbackFactory,\
-  com.watertek.base.api.factory.RemoteBaseFallbackFactory,\
-  com.watertek.invoice.api.factory.RemoteInvoiceFallbackFactory,\
-  com.watertek.system.api.factory.RemoteAreaFallbackFactory
+  com.maochd.cloud.maochd.api.system.order.api.RemoteOrderFallbackFactory

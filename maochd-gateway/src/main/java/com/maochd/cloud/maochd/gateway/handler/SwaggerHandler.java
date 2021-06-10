@@ -16,8 +16,10 @@ import java.util.Optional;
 public class SwaggerHandler {
     @Autowired(required = false)
     private SecurityConfiguration securityConfiguration;
+
     @Autowired(required = false)
     private UiConfiguration uiConfiguration;
+
     private final SwaggerResourcesProvider swaggerResources;
 
     @Autowired
@@ -38,6 +40,7 @@ public class SwaggerHandler {
                 Optional.ofNullable(uiConfiguration).orElse(UiConfigurationBuilder.builder().build()), HttpStatus.OK));
     }
 
+    @SuppressWarnings("rawtypes")
     @GetMapping("")
     public Mono<ResponseEntity> swaggerResources() {
         return Mono.just((new ResponseEntity<>(swaggerResources.get(), HttpStatus.OK)));

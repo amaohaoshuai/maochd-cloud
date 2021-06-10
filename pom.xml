@@ -23,6 +23,16 @@
         <swagger.version>2.9.2</swagger.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+        <pagehelper.boot.version>1.3.0</pagehelper.boot.version>
+        <commons.io.version>2.5</commons.io.version>
+        <poi.version>4.1.2</poi.version>
+        <commons.fileupload.version>1.3.3</commons.fileupload.version>
+        <velocity.version>1.7</velocity.version>
+        <fastjson.version>1.2.76</fastjson.version>
+        <common-pool.version>2.6.2</common-pool.version>
+        <zxing.core.version>3.4.1</zxing.core.version>
+        <hutool.version>5.1.1</hutool.version>
+        <guava.version>20.0</guava.version>
     </properties>
 
     <modules>
@@ -65,6 +75,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- SpringCloud Alibaba Sentinel -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
         <!-- SpringCloud Ailibaba Nacos -->
         <dependency>
@@ -116,24 +131,21 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- 系统接口 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-api-system</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <!-- 第三方接口 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-api-third-part</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
