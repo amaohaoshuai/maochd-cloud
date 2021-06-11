@@ -21,7 +21,13 @@
     <dependencies>
         <dependency>
             <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common</artifactId>
+            <artifactId>maochd-common-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-swagger</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
