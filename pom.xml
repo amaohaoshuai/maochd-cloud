@@ -42,6 +42,7 @@
         <module>maochd-pay</module>
         <module>maochd-api</module>
         <module>maochd-common</module>
+        <module>maochd-monitor</module>
     </modules>
 
     <dependencies>

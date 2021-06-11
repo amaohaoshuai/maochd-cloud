@@ -1,0 +1,26 @@
+server:
+  port: 18083
+spring:
+  application:
+    name: maochd-monitor
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+        namespace: ${NACOS_NAMESPACE:eb47b0ca-11f5-4b6c-b106-9d8a855d4a4f}
+      config:
+        # 配置中心地址
+        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+        namespace: ${NACOS_NAMESPACE:eb47b0ca-11f5-4b6c-b106-9d8a855d4a4f}
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        # 动态刷新
+        refresh-enabled: true
