@@ -1,6 +1,6 @@
 package com.maochd.cloud.api.system.order.api.fallback;
 
-import com.maochd.cloud.api.system.order.api.domain.OrderInfo;
+import com.maochd.cloud.api.system.order.api.domain.Order;
 import com.maochd.cloud.api.system.order.api.service.RemoteOrderService;
 import com.maochd.cloud.common.core.constant.CommonConstant;
 import com.maochd.cloud.common.core.domain.R;
@@ -19,7 +19,7 @@ public class RemoteOrderFallbackFactory implements FallbackFactory<RemoteOrderSe
 
         return new RemoteOrderService() {
             @Override
-            public R<List<OrderInfo>> list() {
+            public R<List<Order>> list() {
                 return R.fail(CommonConstant.EXCEPTION);
             }
         };

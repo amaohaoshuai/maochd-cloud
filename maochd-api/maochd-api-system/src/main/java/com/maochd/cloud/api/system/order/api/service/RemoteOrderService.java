@@ -1,6 +1,6 @@
 package com.maochd.cloud.api.system.order.api.service;
 
-import com.maochd.cloud.api.system.order.api.domain.OrderInfo;
+import com.maochd.cloud.api.system.order.api.domain.Order;
 import com.maochd.cloud.api.system.order.api.fallback.RemoteOrderFallbackFactory;
 import com.maochd.cloud.common.core.constant.ServiceNameConstant;
 import com.maochd.cloud.common.core.domain.R;
@@ -20,5 +20,5 @@ public interface RemoteOrderService {
      * @return 订单列表
      */
     @GetMapping("/order/list")
-    R<List<OrderInfo>> list();
+    R<List<Order>> list();
 }

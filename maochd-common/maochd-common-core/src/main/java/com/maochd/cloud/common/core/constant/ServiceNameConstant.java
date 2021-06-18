@@ -16,4 +16,9 @@ public interface ServiceNameConstant {
      * 支付服务名
      */
     String PAY_SERVER = "maochd-pay";
+
+    /**
+     * 库存服务名
+     */
+    String INVENTORY_SERVER = "maochd-inventory";
 }

@@ -6,7 +6,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.6</version>
-
     </parent>
 
     <groupId>com.maochd.cloud</groupId>
@@ -33,16 +32,22 @@
         <zxing.core.version>3.4.1</zxing.core.version>
         <hutool.version>5.1.1</hutool.version>
         <guava.version>20.0</guava.version>
+        <spring-boot.mybatis>2.1.4</spring-boot.mybatis>
+        <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <mybatis-plus.generator.version>3.4.1</mybatis-plus.generator.version>
+        <druid.version>1.2.4</druid.version>
+        <dynamic-ds.version>3.3.1</dynamic-ds.version>
+        <velocity.core.version>2.3</velocity.core.version>
+        <jackson.datatype.jsr310.version>2.10.1</jackson.datatype.jsr310.version>
     </properties>
 
     <modules>
         <module>maochd-gateway</module>
         <module>maochd-auth</module>
-        <module>maochd-order</module>
-        <module>maochd-pay</module>
         <module>maochd-api</module>
         <module>maochd-common</module>
         <module>maochd-monitor</module>
+        <module>maochd-service</module>
     </modules>
 
     <dependencies>
@@ -104,6 +109,7 @@
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>${spring-boot-admin.version}</version>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -145,6 +151,25 @@
                 <groupId>com.maochd.cloud</groupId>
                 <artifactId>maochd-api-third-part</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.generator.version}</version>
+            </dependency>
+
+            <!-- pagehelper 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

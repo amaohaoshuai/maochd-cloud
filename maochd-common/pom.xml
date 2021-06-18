@@ -21,6 +21,7 @@
     <modules>
         <module>maochd-common-core</module>
         <module>maochd-common-swagger</module>
+        <module>maochd-common-datasource</module>
     </modules>
 
 </project>
