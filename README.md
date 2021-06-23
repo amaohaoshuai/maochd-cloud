@@ -1,37 +1,36 @@
-# 微服务
+## 查看防火墙
+firewall-cmd --state
 
-#### 介绍
-微服务项目
+## 关闭防火墙
+systemctl stop firewalld.service\
+systemctl disable firewalld.service
 
-#### 软件架构
-软件架构说明
+## 安装docker
+curl -fsSL https://get.docker.com | bash -s docker --mirror aliyun
 
+## 运行docker
+systemctl start docker
 
-#### 安装教程
+## 安装mysql(推荐使用5.7)
+docker run --name maochd-mysql -v /opt/mysql5.7/conf:/etc/mysql/conf.d -v /opt/mysql5.7/data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7.32
+docker run --name maochd-mysql -v /opt/mysql8/conf:/etc/mysql/conf.d -v /opt/mysql8/data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0.25
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## 安装nacos server
+docker run --name maochd-nacos -e MODE=standalone -p 8848:8848 -d nacos/nacos-server:1.4.1
 
-#### 使用说明
+## 安装sentinel dashboard
+docker run --name maochd-sentinel  -d -p 8858:8858 -d  bladex/sentinel-dashboard
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## 安装git
+yum install -y git
 
-#### 参与贡献
+## 下载seata源码
+git clone https://gitee.com/seata-io/seata.git -b v1.4.2
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+## 替换config.txt
+## 执行nacos脚本
+sh nacos-config.sh -h 192.168.119.131 -p 8848 -g SEATA_GROUP -t maochd-cloud-seata -u nacos -w nacos
 
+## 安装seata server
+docker run -d --name maochd-seata -p 8091:8091 -e STORE_MODE=db -e SEATA_IP=192.168.119.131 -e SEATA_PORT=8091 -e SEATA_CONFIG_NAME=file:/root/seata-config/registry -v /opt/seata-config:/root/seata-config seataio/seata-server:1.4.2
 
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)

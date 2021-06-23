@@ -14,12 +14,12 @@ spring:
     nacos:
       discovery:
         # 服务注册地址
-        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
-        namespace: ${NACOS_NAMESPACE:eb47b0ca-11f5-4b6c-b106-9d8a855d4a4f}
+        server-addr: ${NACOS_SERVER_ADDR:192.168.119.131:8848}
+        namespace: ${NACOS_NAMESPACE:maochd-cloud-yml}
       config:
         # 配置中心地址
-        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
-        namespace: ${NACOS_NAMESPACE:eb47b0ca-11f5-4b6c-b106-9d8a855d4a4f}
+        server-addr: ${NACOS_SERVER_ADDR:192.168.119.131:8848}
+        namespace: ${NACOS_NAMESPACE:maochd-cloud-yml}
         # 配置文件格式
         file-extension: yml
         # 共享配置
@@ -27,4 +27,3 @@ spring:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         # 动态刷新
         refresh-enabled: true
-

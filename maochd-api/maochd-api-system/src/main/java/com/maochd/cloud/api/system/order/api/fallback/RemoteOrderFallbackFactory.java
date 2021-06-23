@@ -1,11 +1,11 @@
 package com.maochd.cloud.api.system.order.api.fallback;
 
-import com.maochd.cloud.api.system.order.api.domain.OrderInfo;
+import com.maochd.cloud.api.system.order.api.domain.Order;
 import com.maochd.cloud.api.system.order.api.service.RemoteOrderService;
 import com.maochd.cloud.common.core.constant.CommonConstant;
 import com.maochd.cloud.common.core.domain.R;
+import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class RemoteOrderFallbackFactory implements FallbackFactory<RemoteOrderSe
 
         return new RemoteOrderService() {
             @Override
-            public R<List<OrderInfo>> list() {
+            public R<List<Order>> list() {
                 return R.fail(CommonConstant.EXCEPTION);
             }
         };

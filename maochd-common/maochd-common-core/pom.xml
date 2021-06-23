@@ -18,6 +18,14 @@
     </properties>
 
     <dependencies>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
         <!-- io常用工具类 -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -60,32 +68,51 @@
             <version>${common-pool.version}</version>
         </dependency>
 
+        <!-- 二维码生成器 -->
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>
             <version>${zxing.core.version}</version>
         </dependency>
 
-        <!--hu tool-->
+        <!-- hu tool -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool.version}</version>
         </dependency>
 
-        <!--        &lt;!&ndash; pagehelper 分页插件 &ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.github.pagehelper</groupId>-->
-        <!--            <artifactId>pagehelper-spring-boot-starter</artifactId>-->
-        <!--            <version>${pagehelper.boot.version}</version>-->
-        <!--        </dependency>-->
+        <!-- google工具类 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
 
-        <!--        &lt;!&ndash;google工具类&ndash;&gt;-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.google.guava</groupId>-->
-        <!--            <artifactId>guava</artifactId>-->
-        <!--            <version>${guava.version}</version>-->
-        <!--        </dependency>-->
+        <!-- jackson序列化 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.datatype.jsr310.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- kryo序列化 用于解决seata使用jackson无法序列化的问题 -->
+<!--        <dependency>-->
+<!--            <groupId>com.esotericsoftware.kryo</groupId>-->
+<!--            <artifactId>kryo</artifactId>-->
+<!--            <version>2.24.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.esotericsoftware</groupId>-->
+<!--            <artifactId>kryo</artifactId>-->
+<!--            <version>4.0.2</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>de.javakaffee</groupId>-->
+<!--            <artifactId>kryo-serializers</artifactId>-->
+<!--            <version>0.44</version>-->
+<!--        </dependency>-->
     </dependencies>
 
 
