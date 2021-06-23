@@ -4,8 +4,8 @@ import com.maochd.cloud.api.system.pay.api.domain.AmountVo;
 import com.maochd.cloud.api.system.pay.api.service.RemotePayService;
 import com.maochd.cloud.common.core.constant.CommonConstant;
 import com.maochd.cloud.common.core.domain.R;
+import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
 @Slf4j

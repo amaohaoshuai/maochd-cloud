@@ -25,29 +25,40 @@
     </modules>
 
     <dependencies>
+        <!-- Springboot web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Springboot test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- system api -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-api-system</artifactId>
         </dependency>
+
+        <!-- common core -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!-- common swagger -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-swagger</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!-- common datasource -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-datasource</artifactId>

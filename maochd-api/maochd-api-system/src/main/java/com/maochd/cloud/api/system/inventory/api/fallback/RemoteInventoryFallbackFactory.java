@@ -4,8 +4,8 @@ import com.maochd.cloud.api.system.inventory.api.domain.InventoryStockVo;
 import com.maochd.cloud.api.system.inventory.api.service.RemoteInventoryService;
 import com.maochd.cloud.common.core.constant.CommonConstant;
 import com.maochd.cloud.common.core.domain.R;
+import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
 @Slf4j

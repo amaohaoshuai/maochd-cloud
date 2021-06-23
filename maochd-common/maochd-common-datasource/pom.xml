@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.maochd.cloud</groupId>
         <artifactId>maochd-common</artifactId>
@@ -10,6 +11,7 @@
 
     <artifactId>maochd-common-datasource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>maochd-common-datasource</name>
     <description>Demo project for Spring Boot</description>
 
@@ -18,32 +20,39 @@
     </properties>
 
     <dependencies>
+        <!-- Mybatis Plus 代码生成 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
         </dependency>
-        <!-- Apache Velocity -->
+
+        <!-- Apache Velocity 模板引擎-->
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
             <version>${velocity.core.version}</version>
         </dependency>
+
         <!-- mysql连接工具 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <version>${mysql-connect.version}</version>
         </dependency>
+
         <!-- Druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid.version}</version>
         </dependency>
+
+        <!-- Mybatis Plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
+
         <!-- Dynamic DataSource -->
         <dependency>
             <groupId>com.baomidou</groupId>

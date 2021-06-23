@@ -18,7 +18,6 @@
     </properties>
 
     <dependencies>
-
         <!-- SpringBoot Admin -->
         <dependency>
             <groupId>de.codecentric</groupId>
@@ -37,7 +36,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>

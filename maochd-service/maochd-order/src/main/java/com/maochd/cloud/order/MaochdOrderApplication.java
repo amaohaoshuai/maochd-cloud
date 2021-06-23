@@ -1,6 +1,6 @@
 package com.maochd.cloud.order;
 
-import com.maochd.cloud.common.core.annotation.EnableCustomConfig;
+import com.maochd.cloud.common.datasource.annotation.EnableCustomConfig;
 import com.maochd.cloud.common.core.annotation.EnableFeignConfig;
 import com.maochd.cloud.common.swagger.annotation.EnableSwagger2Config;
 import org.springframework.boot.SpringApplication;

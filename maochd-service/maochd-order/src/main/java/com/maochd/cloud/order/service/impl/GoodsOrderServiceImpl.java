@@ -47,9 +47,9 @@ public class GoodsOrderServiceImpl extends ServiceImpl<GoodsOrderMapper, GoodsOr
     public R<Boolean> generateOrder(TestVo testVo) {
         GoodsOrder order = testVo.getGoodsOrder();
 
-        if(testVo.getPayFlag()){
+        if (testVo.getPayFlag()) {
             throw new RuntimeException("扣除余额失败");
-        }else {
+        } else {
             // 扣除余额
             R<Boolean> amountResult = remotePayService.subtractAmount(AmountVo.builder()
                     .accountId(order.getAccountId())
@@ -60,9 +60,9 @@ public class GoodsOrderServiceImpl extends ServiceImpl<GoodsOrderMapper, GoodsOr
             }
         }
 
-        if(testVo.getInventoryFlag()){
-            throw new RuntimeException("扣除余额失败");
-        }else {
+        if (testVo.getInventoryFlag()) {
+            throw new RuntimeException("扣除库存失败");
+        } else {
             // 扣除库存
             R<Boolean> inventoryResult = remoteInventoryService.subtractInventory(InventoryStockVo.builder()
                     .changeNum(order.getNum())
@@ -76,8 +76,8 @@ public class GoodsOrderServiceImpl extends ServiceImpl<GoodsOrderMapper, GoodsOr
         // 添加订单
         order.setOrderId(UUID.randomUUID().toString());
         this.save(order);
-        if(testVo.getFlag()){
-            throw new RuntimeException("aa");
+        if (testVo.getFlag()) {
+            throw new RuntimeException("失败");
         }
         return R.ok();
     }

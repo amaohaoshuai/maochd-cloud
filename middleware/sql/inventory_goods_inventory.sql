@@ -9,5 +9,5 @@ create table goods_inventory
 )
     comment '库存';
 
-INSERT INTO inventory.goods_inventory (id, goods_id, goods_inventory, create_date, goods_name) VALUES (1, '4410b652-94bc-4439-a1d0-210255422f8c', 96, '2021-06-17 02:08:48', '冰红茶');
-INSERT INTO inventory.goods_inventory (id, goods_id, goods_inventory, create_date, goods_name) VALUES (2, 'fbdf389f-d321-4f57-880a-60184a80adea', 10, '2021-06-17 10:09:55', '红糖姜茶');
+INSERT INTO inventory.goods_inventory (id, goods_id, goods_inventory, create_date, goods_name) VALUES (1, '4410b652-94bc-4439-a1d0-210255422f8c', 96, '2021-06-17 02:08:48', 'msg');
+INSERT INTO inventory.goods_inventory (id, goods_id, goods_inventory, create_date, goods_name) VALUES (2, 'fbdf389f-d321-4f57-880a-60184a80adea', 10, '2021-06-17 10:09:55', 'message');
