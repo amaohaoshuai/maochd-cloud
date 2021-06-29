@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
 
+import com.maochd.cloud.common.redis.annotation.LockParam;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -39,6 +40,7 @@ public class User implements Serializable {
     @TableField("user_id")
     private String userId;
 
+//    @LockParam(name = "userName")
     @ApiModelProperty(value = "用户名")
     @TableField("user_name")
     private String userName;
