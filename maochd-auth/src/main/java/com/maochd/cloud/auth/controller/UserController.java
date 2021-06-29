@@ -1,15 +1,19 @@
 package com.maochd.cloud.auth.controller;
 
 
+import cn.hutool.core.lang.UUID;
+import cn.hutool.core.thread.ThreadUtil;
+import com.alibaba.fastjson.JSONArray;
 import com.maochd.cloud.auth.entity.User;
 import com.maochd.cloud.auth.service.UserService;
 import com.maochd.cloud.common.core.domain.R;
+import com.maochd.cloud.common.redis.annotation.LockParam;
+import com.maochd.cloud.common.redis.annotation.RedisLock;
+import com.maochd.cloud.common.redis.util.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -30,10 +34,28 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private RedisUtil redisUtil;
+
     @GetMapping("/list")
     @ApiOperation(value = "用户列表", notes = "用户列表")
     public R<List<User>> list() {
-        return R.ok(userService.list());
+        List<User> users = JSONArray.parseArray(redisUtil.get("user:list"), User.class);
+        if (CollectionUtils.isEmpty(users)) {
+            users = userService.list();
+            redisUtil.set("user:list", users);
+        }
+        return R.ok(users);
+    }
+
+    @RedisLock(prefix = "lock", KeyName = "userName")
+    @PostMapping("/add")
+    @ApiOperation(value = "添加用户", notes = "添加用户")
+    public R<Boolean> add(@RequestBody @LockParam User user) {
+        ThreadUtil.sleep(10000);
+        user.setUserId(UUID.randomUUID().toString());
+        userService.save(user);
+        return R.ok();
     }
 
 }

@@ -34,3 +34,5 @@ sh nacos-config.sh -h 192.168.119.131 -p 8848 -g SEATA_GROUP -t maochd-cloud-sea
 ## 安装seata server
 docker run -d --name maochd-seata -p 8091:8091 -e STORE_MODE=db -e SEATA_IP=192.168.119.131 -e SEATA_PORT=8091 -e SEATA_CONFIG_NAME=file:/root/seata-config/registry -v /opt/seata-config:/root/seata-config seataio/seata-server:1.4.2
 
+## 安装redis
+docker run -p 6379:6379 --name maochd-redis -v /opt/redis6/conf:/etc/redis/redis.conf -v /opt/redis6/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes
