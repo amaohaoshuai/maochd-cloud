@@ -1,12 +1,12 @@
 service.vgroupMapping.maochd-order-group=default
 service.vgroupMapping.maochd-pay-group=default
 service.vgroupMapping.maochd-inventory-group=default
-service.default.grouplist=192.168.119.131:8091
+service.default.grouplist=10.10.3.81:8091
 store.mode=db
 store.db.datasource=druid
 store.db.dbType=mysql
 store.db.driverClassName=com.mysql.cj.jdbc.Driver
-store.db.url=jdbc:mysql://192.168.119.131:3306/seata?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+store.db.url=jdbc:mysql://10.10.3.81:3306/seata?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
 store.db.user=root
 store.db.password=root
 store.db.minConn=5

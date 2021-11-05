@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class GenerateCode {
 
-    public static String DB_URL = "jdbc:mysql://192.168.119.131:3306/inventory?useUnicode=true" +
+    public static String DB_URL = "jdbc:mysql://10.10.3.81:3306/inventory?useUnicode=true" +
             "&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8";
 
     public static String DB_USERNAME = "root";

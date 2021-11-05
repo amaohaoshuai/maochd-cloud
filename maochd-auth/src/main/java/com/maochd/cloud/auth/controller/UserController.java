@@ -7,8 +7,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.maochd.cloud.auth.entity.User;
 import com.maochd.cloud.auth.service.UserService;
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.common.redis.annotation.LockParam;
-import com.maochd.cloud.common.redis.annotation.RedisLock;
 import com.maochd.cloud.common.redis.util.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,10 +46,9 @@ public class UserController {
         return R.ok(users);
     }
 
-    @RedisLock(prefix = "lock", KeyName = "userName")
     @PostMapping("/add")
     @ApiOperation(value = "添加用户", notes = "添加用户")
-    public R<Boolean> add(@RequestBody @LockParam User user) {
+    public R<Boolean> add(@RequestBody User user) {
         ThreadUtil.sleep(10000);
         user.setUserId(UUID.randomUUID().toString());
         userService.save(user);
