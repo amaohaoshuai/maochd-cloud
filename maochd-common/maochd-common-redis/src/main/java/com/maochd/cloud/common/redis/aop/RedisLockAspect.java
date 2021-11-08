@@ -54,7 +54,7 @@ public class RedisLockAspect {
                 throw new RuntimeException(LockMsgConst.TIME_OUT);
             }
         } catch (Throwable throwable) {
-            log.error(LockMsgConst.LOCK_FAIL, threadName, throwable);
+            log.error(LockMsgConst.LOCK_FAIL, threadName, throwable.getMessage());
             throw new RuntimeException(LockMsgConst.TIME_OUT);
         } finally {
             //如果该线程还持有该锁，那么释放该锁。如果该线程不持有该锁，说明该线程的锁已到过期时间，自动释放锁
