@@ -11,11 +11,11 @@ spring:
     nacos:
       discovery:
         # 服务注册地址
-        server-addr: ${NACOS_SERVER_ADDR:192.168.119.131:8848}
+        server-addr: ${NACOS_SERVER_ADDR:10.10.3.81:8848}
         namespace: ${NACOS_NAMESPACE:maochd-cloud-yml}
       config:
         # 配置中心地址
-        server-addr: ${NACOS_SERVER_ADDR:192.168.119.131:8848}
+        server-addr: ${NACOS_SERVER_ADDR:10.10.3.81:8848}
         namespace: ${NACOS_NAMESPACE:maochd-cloud-yml}
         # 配置文件格式
         file-extension: yml
@@ -25,6 +25,6 @@ spring:
         # 动态刷新
         refresh-enabled: true
   redis:
-    host: 192.168.119.131
+    host: 10.10.3.81
     database: 0
     port: 6379

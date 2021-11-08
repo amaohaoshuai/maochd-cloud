@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import java.util.List;
  * @author maochd
  * @since 2021-06-17
  */
+@Slf4j
 @RestController
 @RequestMapping("/userAccount")
 @Api(value = "账户", tags = "账户")
@@ -49,6 +51,5 @@ public class UserAccountController {
     public R<Boolean> subtractAmount(@RequestBody AmountVo amountVo) {
         return userAccountService.subtractAmount(amountVo);
     }
-
 }
 

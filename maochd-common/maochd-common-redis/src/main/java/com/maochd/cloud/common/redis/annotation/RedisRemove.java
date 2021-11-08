@@ -7,20 +7,12 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RedisLock {
+public @interface RedisRemove {
 
     /**
-     * 锁释放时间
+     * 键值
      *
      * @return
      */
-    long leaseTime() default -1;
-
-    /**
-     * 锁等待时间
-     *
-     * @return
-     */
-    long waitTime() default 1;
-
+    String key() default "";
 }

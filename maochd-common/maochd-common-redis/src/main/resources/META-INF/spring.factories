@@ -1,4 +1,7 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.maochd.cloud.common.redis.config.RedisConfig,\
-  com.maochd.cloud.common.redis.util.RedisUtil,\
-  com.maochd.cloud.common.redis.aop.RedisLockAspect
+  com.maochd.cloud.common.redis.service.RedisService,\
+  com.maochd.cloud.common.redis.aop.RedisLockAspect,\
+  com.maochd.cloud.common.redis.service.RedissonService,\
+  com.maochd.cloud.common.redis.aop.RedisSaveAspect,\
+  com.maochd.cloud.common.redis.aop.RedisRemoveAspect

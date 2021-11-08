@@ -5,9 +5,21 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ElementType.PARAMETER, ElementType.FIELD})
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LockParam {
+public @interface RedisSave {
 
-    String name() default "";
+    /**
+     * 键值
+     *
+     * @return
+     */
+    String key() default "";
+
+    /**
+     * 过期时间，默认永久
+     *
+     * @return
+     */
+    long expireTime() default -1L;
 }
