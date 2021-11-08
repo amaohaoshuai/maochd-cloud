@@ -1,4 +1,4 @@
-package com.maochd.cloud.common.redis.util;
+package com.maochd.cloud.common.redis.service;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.fastjson.JSON;
@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -17,8 +17,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-@Component
-public class RedisUtil {
+@Service
+public class RedisService {
 
     @Resource(name = "StringRedisTemplate")
     private RedisTemplate<String, String> redisTemplate;
@@ -156,7 +156,6 @@ public class RedisUtil {
         }
     }
 
-
     /**
      * 如果键值匹配,则删除
      *
@@ -182,7 +181,6 @@ public class RedisUtil {
             return false;
         });
     }
-
 
     /**
      * 删除所有指定数据库的数据
@@ -231,7 +229,6 @@ public class RedisUtil {
         });
     }
 
-
     /**
      * 普通缓存放入
      *
@@ -274,7 +271,6 @@ public class RedisUtil {
         return set(key, value, expire);
     }
 
-
     /**
      * 普通缓存获取
      *
@@ -291,7 +287,6 @@ public class RedisUtil {
             return serializer.deserialize(value);
         });
     }
-
 
     /**
      * 普通缓存获取
@@ -346,7 +341,6 @@ public class RedisUtil {
         return JSONArray.parseArray(result, clz);
     }
 
-
     /**
      * 获取list中的数据, 从集合的 left 开始获取, 元素数量为 len,并删除已返回的元素
      *
@@ -383,7 +377,6 @@ public class RedisUtil {
         return JSONArray.parseArray(result, clz);
     }
 
-
     /**
      * 递增
      *
@@ -409,11 +402,6 @@ public class RedisUtil {
         }
         return redisTemplate.opsForValue().increment(key, -delta);
     }
-
-
-    // endregion
-
-    // region list
 
     /**
      * 将list放入缓存
@@ -569,7 +557,6 @@ public class RedisUtil {
         }
     }
 
-
     /**
      * HashGet
      *
@@ -624,7 +611,6 @@ public class RedisUtil {
             return resData;
         });
     }
-
 
     /**
      * 删除hash表中的值

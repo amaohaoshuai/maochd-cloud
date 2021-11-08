@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.maochd.cloud.auth.entity.User;
 import com.maochd.cloud.auth.service.UserService;
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.common.redis.util.RedisUtil;
+import com.maochd.cloud.common.redis.service.RedisService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.util.CollectionUtils;
@@ -33,15 +33,15 @@ public class UserController {
     private UserService userService;
 
     @Resource
-    private RedisUtil redisUtil;
+    private RedisService redisService;
 
     @GetMapping("/list")
     @ApiOperation(value = "用户列表", notes = "用户列表")
     public R<List<User>> list() {
-        List<User> users = JSONArray.parseArray(redisUtil.get("user:list"), User.class);
+        List<User> users = JSONArray.parseArray(redisService.get("user:list"), User.class);
         if (CollectionUtils.isEmpty(users)) {
             users = userService.list();
-            redisUtil.set("user:list", users);
+            redisService.set("user:list", users);
         }
         return R.ok(users);
     }

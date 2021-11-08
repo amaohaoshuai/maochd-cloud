@@ -2,6 +2,7 @@ package com.maochd.cloud.common.redis.aop;
 
 import com.alibaba.fastjson.JSON;
 import com.maochd.cloud.common.redis.annotation.RedisLock;
+import com.maochd.cloud.common.redis.constants.LockMsgConst;
 import com.maochd.cloud.common.redis.service.RedissonService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -46,20 +47,20 @@ public class RedisLockAspect {
             boolean lockFlag = leaseTime < 0 ? lock.tryLock(redisLock.waitTime(), TimeUnit.SECONDS)
                     : lock.tryLock(redisLock.waitTime(), redisLock.leaseTime(), TimeUnit.SECONDS);
             if (lockFlag) {
-                log.info("线程{} 加锁完成，开始执行业务逻辑", threadName);
+                log.info(LockMsgConst.LOCK_COMPLETED, threadName);
                 return joinPoint.proceed();
             } else {
-                log.info("线程{} 获取锁失败", threadName);
-                throw new RuntimeException("请求超时");
+                log.error(LockMsgConst.GET_LOCK_FAIL, threadName);
+                throw new RuntimeException(LockMsgConst.TIME_OUT);
             }
         } catch (Throwable throwable) {
-            log.error("线程{} 加锁失败,失败原因：{}", threadName, throwable);
-            throw new RuntimeException("请求超时");
+            log.error(LockMsgConst.LOCK_FAIL, threadName, throwable);
+            throw new RuntimeException(LockMsgConst.TIME_OUT);
         } finally {
             //如果该线程还持有该锁，那么释放该锁。如果该线程不持有该锁，说明该线程的锁已到过期时间，自动释放锁
             if (redissonService.isHeldByCurrentThread(lockName)) {
                 redissonService.unlock(lockName);
-                log.info("线程{} 解锁成功", threadName);
+                log.info(LockMsgConst.UNLOCK_COMPLETE, threadName);
             }
         }
     }

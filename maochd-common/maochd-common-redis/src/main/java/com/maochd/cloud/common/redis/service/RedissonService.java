@@ -87,7 +87,6 @@ public class RedissonService {
         return redissonClient.getDeque(key);
     }
 
-
     /**
      * 获取锁
      *
@@ -129,16 +128,27 @@ public class RedissonService {
      *
      * @param key 键值
      */
-    public <M> RTopic<M> getTopic(String key) {
-        return redissonClient.getTopic(key);
-    }
+//    public <M> RTopic<M> getTopic(String key) {
+//        return redissonClient.getTopic(key);
+//    }
 
-    public boolean isHeldByCurrentThread(String lockName) {
-        RLock rLock = redisson.getLock(lockName);
+    /**
+     * 判断当前线程是否持有锁
+     *
+     * @param key 键值
+     * @return
+     */
+    public boolean isHeldByCurrentThread(String key) {
+        RLock rLock = redisson.getLock(key);
         return rLock.isHeldByCurrentThread();
     }
 
-    public void unlock(String lockName){
-        redisson.getLock(lockName).unlock();
+    /**
+     * 解锁
+     *
+     * @param key 键值
+     */
+    public void unlock(String key) {
+        redisson.getLock(key).unlock();
     }
 }

@@ -35,9 +35,10 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <!-- redisson -->
         <dependency>
             <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
             <version>${redisson.version}</version>
         </dependency>
     </dependencies>
