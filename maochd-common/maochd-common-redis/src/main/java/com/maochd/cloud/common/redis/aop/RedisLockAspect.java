@@ -1,10 +1,6 @@
 package com.maochd.cloud.common.redis.aop;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONObject;
 import com.alibaba.fastjson.JSON;
-import com.maochd.cloud.common.core.domain.R;
 import com.maochd.cloud.common.redis.annotation.RedisLock;
 import com.maochd.cloud.common.redis.service.RedissonService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +13,6 @@ import org.redisson.api.RLock;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
