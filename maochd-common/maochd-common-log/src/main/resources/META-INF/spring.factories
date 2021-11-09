@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.maochd.cloud.common.log.aop.LogControllerAspect,\
+  com.maochd.cloud.common.log.aop.LogCustomAspect
