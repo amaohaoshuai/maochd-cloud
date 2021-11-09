@@ -8,7 +8,7 @@ public interface LockMsgConst {
 
     String TIME_OUT = "请求超时";
 
-    String LOCK_FAIL = "线程{} 加锁失败,失败原因：{}";
+    String LOCK_FAIL = "线程{} 加锁失败";
 
     String UNLOCK_COMPLETE = "线程{} 解锁成功";
 }

@@ -1,9 +1,12 @@
 package com.maochd.cloud.common.redis.aop;
 
 import com.alibaba.fastjson.JSON;
+import com.maochd.cloud.common.core.constant.CommonConstant;
+import com.maochd.cloud.common.core.exception.RedisBizException;
 import com.maochd.cloud.common.redis.annotation.RedisLock;
 import com.maochd.cloud.common.redis.constants.LockMsgConst;
 import com.maochd.cloud.common.redis.service.RedissonService;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -27,6 +30,7 @@ public class RedisLockAspect {
     public void servicePointCut() {
     }
 
+    @SneakyThrows
     @Around(value = "servicePointCut()")
     public Object interceptor(ProceedingJoinPoint joinPoint) {
         String threadName = Thread.currentThread().getName();
@@ -42,20 +46,18 @@ public class RedisLockAspect {
         Object[] args = joinPoint.getArgs();
         String lockName = JSON.toJSONString(args);
         RLock lock = redissonService.getLock(lockName);
+        // 判断是否启用watchDog
+        boolean lockFlag = leaseTime < 0 ? lock.tryLock(redisLock.waitTime(), TimeUnit.SECONDS)
+                : lock.tryLock(redisLock.waitTime(), redisLock.leaseTime(), TimeUnit.SECONDS);
+        if (!lockFlag) {
+            log.error(LockMsgConst.LOCK_FAIL, threadName);
+            throw new RedisBizException(LockMsgConst.TIME_OUT);
+        }
+        log.info(LockMsgConst.LOCK_COMPLETED, threadName);
         try {
-            // 判断是否启用watchDog
-            boolean lockFlag = leaseTime < 0 ? lock.tryLock(redisLock.waitTime(), TimeUnit.SECONDS)
-                    : lock.tryLock(redisLock.waitTime(), redisLock.leaseTime(), TimeUnit.SECONDS);
-            if (lockFlag) {
-                log.info(LockMsgConst.LOCK_COMPLETED, threadName);
-                return joinPoint.proceed();
-            } else {
-                log.error(LockMsgConst.GET_LOCK_FAIL, threadName);
-                throw new RuntimeException(LockMsgConst.TIME_OUT);
-            }
-        } catch (Throwable throwable) {
-            log.error(LockMsgConst.LOCK_FAIL, threadName, throwable.getMessage());
-            throw new RuntimeException(LockMsgConst.TIME_OUT);
+            return joinPoint.proceed();
+        } catch (Throwable e) {
+            throw new RedisBizException(CommonConstant.EXCEPTION);
         } finally {
             //如果该线程还持有该锁，那么释放该锁。如果该线程不持有该锁，说明该线程的锁已到过期时间，自动释放锁
             if (redissonService.isHeldByCurrentThread(lockName)) {
