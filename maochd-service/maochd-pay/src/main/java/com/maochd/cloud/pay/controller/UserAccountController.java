@@ -1,6 +1,7 @@
 package com.maochd.cloud.pay.controller;
 
 
+import com.maochd.cloud.system.api.order.service.RemoteOrderService;
 import com.maochd.cloud.common.core.domain.R;
 import com.maochd.cloud.pay.domain.vo.AmountVo;
 import com.maochd.cloud.pay.entity.UserAccount;
@@ -31,6 +32,9 @@ public class UserAccountController {
     @Resource
     private UserAccountService userAccountService;
 
+    @Resource
+    private RemoteOrderService remoteOrderService;
+
     @GetMapping("/list")
     @ApiOperation(value = "查询账户列表", notes = "查询账户列表")
     public R<List<UserAccount>> list() {
@@ -50,6 +54,12 @@ public class UserAccountController {
     @ApiOperation(value = "扣除金额", notes = "扣除金额")
     public R<Boolean> subtractAmount(@RequestBody AmountVo amountVo) {
         return userAccountService.subtractAmount(amountVo);
+    }
+
+    @GetMapping("/list/order")
+    @ApiOperation(value = "订单列表", notes = "订单列表")
+    public R<?> listOrder() {
+        return userAccountService.listOrder();
     }
 }
 

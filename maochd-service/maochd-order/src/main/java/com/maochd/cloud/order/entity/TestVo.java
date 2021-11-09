@@ -1,5 +1,6 @@
 package com.maochd.cloud.order.entity;
 
+import com.maochd.cloud.system.api.order.domain.GoodsOrder;
 import lombok.Data;
 
 @Data

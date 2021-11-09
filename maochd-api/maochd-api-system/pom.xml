@@ -19,20 +19,17 @@
     </properties>
 
     <dependencies>
-        <!-- common core -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!-- common swagger -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-swagger</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-datasource</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

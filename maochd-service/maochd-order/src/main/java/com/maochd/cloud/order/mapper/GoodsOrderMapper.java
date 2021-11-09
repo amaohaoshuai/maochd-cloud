@@ -1,6 +1,6 @@
 package com.maochd.cloud.order.mapper;
 
-import com.maochd.cloud.order.entity.GoodsOrder;
+import com.maochd.cloud.system.api.order.domain.GoodsOrder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

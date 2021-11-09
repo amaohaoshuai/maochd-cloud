@@ -1,7 +1,7 @@
 package com.maochd.cloud.inventory.service;
 
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.api.system.inventory.api.domain.InventoryStockVo;
+import com.maochd.cloud.system.api.inventory.domain.InventoryStockVo;
 import com.maochd.cloud.inventory.entity.GoodsInventory;
 import com.baomidou.mybatisplus.extension.service.IService;
 

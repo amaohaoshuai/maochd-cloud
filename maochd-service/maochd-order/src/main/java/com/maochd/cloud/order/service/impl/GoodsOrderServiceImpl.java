@@ -1,20 +1,18 @@
 package com.maochd.cloud.order.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.maochd.cloud.api.system.inventory.api.domain.InventoryStockVo;
-import com.maochd.cloud.api.system.inventory.api.service.RemoteInventoryService;
-import com.maochd.cloud.api.system.pay.api.domain.AmountVo;
-import com.maochd.cloud.api.system.pay.api.service.RemotePayService;
+import com.maochd.cloud.system.api.inventory.domain.InventoryStockVo;
+import com.maochd.cloud.system.api.inventory.service.RemoteInventoryService;
+import com.maochd.cloud.system.api.pay.domain.AmountVo;
+import com.maochd.cloud.system.api.pay.service.RemotePayService;
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.order.entity.GoodsOrder;
+import com.maochd.cloud.system.api.order.domain.GoodsOrder;
 import com.maochd.cloud.order.entity.TestVo;
 import com.maochd.cloud.order.mapper.GoodsOrderMapper;
 import com.maochd.cloud.order.service.GoodsOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;

@@ -2,7 +2,7 @@ package com.maochd.cloud.inventory.controller;
 
 
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.api.system.inventory.api.domain.InventoryStockVo;
+import com.maochd.cloud.system.api.inventory.domain.InventoryStockVo;
 import com.maochd.cloud.inventory.entity.GoodsInventory;
 import com.maochd.cloud.inventory.service.GoodsInventoryService;
 import io.swagger.annotations.Api;
