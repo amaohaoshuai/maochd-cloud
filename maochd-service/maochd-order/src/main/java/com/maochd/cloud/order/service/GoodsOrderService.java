@@ -1,7 +1,7 @@
 package com.maochd.cloud.order.service;
 
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.order.entity.GoodsOrder;
+import com.maochd.cloud.system.api.order.domain.GoodsOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.maochd.cloud.order.entity.TestVo;
 

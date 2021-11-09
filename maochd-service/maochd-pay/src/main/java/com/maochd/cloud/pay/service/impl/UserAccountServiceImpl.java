@@ -1,6 +1,8 @@
 package com.maochd.cloud.pay.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.maochd.cloud.system.api.order.domain.cond.OrderCondition;
+import com.maochd.cloud.system.api.order.service.RemoteOrderService;
 import com.maochd.cloud.common.core.domain.R;
 import com.maochd.cloud.pay.domain.vo.AmountVo;
 import com.maochd.cloud.pay.entity.UserAccount;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 
 /**
@@ -24,8 +27,12 @@ import java.math.BigDecimal;
  */
 @Service
 public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper, UserAccount> implements UserAccountService {
+
+    @Resource
+    private RemoteOrderService remoteOrderService;
+
     @Override
-    @Transactional(propagation= Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public R<Boolean> subtractAmount(AmountVo amountVo) {
         System.out.println("XID:" + RootContext.getXID());
         UserAccount userAccount = this.getOne(Wrappers.<UserAccount>lambdaQuery()
@@ -40,5 +47,10 @@ public class UserAccountServiceImpl extends ServiceImpl<UserAccountMapper, UserA
             return R.fail("扣除余额失败");
         }
         return R.ok();
+    }
+
+    @Override
+    public R<?> listOrder() {
+        return remoteOrderService.list(OrderCondition.builder().build());
     }
 }

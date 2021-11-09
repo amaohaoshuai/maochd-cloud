@@ -25,5 +25,14 @@
         <module>maochd-api-third-part</module>
     </modules>
 
+    <dependencies>
+        <!-- common core -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>
