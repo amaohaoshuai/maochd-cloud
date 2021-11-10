@@ -25,7 +25,3 @@ spring:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         # 动态刷新
         refresh-enabled: true
-  redis:
-    host: 10.10.3.81
-    database: 0
-    port: 6379
