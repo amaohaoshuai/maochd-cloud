@@ -39,3 +39,8 @@ docker run -p 6379:6379 --name maochd-redis -v /opt/redis6/conf:/etc/redis/redis
 
 ## 安装zipkin
 docker run -d --name maochd-zipkin -p 9411:9411 -e STORAGE_TYPE=mysql -e MYSQL_DB=zipkin -e MYSQL_USER=root -e MYSQL_PASS=root -e MYSQL_HOST=10.10.3.81 -e MYSQL_TCP_PORT=3306 openzipkin/zipkin:2.23.4
+
+## 安装xxj-job-admin
+docker  run -d  --name maochd-xxl-job -p 9000:8080 \
+-v /opt/job/logs:/data/applogs \
+-e PARAMS="--spring.datasource.url=jdbc:mysql://10.10.3.81:3306/xxl_job?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8 --spring.datasource.username=root --spring.datasource.password=root --spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver"  xuxueli/xxl-job-admin:2.3.0
