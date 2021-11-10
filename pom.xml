@@ -43,6 +43,7 @@
         <lombok.version>1.18.18</lombok.version>
         <mysql-connect.version>8.0.21</mysql-connect.version>
         <redisson.version>3.14.0</redisson.version>
+        <xxl-job.version>2.3.0</xxl-job.version>
     </properties>
 
     <modules>
@@ -52,6 +53,7 @@
         <module>maochd-common</module>
         <module>maochd-monitor</module>
         <module>maochd-service</module>
+        <module>maochd-job</module>
     </modules>
 
     <dependencies>
