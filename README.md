@@ -61,7 +61,7 @@ Xxl-Job             [分布式定时任务]
 [当前目录]: /root
 ~~~
 
-#### 安装git
+#### 安装Git
 ~~~
 [CMD]: yum install -y git
 [当前目录]: /root
