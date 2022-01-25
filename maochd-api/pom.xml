@@ -11,9 +11,8 @@
 
     <artifactId>maochd-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
     <name>maochd-api</name>
-    <description>接口</description>
+    <description>API调用模块</description>
     <packaging>pom</packaging>
 
     <properties>
@@ -21,18 +20,9 @@
     </properties>
 
     <modules>
+        <!-- 内部API模块 -->
         <module>maochd-api-system</module>
+        <!-- 第三方API模块 -->
         <module>maochd-api-third-part</module>
     </modules>
-
-    <dependencies>
-        <!-- common core -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-
 </project>

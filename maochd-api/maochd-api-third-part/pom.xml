@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.maochd.cloud</groupId>
         <artifactId>maochd-api</artifactId>
@@ -11,22 +12,29 @@
     <artifactId>maochd-api-third-part</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>maochd-api-third-part</name>
-    <description>第三方接口</description>
+    <description>第三方API模块</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
+        <!-- OkHttp3 -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.9.2</version>
         </dependency>
+
+        <!-- Http Client -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
-    </dependencies>
 
+        <!-- Springboot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
 </project>

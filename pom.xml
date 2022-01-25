@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -11,131 +12,119 @@
     <groupId>com.maochd.cloud</groupId>
     <artifactId>maochd-cloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
     <name>maochd-cloud</name>
-    <description>微服务项目</description>
+    <description>maochd微服务项目</description>
     <packaging>pom</packaging>
 
     <properties>
+        <!-- java版本 -->
         <java.version>1.8</java.version>
-        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+
+        <!-- 微服务 -->
+        <!-- springboot版本 -->
         <spring-boot.version>2.3.2.RELEASE</spring-boot.version>
-        <swagger.version>2.9.2</swagger.version>
+        <!-- spring cloud版本 -->
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+        <!-- alibaba cloud 版本 -->
         <spring-cloud-alibaba.version>2.2.5.RELEASE</spring-cloud-alibaba.version>
-        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
-        <pagehelper.boot.version>1.3.0</pagehelper.boot.version>
-        <commons.io.version>2.5</commons.io.version>
-        <poi.version>4.1.2</poi.version>
-        <commons.fileupload.version>1.3.3</commons.fileupload.version>
-        <velocity.version>1.7</velocity.version>
-        <fastjson.version>1.2.76</fastjson.version>
-        <common-pool.version>2.6.2</common-pool.version>
-        <zxing.core.version>3.4.1</zxing.core.version>
-        <hutool.version>5.1.1</hutool.version>
-        <guava.version>20.0</guava.version>
-        <spring-boot.mybatis>2.1.4</spring-boot.mybatis>
-        <mybatis-plus.version>3.4.2</mybatis-plus.version>
-        <mybatis-plus.generator.version>3.4.1</mybatis-plus.generator.version>
-        <druid.version>1.2.4</druid.version>
-        <dynamic-ds.version>3.3.1</dynamic-ds.version>
-        <velocity.core.version>2.3</velocity.core.version>
-        <jackson.datatype.jsr310.version>2.10.1</jackson.datatype.jsr310.version>
-        <lombok.version>1.18.18</lombok.version>
-        <mysql-connect.version>8.0.21</mysql-connect.version>
+        <!-- 分布式锁版本 -->
         <redisson.version>3.14.0</redisson.version>
+        <!-- 分布式定时任务版本 -->
         <xxl-job.version>2.3.0</xxl-job.version>
+        <!-- 网关限流适配器版本 -->
+        <gateway-sentinel.version>1.8.0</gateway-sentinel.version>
+
+        <!-- swagger文档版本 -->
+        <swagger.version>2.9.2</swagger.version>
+        <!-- springboot admin管理界面版本 -->
+        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+
+        <!-- orm -->
+        <!-- springboot-mybatis版本 -->
+        <spring-boot.mybatis>2.1.4</spring-boot.mybatis>
+        <!-- mybatis-plus版本 -->
+        <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <!-- 分页插件版本 -->
+        <pagehelper.boot.version>1.3.0</pagehelper.boot.version>
+        <!-- 数据库连接池版本 -->
+        <druid.version>1.2.4</druid.version>
+        <!-- 动态数据源管理包版本 -->
+        <dynamic-ds.version>3.3.1</dynamic-ds.version>
+        <!-- mysql驱动版本 -->
+        <mysql-connect.version>8.0.21</mysql-connect.version>
+
+        <!-- 代码生成 -->
+        <!-- mybatis-plus代码生成版本 -->
+        <mybatis-plus.generator.version>3.4.1</mybatis-plus.generator.version>
+        <!-- 模板引擎版本 -->
+        <velocity.core.version>2.3</velocity.core.version>
+        <velocity.version>1.7</velocity.version>
+
+        <!-- 组件 -->
+        <!-- 序列化组件 -->
+        <!-- alibaba fastjson版本 -->
+        <fastjson.version>1.2.76</fastjson.version>
+        <!-- jackson序列化组件版本 -->
+        <jackson.datatype.jsr310.version>2.10.1</jackson.datatype.jsr310.version>
+
+        <!-- 公共工具 -->
+        <!-- IO组件版本 -->
+        <commons.io.version>2.5</commons.io.version>
+        <!-- 文件上传组件版本 -->
+        <commons.fileupload.version>1.3.3</commons.fileupload.version>
+        <!-- 对象池组件版本 -->
+        <common-pool.version>2.6.2</common-pool.version>
+
+        <!-- 其他组件 -->
+        <!-- office工具版本 -->
+        <poi.version>4.1.2</poi.version>
+        <!-- 二维码组件版本 -->
+        <zxing.core.version>3.4.1</zxing.core.version>
+        <!-- hutool工具版本 -->
+        <hutool.version>5.1.1</hutool.version>
+        <!-- google开源工具库版本 -->
+        <guava.version>20.0</guava.version>
+        <!-- lombok版本 -->
+        <lombok.version>1.18.18</lombok.version>
+        <!--okhttp版本 -->
+        <okhttp.version>4.9.2</okhttp.version>
     </properties>
 
     <modules>
+        <!-- 网关服务 -->
         <module>maochd-gateway</module>
+        <!-- 认证中心 -->
         <module>maochd-auth</module>
+        <!-- API调用模块 -->
         <module>maochd-api</module>
+        <!-- 公共组件模块 -->
         <module>maochd-common</module>
+        <!-- 监控服务 -->
         <module>maochd-monitor</module>
+        <!-- 业务模块 -->
         <module>maochd-service</module>
+        <!-- 定时任务服务 -->
         <module>maochd-job</module>
     </modules>
 
     <dependencies>
-        <!-- Swagger2 -->
+        <!-- Lombok -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.version}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
 
-        <!-- Swagger2 UI -->
+        <!-- Hutool -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.version}</version>
-        </dependency>
-
-        <!--客户端负载均衡loadbalancer-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
-
-        <!-- SpringCloud Openfeign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-
-        <!-- SpringCloud Alibaba Sentinel -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-
-        <!-- SpringCloud Ailibaba Nacos -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <!-- SpringCloud Ailibaba Nacos Config -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-
-        <!--服务监控-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <!--服务监控客户端-->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${spring-boot-admin.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-sleuth</artifactId>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
-            <!-- SpringCloud -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <!-- Springboot -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -145,7 +134,16 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- SpringCloud Alibaba 微服务 -->
+            <!-- SpringCloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringCloud Alibaba -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -154,18 +152,18 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- 系统接口 -->
+            <!-- Swagger2 -->
             <dependency>
-                <groupId>com.maochd.cloud</groupId>
-                <artifactId>maochd-api-system</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
 
-            <!-- 第三方接口 -->
+            <!-- Swagger2 UI -->
             <dependency>
-                <groupId>com.maochd.cloud</groupId>
-                <artifactId>maochd-api-third-part</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
 
             <!-- Mybatis Plus -->
@@ -188,7 +186,180 @@
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.boot.version}</version>
             </dependency>
+
+            <!-- io常用工具类 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+
+            <!-- 文件上传工具类 -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons.fileupload.version}</version>
+            </dependency>
+
+            <!-- 代码生成使用模板 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+
+            <!-- JSON 解析器和生成器 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- 公共资源池 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${common-pool.version}</version>
+            </dependency>
+
+            <!-- 二维码生成器 -->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.core.version}</version>
+            </dependency>
+
+            <!-- Google工具类 -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- Jackson序列化 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.datatype.jsr310.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <!-- Office工具类 -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <!-- kryo序列化 用于解决seata使用jackson无法序列化的问题 -->
+            <!--            <dependency>-->
+            <!--                <groupId>com.esotericsoftware.kryo</groupId>-->
+            <!--                <artifactId>kryo</artifactId>-->
+            <!--                <version>2.24.0</version>-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>com.esotericsoftware</groupId>-->
+            <!--                <artifactId>kryo</artifactId>-->
+            <!--                <version>4.0.2</version>-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>de.javakaffee</groupId>-->
+            <!--                <artifactId>kryo-serializers</artifactId>-->
+            <!--                <version>0.44</version>-->
+            <!--            </dependency>-->
+
+            <!-- Xxl Job Core -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
+
+            <!-- 内部API模块 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-api-system</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 第三方API模块 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-api-third-part</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 公共核心模块 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- API文档模块 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-common-swagger</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 数据源模块 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-common-datasource</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Redis缓存模块 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-common-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 日志模块 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-common-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Redisson -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <!-- Sentinel Gateway Adapter -->
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-spring-cloud-gateway-adapter</artifactId>
+                <version>${gateway-sentinel.version}</version>
+            </dependency>
+
+            <!-- SpringBoot Admin -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <!-- OkHttp3 -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
+            <!-- Dynamic DataSource -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                <version>${dynamic-ds.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
 
 </project>

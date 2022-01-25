@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.maochd.cloud</groupId>
         <artifactId>maochd-cloud</artifactId>
@@ -11,7 +12,7 @@
     <artifactId>maochd-monitor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>maochd-monitor</name>
-    <description>服务监控</description>
+    <description>监控服务</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -22,7 +23,6 @@
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-server</artifactId>
-            <version>${spring-boot-admin.version}</version>
         </dependency>
 
         <!-- SpringBoot Web -->
@@ -35,6 +35,36 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Ailibaba Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Ailibaba Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- 服务监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- 服务链路追踪 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
+        <!-- 服务链路追踪 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
     </dependencies>
 
@@ -54,5 +84,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

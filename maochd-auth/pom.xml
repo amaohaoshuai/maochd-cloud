@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.maochd.cloud</groupId>
         <artifactId>maochd-cloud</artifactId>
@@ -11,7 +12,7 @@
     <artifactId>maochd-auth</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>maochd-auth</name>
-    <description>鉴权</description>
+    <description>认证中心</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -24,41 +25,98 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Springboot test -->
+        <!-- Springboot Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- common core -->
+        <!-- Mybatis Plus 代码生成 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+        </dependency>
+
+        <!-- Apache Velocity 模板引擎-->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>${velocity.core.version}</version>
+        </dependency>
+
+        <!-- Mysql驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connect.version}</version>
+        </dependency>
+
+        <!-- Druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <!-- SpringCloud Ailibaba Nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Ailibaba Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- 服务监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- 服务链路追踪 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+
+        <!-- 服务链路追踪 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+
+        <!-- 公共核心模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- common swagger -->
+        <!-- API文档模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-swagger</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
 
-        <!-- common datasource -->
+        <!-- 数据源模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-datasource</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- common redis -->
+        <!-- Redis缓存模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-redis</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- 日志模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-log</artifactId>
         </dependency>
     </dependencies>
-
 </project>
