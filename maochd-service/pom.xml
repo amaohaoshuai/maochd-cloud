@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.maochd.cloud</groupId>
         <artifactId>maochd-cloud</artifactId>
@@ -11,7 +12,7 @@
     <artifactId>maochd-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>maochd-service</name>
-    <description>服务</description>
+    <description>业务模块</description>
     <packaging>pom</packaging>
 
     <properties>
@@ -19,63 +20,11 @@
     </properties>
 
     <modules>
+        <!-- 支付服务 -->
         <module>maochd-pay</module>
+        <!-- 订单服务 -->
         <module>maochd-order</module>
+        <!-- 库存服务 -->
         <module>maochd-inventory</module>
     </modules>
-
-    <dependencies>
-        <!-- Springboot web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- Springboot test -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- system api -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-api-system</artifactId>
-        </dependency>
-
-        <!-- common core -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <!-- common swagger -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-swagger</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <!-- common datasource -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-datasource</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-redis</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-log</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
 </project>

@@ -11,9 +11,8 @@
 
     <artifactId>maochd-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
     <name>maochd-common</name>
-    <description>共通模块</description>
+    <description>公共组件模块</description>
     <packaging>pom</packaging>
 
     <properties>
@@ -21,11 +20,15 @@
     </properties>
 
     <modules>
+        <!-- 公共核心模块 -->
         <module>maochd-common-core</module>
+        <!-- API文档模块 -->
         <module>maochd-common-swagger</module>
+        <!-- 数据源模块 -->
         <module>maochd-common-datasource</module>
+        <!-- Redis缓存模块 -->
         <module>maochd-common-redis</module>
+        <!-- 日志模块 -->
         <module>maochd-common-log</module>
     </modules>
-
 </project>

@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import springfox.documentation.swagger.web.*;
 
+import javax.annotation.Resource;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/swagger-resources")
 public class SwaggerHandler {
+
     @Autowired(required = false)
     private SecurityConfiguration securityConfiguration;
 

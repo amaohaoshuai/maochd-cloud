@@ -1,12 +1,12 @@
 package com.maochd.cloud.inventory.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.system.api.inventory.domain.InventoryStockVo;
 import com.maochd.cloud.inventory.entity.GoodsInventory;
 import com.maochd.cloud.inventory.mapper.GoodsInventoryMapper;
 import com.maochd.cloud.inventory.service.GoodsInventoryService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.maochd.cloud.system.api.inventory.domain.InventoryStockVo;
 import io.seata.core.context.RootContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

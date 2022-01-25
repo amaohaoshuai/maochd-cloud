@@ -1,36 +1,46 @@
-# 微服务
+## 查看防火墙
+firewall-cmd --state
 
-#### Description
-微服务项目
+## 关闭防火墙
+systemctl stop firewalld.service\
+systemctl disable firewalld.service
 
-#### Software Architecture
-Software architecture description
+## 安装docker
+curl -fsSL https://get.docker.com | bash -s docker --mirror aliyun
 
-#### Installation
+## 运行docker
+systemctl start docker
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## 安装mysql(推荐使用5.7)
+docker run --name maochd-mysql -v /opt/mysql5.7/conf:/etc/mysql/conf.d -v /opt/mysql5.7/data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7.32
+docker run --name maochd-mysql -v /opt/mysql8/conf:/etc/mysql/conf.d -v /opt/mysql8/data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0.25
 
-#### Instructions
+## 安装nacos server
+docker run --name maochd-nacos -e MODE=standalone -p 8848:8848 -d nacos/nacos-server:1.4.1
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+## 安装sentinel dashboard
+docker run --name maochd-sentinel  -d -p 8858:8858 -d  bladex/sentinel-dashboard
 
-#### Contribution
+## 安装git
+yum install -y git
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+## 下载seata源码
+git clone https://gitee.com/seata-io/seata.git -b v1.4.2
 
+## 替换config.txt
+## 执行nacos脚本
+sh nacos-config.sh -h 10.10.3.81 -p 8848 -g SEATA_GROUP -t maochd-cloud-seata -u nacos -w nacos
 
-#### Gitee Feature
+## 安装seata server
+docker run -d --name maochd-seata -p 8091:8091 -e STORE_MODE=db -e SEATA_IP=10.10.3.81 -e SEATA_PORT=8091 -e SEATA_CONFIG_NAME=file:/root/seata-config/registry -v /opt/seata-config:/root/seata-config seataio/seata-server:1.4.2
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+## 安装redis
+docker run -p 6379:6379 --name maochd-redis -v /opt/redis6/conf:/etc/redis/redis.conf -v /opt/redis6/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes
+
+## 安装zipkin
+docker run -d --name maochd-zipkin -p 9411:9411 -e STORAGE_TYPE=mysql -e MYSQL_DB=zipkin -e MYSQL_USER=root -e MYSQL_PASS=root -e MYSQL_HOST=10.10.3.81 -e MYSQL_TCP_PORT=3306 openzipkin/zipkin:2.23.4
+
+## 安装xxj-job-admin
+docker  run -d  --name maochd-xxl-job -p 9000:8080 \
+-v /opt/job/logs:/data/applogs \
+-e PARAMS="--spring.datasource.url=jdbc:mysql://10.10.3.81:3306/xxl_job?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8 --spring.datasource.username=root --spring.datasource.password=root --spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver"  xuxueli/xxl-job-admin:2.3.0
