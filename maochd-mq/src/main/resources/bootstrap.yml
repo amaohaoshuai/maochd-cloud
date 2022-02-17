@@ -1,0 +1,17 @@
+server:
+  port: 19005
+spring:
+  application:
+    name: maochd-mq
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    stream:
+      binders:
+        defaultKafka:
+          type: kafka
+            environment:
+              spring.kafka: ${spring.kafka}
+        bindings:
