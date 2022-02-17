@@ -8,10 +8,52 @@ spring:
   main:
     allow-bean-definition-overriding: true
   cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        server-addr: ${NACOS_SERVER_ADDR:10.10.3.81:8848}
+        namespace: ${NACOS_NAMESPACE:maochd-cloud-yml}
+      config:
+        # 配置中心地址
+        server-addr: ${NACOS_SERVER_ADDR:10.10.3.81:8848}
+        namespace: ${NACOS_NAMESPACE:maochd-cloud-yml}
+        # 配置文件格式
+        file-extension: yml
+        # 共享配置
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        # 动态刷新
+        refresh-enabled: true
     stream:
       binders:
         defaultKafka:
           type: kafka
-            environment:
-              spring.kafka: ${spring.kafka}
-        bindings:
+          environment:
+            spring.kafka: ${spring.kafka}
+      bindings:
+        # bindingName的命名规则
+        # input: <functionName>-in-<index>
+        # output: <functionName>-out-<index>
+        # kafka binding
+        sendEmail-out-0:
+          destination: email
+        sendSms-out-0:
+          destination: sms
+        recvEmail-in-0:
+          destination: email
+          group: email_group
+        recvSms-in-0:
+          destination: sms
+          group: sms_group
+    function:
+      # functionName对应服务中的Bean
+      definition: recvEmail;recvSms;
+  kafka:
+    bootstrap-servers: 10.10.3.81:9092
+    producer:
+      acks: 1
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100
+

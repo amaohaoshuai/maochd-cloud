@@ -48,17 +48,17 @@
             <artifactId>maochd-common-core</artifactId>
         </dependency>
 
-        <!-- API文档模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-swagger</artifactId>
-        </dependency>
+<!--        &lt;!&ndash; API文档模块 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.maochd.cloud</groupId>-->
+<!--            <artifactId>maochd-common-swagger</artifactId>-->
+<!--        </dependency>-->
 
-        <!-- 日志模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-log</artifactId>
-        </dependency>
+<!--        &lt;!&ndash; 日志模块 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.maochd.cloud</groupId>-->
+<!--            <artifactId>maochd-common-log</artifactId>-->
+<!--        </dependency>-->
 
         <!-- SpringCloud Ailibaba Nacos -->
         <dependency>
@@ -78,17 +78,17 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- 服务链路追踪 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
-        </dependency>
+<!--        &lt;!&ndash; 服务链路追踪 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-zipkin</artifactId>-->
+<!--        </dependency>-->
 
-        <!-- 服务链路追踪 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-sleuth</artifactId>
-        </dependency>
+<!--        &lt;!&ndash; 服务链路追踪 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-sleuth</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
