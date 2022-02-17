@@ -21,4 +21,9 @@ public interface ServiceNameConstant {
      * 库存服务名
      */
     String INVENTORY_SERVER = "maochd-inventory";
+
+    /**
+     * 消息队列服务名
+     */
+    String MQ_SERVER = "maochd-mq";
 }

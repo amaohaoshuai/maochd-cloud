@@ -53,6 +53,5 @@ public class GoodsOrderController {
                 .eq(StrUtil.isNotBlank(condition.getOrderId()), GoodsOrder::getOrderId, condition.getOrderId())
                 .eq(StrUtil.isNotBlank(condition.getGoodsId()), GoodsOrder::getGoodsId, condition.getGoodsId())));
     }
-
 }
 
