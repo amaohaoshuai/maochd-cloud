@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
  * @since 2021-06-16
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "GoodsOrder对象", description = "订单")

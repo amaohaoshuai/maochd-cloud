@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class RemoteInventoryFallbackFactory implements FallbackFactory<RemoteInventoryService> {
     @Override
     public RemoteInventoryService create(Throwable cause) {
-        log.error("订单服务调用失败:{}", cause.getMessage());
+        log.error("库存服务调用失败:{}", cause.getMessage());
 
         return new RemoteInventoryService() {
             @Override

@@ -1,29 +1,19 @@
 package com.maochd.cloud.auth.controller;
 
 
-import cn.hutool.core.lang.UUID;
-import cn.hutool.core.thread.ThreadUtil;
-import com.alibaba.fastjson.JSONArray;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.maochd.cloud.auth.condition.UserQueryCondition;
 import com.maochd.cloud.auth.entity.User;
 import com.maochd.cloud.auth.service.UserService;
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.common.redis.service.RedisService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * <p>
- * 前端控制器
- * </p>
- *
- * @author maochd
- * @since 2021-06-16
- */
+
 @RestController
 @RequestMapping("/user")
 @Api(value = "用户信息", tags = "用户信息")
@@ -32,27 +22,40 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @Resource
-    private RedisService redisService;
-
-    @GetMapping("/list")
-    @ApiOperation(value = "用户列表", notes = "用户列表")
-    public R<List<User>> list() {
-        List<User> users = JSONArray.parseArray(redisService.get("user:list"), User.class);
-        if (CollectionUtils.isEmpty(users)) {
-            users = userService.list();
-            redisService.set("user:list", users);
-        }
-        return R.ok(users);
+    @PostMapping("/list")
+    @ApiOperation(value = "根据条件查询用户列表", notes = "根据条件查询用户列表")
+    public R<List<User>> list(@RequestBody UserQueryCondition cond) {
+        return R.ok(userService.list(cond));
     }
 
-    @PostMapping("/add")
-    @ApiOperation(value = "添加用户", notes = "添加用户")
+    @GetMapping("/{id}")
+    @ApiOperation(value = "获取指定用户", notes = "获取指定用户")
+    public R<User> getById(@PathVariable Long id) {
+        return R.ok(userService.getById(id));
+    }
+
+    @PostMapping("/page")
+    @ApiOperation(value = "根据条件分页查询用户列表", notes = "根据条件分页查询用户列表")
+    public R<Page<User>> page(@RequestBody UserQueryCondition cond) {
+        return R.ok(userService.page(cond));
+    }
+
+    @PostMapping
+    @ApiOperation(value = "新增用户", notes = "新增用户")
     public R<Boolean> add(@RequestBody User user) {
-        ThreadUtil.sleep(10000);
-        user.setUserId(UUID.randomUUID().toString());
-        userService.save(user);
-        return R.ok();
+        return R.ok(userService.add(user));
+    }
+
+    @PutMapping
+    @ApiOperation(value = "修改用户", notes = "修改用户")
+    public R<Boolean> modify(@RequestBody User user) {
+        return R.ok(userService.modify(user));
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除指定用户", notes = "删除指定用户")
+    public R<Boolean> remove(@PathVariable Long id) {
+        return R.ok(userService.remove(id));
     }
 
 }

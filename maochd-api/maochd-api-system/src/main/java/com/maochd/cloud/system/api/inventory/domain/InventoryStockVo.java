@@ -13,8 +13,9 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("库存数量VO")
+@ApiModel(value = "库存数量VO", description = "库存前端交互对象")
 public class InventoryStockVo implements Serializable {
+
     @ApiModelProperty(value = "主键ID")
     private Long id;
 

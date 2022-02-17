@@ -9,8 +9,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-@ApiModel(value = "订单检索条件", description = "订单检索条件实体")
+@EqualsAndHashCode
+@ApiModel(value = "订单检索条件", description = "订单检索条件对象")
 public class OrderCondition extends QueryCondition {
 
     @ApiModelProperty(value = "购买方帐号ID")

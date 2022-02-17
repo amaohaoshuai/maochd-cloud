@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 public class RemotePayFallbackFactory implements FallbackFactory<RemotePayService> {
     @Override
     public RemotePayService create(Throwable cause) {
+        log.error("支付服务调用失败:{}", cause.getMessage());
+
         return new RemotePayService() {
             @Override
             public R<Boolean> subtractAmount(AmountVo amountVo) {

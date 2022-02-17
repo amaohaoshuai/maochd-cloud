@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+ * 代码生成
+ */
 public class GenerateCode {
 
     public static String DB_URL = "jdbc:mysql://10.10.3.81:3306/auth?useUnicode=true" +
@@ -39,11 +43,6 @@ public class GenerateCode {
     public static String MAPPER_PATH = "/src/main/resources/mapper/";
 
 
-    /**
-     * <p>
-     * 读取控制台内容
-     * </p>
-     */
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder help = new StringBuilder();

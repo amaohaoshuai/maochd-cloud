@@ -2,19 +2,18 @@ package com.maochd.cloud.system.api.pay.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("金额VO")
-public class AmountVo {
+@EqualsAndHashCode
+@ApiModel(value = "账户VO", description = "账户金额前端交互对象")
+public class AmountVo implements Serializable {
 
     @ApiModelProperty("主键ID")
     private Long id;
