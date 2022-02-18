@@ -1,8 +1,11 @@
 package com.maochd.cloud.inventory.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maochd.cloud.common.core.domain.R;
+import com.maochd.cloud.inventory.condition.InventoryQueryCondition;
 import com.maochd.cloud.inventory.entity.GoodsInventory;
 import com.maochd.cloud.inventory.mapper.GoodsInventoryMapper;
 import com.maochd.cloud.inventory.service.GoodsInventoryService;
@@ -12,16 +15,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * <p>
- * 库存 服务实现类
- * </p>
- *
- * @author maochd
- * @since 2021-06-16
- */
+import java.util.List;
+
+
 @Service
 public class GoodsInventoryServiceImpl extends ServiceImpl<GoodsInventoryMapper, GoodsInventory> implements GoodsInventoryService {
+
+    @Override
+    public List<GoodsInventory> list(InventoryQueryCondition cond) {
+        return this.list(Wrappers.<GoodsInventory>lambdaQuery()
+                .eq(StrUtil.isNotBlank(cond.getGoodsName()), GoodsInventory::getGoodsName, cond.getGoodsName()));
+    }
+
+    @Override
+    public Page<GoodsInventory> page(InventoryQueryCondition cond) {
+        return this.page(new Page<>(cond.current(), cond.size()), Wrappers.<GoodsInventory>lambdaQuery()
+                .eq(StrUtil.isNotBlank(cond.getGoodsName()), GoodsInventory::getGoodsName, cond.getGoodsName()));
+    }
 
     @Override
     public R<GoodsInventory> getByGoodsId(String goodsId) {

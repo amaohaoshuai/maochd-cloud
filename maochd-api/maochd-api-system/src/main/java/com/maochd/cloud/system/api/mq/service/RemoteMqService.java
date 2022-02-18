@@ -1,5 +1,6 @@
 package com.maochd.cloud.system.api.mq.service;
 
+import com.maochd.cloud.common.core.constant.ServiceContextConstant;
 import com.maochd.cloud.common.core.constant.ServiceNameConstant;
 import com.maochd.cloud.common.core.domain.EmailInfo;
 import com.maochd.cloud.common.core.domain.R;
@@ -10,7 +11,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(contextId = "remoteMqService",
+@FeignClient(contextId = ServiceContextConstant.MQ_CONTEXT_ID,
         value = ServiceNameConstant.MQ_SERVER,
         fallbackFactory = RemoteMqFallbackFactory.class)
 public interface RemoteMqService {

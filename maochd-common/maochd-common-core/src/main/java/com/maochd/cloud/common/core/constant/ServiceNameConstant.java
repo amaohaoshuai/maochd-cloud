@@ -26,4 +26,14 @@ public interface ServiceNameConstant {
      * 消息队列服务名
      */
     String MQ_SERVER = "maochd-mq";
+
+    /**
+     * 账户服务名
+     */
+    String ACCOUNT_SERVER = "maochd-account";
+
+    /**
+     * 商品服务名
+     */
+    String GOODS_SERVER = "maochd-goods";
 }

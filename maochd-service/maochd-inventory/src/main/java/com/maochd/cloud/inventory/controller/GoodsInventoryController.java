@@ -1,7 +1,9 @@
 package com.maochd.cloud.inventory.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.maochd.cloud.common.core.domain.R;
+import com.maochd.cloud.inventory.condition.InventoryQueryCondition;
 import com.maochd.cloud.system.api.inventory.domain.InventoryStockVo;
 import com.maochd.cloud.inventory.entity.GoodsInventory;
 import com.maochd.cloud.inventory.service.GoodsInventoryService;
@@ -30,11 +32,18 @@ public class GoodsInventoryController {
     @Resource
     private GoodsInventoryService goodsInventoryService;
 
-    @GetMapping("/list")
-    @ApiOperation(value = "查询商品库存列表", notes = "查询商品库存列表")
-    public R<List<GoodsInventory>> list() {
-        return R.ok(goodsInventoryService.list());
+    @PostMapping("/list")
+    @ApiOperation(value = "根据条件查询商品", notes = "根据条件查询商品")
+    public R<List<GoodsInventory>> list(InventoryQueryCondition cond) {
+        return R.ok(goodsInventoryService.list(cond));
     }
+
+    @PostMapping("/page")
+    @ApiOperation(value = "根据条件分页查询商品", notes = "根据条件分页查询商品")
+    public R<Page<GoodsInventory>> page(InventoryQueryCondition cond) {
+        return R.ok(goodsInventoryService.page(cond));
+    }
+
 
     @GetMapping("/getByGoodsId")
     @ApiOperation(value = "查询商品详情", notes = "查询商品详情")

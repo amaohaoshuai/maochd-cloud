@@ -121,5 +121,10 @@
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-feign</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-api-system</artifactId>
+        </dependency>
     </dependencies>
 </project>
