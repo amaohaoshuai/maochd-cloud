@@ -8,7 +8,7 @@ public interface ServiceNameConstant {
     String ORDER_SERVER = "maochd-order";
 
     /**
-     * 鉴权服务名
+     * 认证中心服务名
      */
     String AUTH_SERVER = "maochd-auth";
 

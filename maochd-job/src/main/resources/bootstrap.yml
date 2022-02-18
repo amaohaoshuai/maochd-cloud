@@ -1,5 +1,6 @@
 server:
   port: 19004
+
 spring:
   application:
     name: maochd-job

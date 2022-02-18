@@ -1,7 +1,7 @@
 package com.maochd.cloud.auth;
 
-import com.maochd.cloud.common.datasource.annotation.EnableCustomConfig;
-import com.maochd.cloud.common.core.annotation.EnableFeignConfig;
+import com.maochd.cloud.common.datasource.annotation.EnableMybatisConfig;
+import com.maochd.cloud.common.feign.annotation.EnableFeignConfig;
 import com.maochd.cloud.common.swagger.annotation.EnableSwagger2Config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,9 +10,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableFeignConfig
 @EnableDiscoveryClient
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableSwagger2Config
-@EnableCustomConfig
+@EnableMybatisConfig
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class MaochdAuthApplication {
 
     public static void main(String[] args) {

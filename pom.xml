@@ -105,6 +105,8 @@
         <module>maochd-service</module>
         <!-- 定时任务服务 -->
         <module>maochd-job</module>
+        <!-- 消息队列服务 -->
+        <module>maochd-mq</module>
     </modules>
 
     <dependencies>
@@ -324,6 +326,13 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- 远程调用模块 -->
+            <dependency>
+                <groupId>com.maochd.cloud</groupId>
+                <artifactId>maochd-common-feign</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- Redisson -->
             <dependency>
                 <groupId>org.redisson</groupId>
@@ -358,8 +367,27 @@
                 <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
                 <version>${dynamic-ds.version}</version>
             </dependency>
+
+            <!-- Apache Velocity 模板引擎-->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.core.version}</version>
+            </dependency>
+
+            <!-- Mysql驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connect.version}</version>
+            </dependency>
+
+            <!-- Druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-
 </project>

@@ -1,6 +1,8 @@
-package com.maochd.cloud.common.core.annotation;
+package com.maochd.cloud.common.feign.annotation;
 
+import com.maochd.cloud.common.feign.config.FeignAutoConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
@@ -8,6 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @EnableFeignClients
+@Import({FeignAutoConfiguration.class})
 public @interface EnableFeignConfig {
     String[] value() default {};
 

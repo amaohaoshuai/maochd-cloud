@@ -1,5 +1,6 @@
 server:
   port: 19002
+
 spring:
   application:
     name: maochd-pay

@@ -1,33 +1,29 @@
 package com.maochd.cloud.common.core.domain;
 
-import cn.hutool.http.HttpStatus;
+import com.maochd.cloud.common.core.constant.CommonConstant;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
+@ApiModel(value = "统一返回对象", description = "统一返回对象")
 public class R<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 成功
-     */
-    public static final int SUCCESS = HttpStatus.HTTP_OK;
-
-    /**
-     * 失败
-     */
-    public static final int FAIL = HttpStatus.HTTP_INTERNAL_ERROR;
-
+    @ApiModelProperty("状态码")
     private int code;
 
+    @ApiModelProperty("返回信息（一般指错误信息）")
     private String msg;
 
+    @ApiModelProperty("返回数据")
     private T data;
 
     public static Boolean isOk(R r) {
-        return r != null && r.getCode() == SUCCESS;
+        return r != null && r.getCode() == CommonConstant.R_SUCCESS;
     }
 
     public static Boolean isNotOk(R r) {
@@ -35,31 +31,31 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> ok() {
-        return restResult(null, SUCCESS, "操作成功");
+        return restResult(null, CommonConstant.R_SUCCESS, "操作成功");
     }
 
     public static <T> R<T> ok(T data) {
-        return restResult(data, SUCCESS, null);
+        return restResult(data, CommonConstant.R_SUCCESS, null);
     }
 
     public static <T> R<T> ok(T data, String msg) {
-        return restResult(data, SUCCESS, msg);
+        return restResult(data, CommonConstant.R_SUCCESS, msg);
     }
 
     public static <T> R<T> fail() {
-        return restResult(null, FAIL, null);
+        return restResult(null, CommonConstant.R_FAIL, null);
     }
 
     public static <T> R<T> fail(String msg) {
-        return restResult(null, FAIL, msg);
+        return restResult(null, CommonConstant.R_FAIL, msg);
     }
 
     public static <T> R<T> fail(T data) {
-        return restResult(data, FAIL, null);
+        return restResult(data, CommonConstant.R_FAIL, null);
     }
 
     public static <T> R<T> fail(T data, String msg) {
-        return restResult(data, FAIL, msg);
+        return restResult(data, CommonConstant.R_FAIL, msg);
     }
 
     public static <T> R<T> fail(int code, String msg) {

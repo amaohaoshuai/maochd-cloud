@@ -1,4 +1,4 @@
-package com.maochd.cloud.common.core.feign;
+package com.maochd.cloud.common.feign.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

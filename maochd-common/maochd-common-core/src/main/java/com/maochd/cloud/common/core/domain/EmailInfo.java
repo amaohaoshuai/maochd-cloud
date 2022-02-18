@@ -4,13 +4,15 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(value = "邮箱队列公共对象", description = "用于微服务之间的邮箱推送")
-public class EmailInfo {
+public class EmailInfo implements Serializable {
 
     @ApiModelProperty("邮箱发送目的地")
     private String targetEmail;

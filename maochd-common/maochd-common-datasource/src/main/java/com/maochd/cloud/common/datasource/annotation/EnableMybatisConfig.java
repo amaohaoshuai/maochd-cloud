@@ -1,10 +1,7 @@
 package com.maochd.cloud.common.datasource.annotation;
 
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Import;
-import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.lang.annotation.*;
 
@@ -16,10 +13,6 @@ import java.lang.annotation.*;
 @EnableAspectJAutoProxy(exposeProxy = true)
 // 指定要扫描的Mapper类的包的路径
 @MapperScan("com.maochd.cloud.**.mapper")
-// 开启线程异步执行
-@EnableAsync
-// 自动加载类
-@Import({FeignAutoConfiguration.class})
-public @interface EnableCustomConfig {
+public @interface EnableMybatisConfig {
 
 }
