@@ -20,12 +20,8 @@
     </properties>
 
     <modules>
-        <!-- 支付服务 -->
-        <module>maochd-pay</module>
         <!-- 订单服务 -->
         <module>maochd-order</module>
-        <!-- 库存服务 -->
-        <module>maochd-inventory</module>
         <!-- 商品服务 -->
         <module>maochd-goods</module>
         <!-- 帐号服务 -->

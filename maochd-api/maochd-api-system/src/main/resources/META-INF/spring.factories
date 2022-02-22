@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.maochd.cloud.system.api.order.fallback.RemoteOrderFallbackFactory,\
-  com.maochd.cloud.system.api.pay.fallback.RemotePayFallbackFactory,\
-  com.maochd.cloud.system.api.inventory.fallback.RemoteInventoryFallbackFactory
+  com.maochd.cloud.system.api.account.fallback.RemoteAccountFallbackFactory,\
+  com.maochd.cloud.system.api.goods.fallback.RemoteGoodsFallbackFactory

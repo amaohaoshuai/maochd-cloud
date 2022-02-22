@@ -25,9 +25,9 @@ com.maochd.cloud
 │       └── maochd-common-redis              // Redis缓存模块
 │       └── maochd-common-swagger            // API文档模块
 ├── maochd-service                           // 业务模块
-│       └── maochd-inventory                 // 库存服务 [19003]
+│       └── maochd-goods                     // 商品服务 [19003]
 │       └── maochd-order                     // 订单服务 [19001]
-│       └── maochd-pay                       // 支付服务 [19002]
+│       └── maochd-account                   // 账户服务 [19002]
 ~~~
 
 ### 架构图
