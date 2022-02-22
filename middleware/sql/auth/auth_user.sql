@@ -9,5 +9,6 @@ create table user
     password    varchar(128) default ''                not null comment '密码',
     phone       varchar(16)  default ''                not null comment '联系方式',
     create_date datetime     default CURRENT_TIMESTAMP not null comment '创建时间'
-);
+)
+    comment '用户信息' charset = utf8mb4;
 

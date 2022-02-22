@@ -9,4 +9,4 @@ create table account_info
     amount       decimal(16, 2)                         null comment '余额',
     create_date  datetime     default CURRENT_TIMESTAMP not null comment '创建时间'
 )
-    comment '账户信息';
+    comment '账户信息' charset = utf8mb4;

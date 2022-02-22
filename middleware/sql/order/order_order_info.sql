@@ -10,4 +10,4 @@ create table order_info
     goods_id     bigint       default 0                 not null comment '商品ID',
     user_id      bigint       default 0                 not null comment '用户ID'
 )
-    comment '订单信息';
+    comment '订单信息' charset = utf8mb4;

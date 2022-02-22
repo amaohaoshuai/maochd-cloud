@@ -8,4 +8,4 @@ create table goods_info
     goods_name      varchar(128) charset latin1 default ''                not null comment '商品名称',
     goods_price     decimal(16, 8)              default 0.00000000        not null comment '商品单价'
 )
-    comment '商品信息';
+    comment '商品信息' charset = utf8mb4;
