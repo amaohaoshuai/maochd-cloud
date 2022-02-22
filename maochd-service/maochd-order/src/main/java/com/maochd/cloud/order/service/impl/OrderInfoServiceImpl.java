@@ -79,7 +79,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
         }
         // 账户扣费
         R<Boolean> deductResp = remoteAccountService.deduct(orderInfo.getAccountCode(), orderInfo.getTotalAmount());
-        if(R.isNotOk(reduceResp)) {
+        if(R.isNotOk(deductResp)) {
             log.error("账户扣费失败，失败原因：{}，数据详情：{}", deductResp.getMsg(), orderInfo);
             throw new BaseException("账户扣费失败");
         }

@@ -14,6 +14,8 @@ import com.maochd.cloud.system.api.goods.domain.entity.GoodsInfo;
 import com.maochd.cloud.goods.mapper.GoodsInfoMapper;
 import com.maochd.cloud.goods.service.GoodsInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.seata.core.context.RootContext;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 
+@Slf4j
 @Service
 public class GoodsInfoServiceImpl extends ServiceImpl<GoodsInfoMapper, GoodsInfo> implements GoodsInfoService {
 
@@ -80,7 +83,7 @@ public class GoodsInfoServiceImpl extends ServiceImpl<GoodsInfoMapper, GoodsInfo
     }
 
     @Override
-    @RedisLock
+    @RedisLock(value = "id", asObject = false)
     @Transactional
     public boolean reduceInventory(Long id, Integer count) {
         GoodsInfo goodsInfo = this.getById(id);

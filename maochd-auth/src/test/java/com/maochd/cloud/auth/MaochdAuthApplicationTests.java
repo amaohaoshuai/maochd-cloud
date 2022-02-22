@@ -3,12 +3,18 @@ package com.maochd.cloud.auth;
 import com.maochd.cloud.auth.condition.UserQueryCondition;
 import com.maochd.cloud.auth.entity.User;
 import com.maochd.cloud.auth.service.UserService;
+import com.maochd.cloud.common.core.domain.EmailInfo;
+import com.maochd.cloud.common.core.domain.SmsInfo;
 import com.maochd.cloud.system.api.account.domain.condition.AccountQueryCondition;
 import com.maochd.cloud.system.api.account.domain.entity.AccountInfo;
 import com.maochd.cloud.system.api.account.service.RemoteAccountService;
 import com.maochd.cloud.system.api.goods.domain.condition.GoodsQueryCondition;
 import com.maochd.cloud.system.api.goods.domain.entity.GoodsInfo;
 import com.maochd.cloud.system.api.goods.service.RemoteGoodsService;
+import com.maochd.cloud.system.api.mq.service.RemoteMqService;
+import com.maochd.cloud.system.api.order.domain.condition.OrderQueryCondition;
+import com.maochd.cloud.system.api.order.domain.entity.OrderInfo;
+import com.maochd.cloud.system.api.order.service.RemoteOrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,6 +36,13 @@ public class MaochdAuthApplicationTests {
 
     @Resource
     private RemoteAccountService remoteAccountService;
+
+    @Resource
+    private RemoteOrderService remoteOrderService;
+
+    @Resource
+    private RemoteMqService remoteMqService;
+
 
     @Test
     public void list() {
@@ -94,19 +107,19 @@ public class MaochdAuthApplicationTests {
     @Test
     public void goodAdd() {
         System.out.println(remoteGoodsService.save(GoodsInfo.builder()
-                        .goodPrice(new BigDecimal("1.0"))
-                        .goodsName("11111111")
-                        .goodsCode(UUID.randomUUID().toString())
-                        .goodsInventory(100)
-                        .build()));
+                .goodPrice(new BigDecimal("1.0"))
+                .goodsName("11111111")
+                .goodsCode(UUID.randomUUID().toString())
+                .goodsInventory(100)
+                .build()));
     }
 
     @Test
     public void goodModify() {
         System.out.println(remoteGoodsService.modify(GoodsInfo.builder()
-                        .id(1L)
+                .id(1L)
                 .goodPrice(new BigDecimal("1.0"))
-                .goodsName("22222222")
+                .goodsName("11111111")
                 .goodsCode(UUID.randomUUID().toString())
                 .goodsInventory(100)
                 .build()));
@@ -119,7 +132,7 @@ public class MaochdAuthApplicationTests {
 
     @Test
     public void goodsReduce() {
-        System.out.println(remoteGoodsService.reduceInventory(2L, 100));
+        System.out.println(remoteGoodsService.reduceInventory(2L, 1));
     }
 
 
@@ -149,6 +162,49 @@ public class MaochdAuthApplicationTests {
         System.out.println(remoteAccountService.deduct("11111", new BigDecimal("1.0")));
     }
 
+    @Test
+    public void orderList() {
+        OrderQueryCondition condition = new OrderQueryCondition();
+        System.out.println(remoteOrderService.list(condition));
+    }
 
+    @Test
+    public void orderPage() {
+        OrderQueryCondition condition = new OrderQueryCondition();
+        System.out.println(remoteOrderService.page(condition));
+    }
 
+    @Test
+    public void orderGetById() {
+        System.out.println(remoteOrderService.getById(3L));
+    }
+
+    @Test
+    public void orderAdd() {
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setAccountCode("11111");
+        orderInfo.setUserId(0L);
+        orderInfo.setGoodsId(2L);
+        orderInfo.setNum(10);
+        orderInfo.setTotalAmount(new BigDecimal("10.00"));
+        System.out.println(remoteOrderService.add(orderInfo));
+    }
+
+    @Test
+    public void mqPushEmail() {
+        System.out.println(remoteMqService.pushEmail(EmailInfo.builder()
+                .targetEmail("834739007@qq.com")
+                .content("测试邮件")
+                .subject("主题")
+                .build()));
+    }
+
+    @Test
+    public void mqPushSms() {
+        System.out.println(remoteMqService.pushSms(SmsInfo.builder()
+                .templateId("1")
+                .phone("19439803232")
+                .content("测试短信")
+                .build()));
+    }
 }
