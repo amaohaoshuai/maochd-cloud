@@ -30,9 +30,7 @@ com.maochd.cloud
 ~~~
 
 ### 架构图
-~~~
-暂未上传
-~~~
+![Image](https://gitee.com/maochd/maochd-cloud/blob/master/maochd%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 ### 使用主要组件
 ~~~
