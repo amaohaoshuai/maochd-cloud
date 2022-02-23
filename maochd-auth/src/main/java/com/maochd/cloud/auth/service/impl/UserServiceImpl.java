@@ -14,6 +14,8 @@ import com.maochd.cloud.auth.mapper.UserMapper;
 import com.maochd.cloud.auth.service.UserService;
 import com.maochd.cloud.common.core.exception.BaseException;
 import com.maochd.cloud.common.redis.annotation.RedisLock;
+import com.maochd.cloud.common.redis.annotation.RedisRemove;
+import com.maochd.cloud.common.redis.annotation.RedisSave;
 import com.maochd.cloud.common.redis.service.RedisService;
 import org.springframework.stereotype.Service;
 
@@ -28,15 +30,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private RedisService redisService;
 
     @Override
+    @RedisSave(key = RedisConstant.KEY_USER_LIST, clazz = User.class)
     public List<User> list(UserQueryCondition cond) {
-        List<User> users = JSONArray.parseArray(redisService.get(RedisConstant.KEY_USER_LIST), User.class);
-        if (CollUtil.isEmpty(users)) {
-            users = this.list(Wrappers.<User>lambdaQuery()
-                    .like(StrUtil.isNotBlank(cond.getUserName()), User::getUserName, cond.getUserName())
-                    .eq(StrUtil.isNotBlank(cond.getPhone()), User::getPhone, cond.getPhone()));
-            redisService.set(RedisConstant.KEY_USER_LIST, users);
-        }
-        return users;
+        return this.list(Wrappers.<User>lambdaQuery()
+                .like(StrUtil.isNotBlank(cond.getUserName()), User::getUserName, cond.getUserName())
+                .eq(StrUtil.isNotBlank(cond.getPhone()), User::getPhone, cond.getPhone()));
     }
 
     @Override
@@ -48,6 +46,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @RedisLock
+    @RedisRemove(key = RedisConstant.KEY_USER_LIST)
     public boolean add(User user) {
         user.setUserId(UUID.randomUUID().toString());
         boolean result = this.save(user);
@@ -60,6 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @RedisLock
+    @RedisRemove(key = RedisConstant.KEY_USER_LIST)
     public boolean modify(User user) {
         if (user.getId() == null) {
             throw new BaseException("用户ID不能为空");
@@ -74,6 +74,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @RedisLock
+    @RedisRemove(key = RedisConstant.KEY_USER_LIST)
     public boolean remove(Long id) {
         boolean result = this.removeById(id);
         String userList = redisService.get(RedisConstant.KEY_USER_LIST);

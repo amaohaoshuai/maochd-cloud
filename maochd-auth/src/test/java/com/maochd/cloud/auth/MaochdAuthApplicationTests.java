@@ -108,7 +108,7 @@ public class MaochdAuthApplicationTests {
     public void goodAdd() {
         System.out.println(remoteGoodsService.save(GoodsInfo.builder()
                 .goodPrice(new BigDecimal("1.0"))
-                .goodsName("11111111")
+                .goodsName("西瓜")
                 .goodsCode(UUID.randomUUID().toString())
                 .goodsInventory(100)
                 .build()));
@@ -117,9 +117,9 @@ public class MaochdAuthApplicationTests {
     @Test
     public void goodModify() {
         System.out.println(remoteGoodsService.modify(GoodsInfo.builder()
-                .id(1L)
+                .id(4L)
                 .goodPrice(new BigDecimal("1.0"))
-                .goodsName("11111111")
+                .goodsName("苹果")
                 .goodsCode(UUID.randomUUID().toString())
                 .goodsInventory(100)
                 .build()));
@@ -127,12 +127,12 @@ public class MaochdAuthApplicationTests {
 
     @Test
     public void goodRemove() {
-        System.out.println(remoteGoodsService.remove(1L));
+        System.out.println(remoteGoodsService.remove(2L));
     }
 
     @Test
     public void goodsReduce() {
-        System.out.println(remoteGoodsService.reduceInventory(2L, 1));
+        System.out.println(remoteGoodsService.reduceInventory(4L, 1000));
     }
 
 

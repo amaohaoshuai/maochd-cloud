@@ -1,8 +1,6 @@
 package com.maochd.cloud.goods.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,33 +8,26 @@ import com.maochd.cloud.api.goods.domain.condition.GoodsQueryCondition;
 import com.maochd.cloud.api.goods.domain.entity.GoodsInfo;
 import com.maochd.cloud.common.core.exception.BaseException;
 import com.maochd.cloud.common.redis.annotation.RedisLock;
-import com.maochd.cloud.common.redis.service.RedisService;
+import com.maochd.cloud.common.redis.annotation.RedisRemove;
+import com.maochd.cloud.common.redis.annotation.RedisSave;
 import com.maochd.cloud.goods.constant.RedisConstant;
 import com.maochd.cloud.goods.mapper.GoodsInfoMapper;
 import com.maochd.cloud.goods.service.GoodsInfoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 
 @Service
 public class GoodsInfoServiceImpl extends ServiceImpl<GoodsInfoMapper, GoodsInfo> implements GoodsInfoService {
 
-    @Resource
-    private RedisService redisService;
-
     @Override
+    @RedisSave(key = RedisConstant.KEY_GOODS_LIST, clazz = GoodsInfo.class)
     public List<GoodsInfo> list(GoodsQueryCondition cond) {
-        List<GoodsInfo> goods = JSONArray.parseArray(redisService.get(RedisConstant.KEY_GOODS_LIST), GoodsInfo.class);
-        if (CollUtil.isEmpty(goods)) {
-            goods = this.list(Wrappers.<GoodsInfo>lambdaQuery()
-                    .eq(StrUtil.isNotBlank(cond.getGoodsCode()), GoodsInfo::getGoodsCode, cond.getGoodsCode())
-                    .like(StrUtil.isNotBlank(cond.getGoodsName()), GoodsInfo::getGoodsName, cond.getGoodsName()));
-            redisService.set(RedisConstant.KEY_GOODS_LIST, goods);
-        }
-        return goods;
+        return this.list(Wrappers.<GoodsInfo>lambdaQuery()
+                .eq(StrUtil.isNotBlank(cond.getGoodsCode()), GoodsInfo::getGoodsCode, cond.getGoodsCode())
+                .like(StrUtil.isNotBlank(cond.getGoodsName()), GoodsInfo::getGoodsName, cond.getGoodsName()));
     }
 
     @Override
@@ -47,52 +38,39 @@ public class GoodsInfoServiceImpl extends ServiceImpl<GoodsInfoMapper, GoodsInfo
     }
 
     @Override
+    @RedisLock
+    @RedisRemove(key = RedisConstant.KEY_GOODS_LIST)
     public boolean insert(GoodsInfo goodsInfo) {
-        boolean result = this.save(goodsInfo);
-        String goods = redisService.get(RedisConstant.KEY_GOODS_LIST);
-        if (StrUtil.isNotBlank(goods)) {
-            redisService.del(RedisConstant.KEY_GOODS_LIST);
-        }
-        return result;
+        return this.save(goodsInfo);
     }
 
     @Override
+    @RedisLock
+    @RedisRemove(key = RedisConstant.KEY_GOODS_LIST)
     public boolean modify(GoodsInfo goodsInfo) {
         if (goodsInfo.getId() == null) {
             throw new BaseException("ID不能为空");
         }
-        boolean result = this.updateById(goodsInfo);
-        String goods = redisService.get(RedisConstant.KEY_GOODS_LIST);
-        if (StrUtil.isNotBlank(goods)) {
-            redisService.del(RedisConstant.KEY_GOODS_LIST);
-        }
-        return result;
+        return this.updateById(goodsInfo);
     }
 
     @Override
+    @RedisLock
+    @RedisRemove(key = RedisConstant.KEY_GOODS_LIST)
     public boolean remove(Long id) {
-        boolean result = this.removeById(id);
-        String goods = redisService.get(RedisConstant.KEY_GOODS_LIST);
-        if (StrUtil.isNotBlank(goods)) {
-            redisService.del(RedisConstant.KEY_GOODS_LIST);
-        }
-        return result;
+        return this.removeById(id);
     }
 
     @Override
     @RedisLock(value = "id", asObject = false)
     @Transactional
+    @RedisRemove(key = RedisConstant.KEY_GOODS_LIST)
     public boolean reduceInventory(Long id, Integer count) {
         GoodsInfo goodsInfo = this.getById(id);
         if (goodsInfo.getGoodsInventory() < count) {
             throw new BaseException("库存不足");
         }
-        boolean result = this.update(Wrappers.<GoodsInfo>lambdaUpdate()
+        return this.update(Wrappers.<GoodsInfo>lambdaUpdate()
                 .set(GoodsInfo::getGoodsInventory, goodsInfo.getGoodsInventory() - count));
-        String goods = redisService.get(RedisConstant.KEY_GOODS_LIST);
-        if (StrUtil.isNotBlank(goods)) {
-            redisService.del(RedisConstant.KEY_GOODS_LIST);
-        }
-        return result;
     }
 }
