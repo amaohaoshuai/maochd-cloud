@@ -8,22 +8,27 @@ public interface ServiceNameConstant {
     String ORDER_SERVER = "maochd-order";
 
     /**
-     * 鉴权服务名
+     * 认证中心服务名
      */
     String AUTH_SERVER = "maochd-auth";
-
-    /**
-     * 支付服务名
-     */
-    String PAY_SERVER = "maochd-pay";
-
-    /**
-     * 库存服务名
-     */
-    String INVENTORY_SERVER = "maochd-inventory";
 
     /**
      * 消息队列服务名
      */
     String MQ_SERVER = "maochd-mq";
+
+    /**
+     * 账户服务名
+     */
+    String ACCOUNT_SERVER = "maochd-account";
+
+    /**
+     * 商品服务名
+     */
+    String GOODS_SERVER = "maochd-goods";
+
+    /**
+     * 第三方服务名
+     */
+    String THIRD_PARTY_SERVER = "maochd-third-party";
 }

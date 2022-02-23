@@ -25,6 +25,12 @@
             <artifactId>maochd-common-core</artifactId>
         </dependency>
 
+        <!-- 远程调用模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-feign</artifactId>
+        </dependency>
+
         <!-- Xxl Job Core -->
         <dependency>
             <groupId>com.xuxueli</groupId>
@@ -44,10 +50,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- 内部API模块 -->
+        <!-- API调用模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-api-system</artifactId>
+            <artifactId>maochd-api</artifactId>
         </dependency>
 
         <!-- SpringCloud Ailibaba Nacos -->

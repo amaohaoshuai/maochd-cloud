@@ -32,10 +32,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- 内部API模块 -->
+        <!-- API调用模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-api-system</artifactId>
+            <artifactId>maochd-api</artifactId>
         </dependency>
 
         <!-- 公共核心模块 -->
@@ -68,6 +68,12 @@
             <artifactId>maochd-common-log</artifactId>
         </dependency>
 
+        <!-- 远程调用模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-feign</artifactId>
+        </dependency>
+
         <!-- Mybatis Plus 代码生成 -->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -78,21 +84,18 @@
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
-            <version>${velocity.core.version}</version>
         </dependency>
 
         <!-- Mysql驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connect.version}</version>
         </dependency>
 
         <!-- Druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
         </dependency>
 
         <!-- SpringBoot Seata -->

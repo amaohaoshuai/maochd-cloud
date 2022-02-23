@@ -2,7 +2,7 @@
 ### 简介
 ~~~
 提供了一套拆箱即用的微服务框架，包含注册中心、配置中心、统一入口（网关）、认证中心、服务监控、服务链路追踪、分布式事务、
-分布式任务、分布式定时任务的功能，极大简化项目前期的构建。
+分布式任务、分布式定时任务、消息队列的功能，极大简化项目前期的构建。
 ~~~
 
 ### 系统模块
@@ -12,20 +12,21 @@ com.maochd.cloud
 ├── maochd-auth                              // 认证中心 [19000]
 ├── maochd-job                               // 定时任务服务 [19004]
 ├── maochd-monitor                           // 监控服务 [18083]
+├── maochd-mq                                // 消息队列服务 [19005]
 ├── middleware                               // 配置文件
 ├── maochd-api                               // API调用模块
-│       └── maochd-api-system                // 内部API模块
-│       └── maochd-api-third-part            // 第三方API模块
 ├── maochd-common                            // 公共组件模块
 │       └── maochd-common-core               // 公共核心模块
 │       └── maochd-common-datasource         // 数据源模块
+│       └── maochd-common-feign              // 远程调用模块
 │       └── maochd-common-log                // 日志模块
 │       └── maochd-common-redis              // Redis缓存模块
 │       └── maochd-common-swagger            // API文档模块
 ├── maochd-service                           // 业务模块
-│       └── maochd-inventory                 // 库存服务 [19003]
+│       └── maochd-goods                     // 商品服务 [19003]
 │       └── maochd-order                     // 订单服务 [19001]
-│       └── maochd-pay                       // 支付服务 [19002]
+│       └── maochd-account                   // 账户服务 [19002]
+│       └── maochd-third-party               // 第三方服务 [19006]
 ~~~
 
 ### 架构图
@@ -46,6 +47,7 @@ Redisson            [分布式锁]
 Zikpin              [服务链路追踪]
 Sleuth              [服务链路追踪]
 Xxl-Job             [分布式定时任务]
+Kafka               [消息队列]
 ~~~
 
 ### 组件部署步骤（默认Linux系统，并在root目录下）
@@ -141,7 +143,7 @@ Xxl-Job             [分布式定时任务]
 [当前目录]: /root
 ~~~
 
-#### 安装zookeeper、kafka（集成kafka时用到，暂时可以不用，正在集成中）
+#### 安装zookeeper、kafka
 ~~~
 1、 安装zookeeper
 [CMD]: docker run -d --name zookeeper -p 2181:2181 --restart=always -v /home/data/zookeeper_data/data:/data -v /home/data/zookeeper_data/conf:/conf wurstmeister/zookeeper

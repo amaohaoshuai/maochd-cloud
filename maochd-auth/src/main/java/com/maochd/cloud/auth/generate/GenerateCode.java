@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+
 public class GenerateCode {
 
     public static String DB_URL = "jdbc:mysql://10.10.3.81:3306/auth?useUnicode=true" +
@@ -39,16 +41,9 @@ public class GenerateCode {
     public static String MAPPER_PATH = "/src/main/resources/mapper/";
 
 
-    /**
-     * <p>
-     * 读取控制台内容
-     * </p>
-     */
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
-        StringBuilder help = new StringBuilder();
-        help.append("请输入").append(tip).append("：");
-        System.out.println(help.toString());
+        System.out.println("请输入" + tip + "：");
         if (scanner.hasNext()) {
             String ipt = scanner.next();
             if (org.apache.commons.lang.StringUtils.isNotBlank(ipt)) {

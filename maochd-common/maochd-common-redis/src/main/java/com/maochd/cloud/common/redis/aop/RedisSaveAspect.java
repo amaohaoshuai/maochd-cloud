@@ -1,12 +1,11 @@
 package com.maochd.cloud.common.redis.aop;
 
-import com.maochd.cloud.common.core.domain.R;
 import com.maochd.cloud.common.redis.annotation.RedisSave;
 import com.maochd.cloud.common.redis.service.RedisService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -26,17 +25,29 @@ public class RedisSaveAspect {
     }
 
     @SneakyThrows
-    @AfterReturning(pointcut = "servicePointCut()", returning = "result")
-    public void afterMethod(JoinPoint joinPoint, Object result) {
+    @Around(value = "servicePointCut()")
+    public Object interceptor(ProceedingJoinPoint joinPoint) {
         //从切面织入点处通过反射机制获取织入点处的方法
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         //获取切入点所在的方法
         Method method = signature.getMethod();
         // 拿到注解
         RedisSave redisSave = method.getAnnotation(RedisSave.class);
-        if (redisService.hasKey(redisSave.key())) {
-            return;
+        Object obj;
+        // 读取缓存
+        if (redisSave.asList()) {
+            obj = redisService.getList(redisSave.key(), redisSave.clazz());
+        } else {
+            obj = redisService.get(redisSave.key(), redisSave.clazz());
         }
-        redisService.set(redisSave.key(), ((R<?>) result).getData(), redisSave.expireTime());
+        // 如果缓存中有值，则返回缓存数据
+        if (obj != null) {
+            return obj;
+        }
+        // 执行方法
+        obj = joinPoint.proceed();
+        // 保存方法返回值
+        redisService.set(redisSave.key(), obj, redisSave.expireTime());
+        return obj;
     }
 }

@@ -15,6 +15,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -51,10 +53,10 @@ public class LogControllerAspect {
                 .collect(Collectors.toMap(k -> Objects.requireNonNull(params)[k], args::get));
         log.info(LogConst.LOG_START_MSG, method.getName(), request.getMethod(), reqParams);
         // 获取开始时间
-        long startTime = System.currentTimeMillis();
+        LocalDateTime startTime = LocalDateTime.now();
         Object result = joinPoint.proceed();
         // 计算方法耗时
-        long diffTime = (System.currentTimeMillis() - startTime) / 1000;
+        long diffTime = Duration.between(startTime, LocalDateTime.now()).toMillis();
         log.info(LogConst.LOG_END_MSG, method.getName(), diffTime, result);
         return result;
     }

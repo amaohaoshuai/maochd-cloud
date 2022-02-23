@@ -1,6 +1,6 @@
 service.vgroupMapping.maochd-order-group=default
-service.vgroupMapping.maochd-pay-group=default
-service.vgroupMapping.maochd-inventory-group=default
+service.vgroupMapping.maochd-account-group=default
+service.vgroupMapping.maochd-goods-group=default
 service.default.grouplist=10.10.3.81:8091
 store.mode=db
 store.db.datasource=druid

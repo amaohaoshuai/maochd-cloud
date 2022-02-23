@@ -12,21 +12,15 @@ import java.io.Serializable;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author maochd
- * @since 2021-06-16
- */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @TableName("user")
-@ApiModel(value = "User对象", description = "")
+@ApiModel(value = "User对象", description = "用户信息")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
