@@ -44,10 +44,10 @@
             <artifactId>spring-cloud-starter-stream-kafka</artifactId>
         </dependency>
 
-        <!-- 内部API模块 -->
+        <!-- API调用模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-api-system</artifactId>
+            <artifactId>maochd-api</artifactId>
         </dependency>
 
         <!-- 公共核心模块 -->

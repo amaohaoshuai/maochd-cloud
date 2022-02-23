@@ -5,17 +5,15 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.maochd.cloud.api.goods.domain.condition.GoodsQueryCondition;
+import com.maochd.cloud.api.goods.domain.entity.GoodsInfo;
 import com.maochd.cloud.common.core.exception.BaseException;
 import com.maochd.cloud.common.redis.annotation.RedisLock;
 import com.maochd.cloud.common.redis.service.RedisService;
-import com.maochd.cloud.system.api.goods.domain.condition.GoodsQueryCondition;
 import com.maochd.cloud.goods.constant.RedisConstant;
-import com.maochd.cloud.system.api.goods.domain.entity.GoodsInfo;
 import com.maochd.cloud.goods.mapper.GoodsInfoMapper;
 import com.maochd.cloud.goods.service.GoodsInfoService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.seata.core.context.RootContext;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +21,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 
-@Slf4j
 @Service
 public class GoodsInfoServiceImpl extends ServiceImpl<GoodsInfoMapper, GoodsInfo> implements GoodsInfoService {
 

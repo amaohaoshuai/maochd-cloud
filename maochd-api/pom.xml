@@ -13,16 +13,41 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>maochd-api</name>
     <description>API调用模块</description>
-    <packaging>pom</packaging>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
-    <modules>
-        <!-- 内部API模块 -->
-        <module>maochd-api-system</module>
-        <!-- 第三方API模块 -->
-        <module>maochd-api-third-part</module>
-    </modules>
+    <dependencies>
+        <!-- API文档模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-swagger</artifactId>
+        </dependency>
+
+        <!-- 公共核心模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-core</artifactId>
+        </dependency>
+
+        <!-- 客户端负载均衡 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+        <!-- SpringCloud Openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!-- Mybatis Plus 代码生成 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus.generator.version}</version>
+        </dependency>
+    </dependencies>
 </project>

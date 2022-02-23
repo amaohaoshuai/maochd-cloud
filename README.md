@@ -15,8 +15,6 @@ com.maochd.cloud
 ├── maochd-mq                                // 消息队列服务 [19005]
 ├── middleware                               // 配置文件
 ├── maochd-api                               // API调用模块
-│       └── maochd-api-system                // 内部API模块
-│       └── maochd-api-third-part            // 第三方API模块
 ├── maochd-common                            // 公共组件模块
 │       └── maochd-common-core               // 公共核心模块
 │       └── maochd-common-datasource         // 数据源模块
@@ -28,6 +26,7 @@ com.maochd.cloud
 │       └── maochd-goods                     // 商品服务 [19003]
 │       └── maochd-order                     // 订单服务 [19001]
 │       └── maochd-account                   // 账户服务 [19002]
+│       └── maochd-third-party               // 第三方服务 [19006]
 ~~~
 
 ### 架构图

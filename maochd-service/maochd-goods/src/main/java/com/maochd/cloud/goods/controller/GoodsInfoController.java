@@ -3,8 +3,8 @@ package com.maochd.cloud.goods.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.system.api.goods.domain.condition.GoodsQueryCondition;
-import com.maochd.cloud.system.api.goods.domain.entity.GoodsInfo;
+import com.maochd.cloud.api.goods.domain.condition.GoodsQueryCondition;
+import com.maochd.cloud.api.goods.domain.entity.GoodsInfo;
 import com.maochd.cloud.goods.service.GoodsInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

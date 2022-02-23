@@ -2,11 +2,11 @@ package com.maochd.cloud.account.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.maochd.cloud.system.api.account.domain.condition.AccountQueryCondition;
+import com.maochd.cloud.api.account.domain.condition.AccountQueryCondition;
 import com.maochd.cloud.account.constant.CommonConstant;
 import com.maochd.cloud.account.service.AccountInfoService;
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.system.api.account.domain.entity.AccountInfo;
+import com.maochd.cloud.api.account.domain.entity.AccountInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

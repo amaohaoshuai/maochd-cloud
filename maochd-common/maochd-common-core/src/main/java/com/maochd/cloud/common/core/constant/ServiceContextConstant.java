@@ -13,16 +13,6 @@ public interface ServiceContextConstant {
     String AUTH_CONTEXT_ID = "remoteAuthService";
 
     /**
-     * 支付上下文ID
-     */
-    String PAY_CONTEXT_ID = "remotePayService";
-
-    /**
-     * 库存上下文ID
-     */
-    String INVENTORY_CONTEXT_ID = "remoteInventoryService";
-
-    /**
      * 消息队列上下文ID
      */
     String MQ_CONTEXT_ID = "remoteMqService";
@@ -36,4 +26,9 @@ public interface ServiceContextConstant {
      * 商品上下文ID
      */
     String GOODS_CONTEXT_ID = "remoteGoodsService";
+
+    /**
+     * 第三方上下文ID
+     */
+    String THIRD_PARTY_CONTEXT_ID = "remoteThirdPartyService";
 }

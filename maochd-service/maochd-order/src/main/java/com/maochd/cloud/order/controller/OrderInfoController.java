@@ -3,8 +3,8 @@ package com.maochd.cloud.order.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.maochd.cloud.common.core.domain.R;
-import com.maochd.cloud.system.api.order.domain.condition.OrderQueryCondition;
-import com.maochd.cloud.system.api.order.domain.entity.OrderInfo;
+import com.maochd.cloud.api.order.domain.condition.OrderQueryCondition;
+import com.maochd.cloud.api.order.domain.entity.OrderInfo;
 import com.maochd.cloud.order.service.OrderInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

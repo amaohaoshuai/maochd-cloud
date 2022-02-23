@@ -277,17 +277,10 @@
                 <version>${xxl-job.version}</version>
             </dependency>
 
-            <!-- 内部API模块 -->
+            <!-- API调用模块 -->
             <dependency>
                 <groupId>com.maochd.cloud</groupId>
-                <artifactId>maochd-api-system</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <!-- 第三方API模块 -->
-            <dependency>
-                <groupId>com.maochd.cloud</groupId>
-                <artifactId>maochd-api-third-part</artifactId>
+                <artifactId>maochd-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

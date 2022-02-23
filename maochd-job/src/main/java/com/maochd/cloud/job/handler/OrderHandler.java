@@ -1,7 +1,7 @@
 //package com.maochd.cloud.job.handler;
 //
-//import com.maochd.cloud.system.api.order.domain.cond.OrderCondition;
-//import com.maochd.cloud.system.api.order.service.RemoteOrderService;
+//import com.maochd.cloud.api.order.domain.cond.OrderCondition;
+//import com.maochd.cloud.api.order.service.RemoteOrderService;
 //import com.xxl.job.core.handler.annotation.XxlJob;
 //import org.springframework.stereotype.Component;
 //

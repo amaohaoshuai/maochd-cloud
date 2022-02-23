@@ -10,14 +10,14 @@ public @interface RedisSave {
     /**
      * 键值
      *
-     * @return
+     * @return string
      */
     String key() default "";
 
     /**
      * 过期时间，默认永久
      *
-     * @return
+     * @return long
      */
     long expireTime() default -1L;
 }

@@ -50,10 +50,10 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- 内部API模块 -->
+        <!-- API调用模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-api-system</artifactId>
+            <artifactId>maochd-api</artifactId>
         </dependency>
 
         <!-- SpringCloud Ailibaba Nacos -->

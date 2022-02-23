@@ -13,8 +13,8 @@ import com.maochd.cloud.account.service.AccountInfoService;
 import com.maochd.cloud.common.core.exception.BaseException;
 import com.maochd.cloud.common.redis.annotation.RedisLock;
 import com.maochd.cloud.common.redis.service.RedisService;
-import com.maochd.cloud.system.api.account.domain.condition.AccountQueryCondition;
-import com.maochd.cloud.system.api.account.domain.entity.AccountInfo;
+import com.maochd.cloud.api.account.domain.condition.AccountQueryCondition;
+import com.maochd.cloud.api.account.domain.entity.AccountInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

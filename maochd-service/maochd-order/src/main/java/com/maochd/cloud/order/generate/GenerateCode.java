@@ -41,9 +41,7 @@ public class GenerateCode {
 
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
-        StringBuilder help = new StringBuilder();
-        help.append("请输入").append(tip).append("：");
-        System.out.println(help.toString());
+        System.out.println("请输入" + tip + "：");
         if (scanner.hasNext()) {
             String ipt = scanner.next();
             if (org.apache.commons.lang.StringUtils.isNotBlank(ipt)) {

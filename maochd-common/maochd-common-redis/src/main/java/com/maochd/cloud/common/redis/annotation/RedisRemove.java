@@ -10,7 +10,7 @@ public @interface RedisRemove {
     /**
      * 键值
      *
-     * @return
+     * @return string
      */
     String key() default "";
 }

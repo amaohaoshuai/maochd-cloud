@@ -122,9 +122,10 @@
             <artifactId>maochd-common-feign</artifactId>
         </dependency>
 
+        <!-- API调用模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-api-system</artifactId>
+            <artifactId>maochd-api</artifactId>
         </dependency>
     </dependencies>
 </project>

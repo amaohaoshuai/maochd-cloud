@@ -1,6 +1,6 @@
 package com.maochd.cloud.order.mapper;
 
-import com.maochd.cloud.system.api.order.domain.entity.OrderInfo;
+import com.maochd.cloud.api.order.domain.entity.OrderInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 
