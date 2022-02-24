@@ -1,0 +1,27 @@
+server:
+  port: 19008
+
+spring:
+  application:
+    name: maochd-websocket
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        # ??????
+        server-addr: ${NACOS_SERVER_ADDR:10.10.3.81:8848}
+        namespace: ${NACOS_NAMESPACE:maochd-cloud-yml}
+      config:
+        # ??????
+        server-addr: ${NACOS_SERVER_ADDR:10.10.3.81:8848}
+        namespace: ${NACOS_NAMESPACE:maochd-cloud-yml}
+        # ??????
+        file-extension: yml
+        # ????
+        shared-configs:
+          - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        # ????
+        refresh-enabled: true
