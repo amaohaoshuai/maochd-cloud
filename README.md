@@ -14,6 +14,11 @@ com.maochd.cloud
 ├── maochd-monitor                           // 监控服务 [18083]
 ├── maochd-mq                                // 消息队列服务 [19005]
 ├── middleware                               // 配置文件
+        └── application                      // nacos配置中心文件
+        └── loki                             // 日志配置
+        └── seata                            // seata配置
+        └── sentinel                         // 限流配置
+        └── sql                              // 数据库文件 
 ├── maochd-api                               // API调用模块
 ├── maochd-common                            // 公共组件模块
 │       └── maochd-common-core               // 公共核心模块
@@ -27,6 +32,7 @@ com.maochd.cloud
 │       └── maochd-order                     // 订单服务 [19001]
 │       └── maochd-account                   // 账户服务 [19002]
 │       └── maochd-third-party               // 第三方服务 [19006]
+│       └── maochd-email               // 第三方服务 [19007]
 ~~~
 
 ### 架构图

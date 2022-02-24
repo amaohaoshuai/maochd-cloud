@@ -28,5 +28,7 @@
         <module>maochd-account</module>
         <!-- 第三方服务 -->
         <module>maochd-third-party</module>
+        <!-- 邮件服务 -->
+        <module>maochd-email</module>
     </modules>
 </project>
