@@ -21,7 +21,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @SpringBootTest
@@ -193,10 +195,13 @@ public class MaochdAuthApplicationTests {
     @Test
     public void mqPushEmail() {
         System.out.println(remoteMqService.pushEmail(EmailInfo.builder()
-                .targetEmail("834739007@qq.com")
+                .to(new String[]{"834739007@qq.com"})
                 .content("测试邮件")
                 .subject("主题")
-                .build()));
+                .attachment(new ArrayList<File>() {{
+                    new File("D:\\download\\销项管理-清单开票-ewq模板#20220214104720.xls");
+                    new File("D:\\writeMapTest.xls");
+                }}).build()));
     }
 
     @Test

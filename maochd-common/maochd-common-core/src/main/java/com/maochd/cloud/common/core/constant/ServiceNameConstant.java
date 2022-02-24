@@ -31,4 +31,9 @@ public interface ServiceNameConstant {
      * 第三方服务名
      */
     String THIRD_PARTY_SERVER = "maochd-third-party";
+
+    /**
+     * 邮件服务名
+     */
+    String EMAIL_SERVER = "maochd-email";
 }

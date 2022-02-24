@@ -31,4 +31,9 @@ public interface ServiceContextConstant {
      * 第三方上下文ID
      */
     String THIRD_PARTY_CONTEXT_ID = "remoteThirdPartyService";
+
+    /**
+     * 邮件上下文ID
+     */
+    String EMAIL_CONTEXT_ID = "remoteEmailService";
 }
