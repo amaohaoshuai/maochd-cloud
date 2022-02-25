@@ -1,5 +1,6 @@
 package com.maochd.cloud.auth;
 
+import com.maochd.cloud.api.websocket.service.RemoteWebsocketService;
 import com.maochd.cloud.auth.condition.UserQueryCondition;
 import com.maochd.cloud.auth.entity.User;
 import com.maochd.cloud.auth.service.UserService;
@@ -15,6 +16,7 @@ import com.maochd.cloud.api.mq.service.RemoteMqService;
 import com.maochd.cloud.api.order.domain.condition.OrderQueryCondition;
 import com.maochd.cloud.api.order.domain.entity.OrderInfo;
 import com.maochd.cloud.api.order.service.RemoteOrderService;
+import com.maochd.cloud.common.core.domain.WsMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,6 +46,9 @@ public class MaochdAuthApplicationTests {
 
     @Resource
     private RemoteMqService remoteMqService;
+
+    @Resource
+    private RemoteWebsocketService remoteWebsocketService;
 
 
     @Test
@@ -212,4 +217,24 @@ public class MaochdAuthApplicationTests {
                 .content("测试短信")
                 .build()));
     }
+
+    @Test
+    public void wsSendOne() {
+        System.out.println(remoteWebsocketService.sendMessageToOne(WsMessage.builder()
+                .type("one")
+                .message(User.builder().userId("maochd").build())
+                .to("zhy")
+                .from("maochd")
+                .build()));
+    }
+
+    @Test
+    public void wsSendAll() {
+        System.out.println(remoteWebsocketService.sendMessageToAll(WsMessage.builder()
+                .type("all")
+                .message(User.builder().userId("maochd&zhy").build())
+                .from("maochd")
+                .build()));
+    }
+
 }

@@ -13,12 +13,14 @@ com.maochd.cloud
 ├── maochd-job                               // 定时任务服务 [19004]
 ├── maochd-monitor                           // 监控服务 [18083]
 ├── maochd-mq                                // 消息队列服务 [19005]
+├── maochd-websocket                         // 消息队列服务 [19008]
 ├── middleware                               // 配置文件
-        └── application                      // nacos配置中心文件
+        └── application                      // Nacos配置中心文件
         └── loki                             // 日志配置
-        └── seata                            // seata配置
+        └── seata                            // Seata配置
         └── sentinel                         // 限流配置
         └── sql                              // 数据库文件 
+        └── html                             // HTML文件 
 ├── maochd-api                               // API调用模块
 ├── maochd-common                            // 公共组件模块
 │       └── maochd-common-core               // 公共核心模块
@@ -32,11 +34,11 @@ com.maochd.cloud
 │       └── maochd-order                     // 订单服务 [19001]
 │       └── maochd-account                   // 账户服务 [19002]
 │       └── maochd-third-party               // 第三方服务 [19006]
-│       └── maochd-email               // 第三方服务 [19007]
+│       └── maochd-email                     // 第三方服务 [19007]
 ~~~
 
 ### 架构图
-![输入图片说明](maochd%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
+![输入图片说明](maochd-cloud%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 ### 使用主要组件
 ~~~

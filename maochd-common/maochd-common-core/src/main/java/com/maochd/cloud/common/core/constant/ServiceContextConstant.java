@@ -36,4 +36,9 @@ public interface ServiceContextConstant {
      * 邮件上下文ID
      */
     String EMAIL_CONTEXT_ID = "remoteEmailService";
+
+    /**
+     * Websocket上下文ID
+     */
+    String WEBSOCKET_CONTEXT_ID = "remoteWebsocketService";
 }
