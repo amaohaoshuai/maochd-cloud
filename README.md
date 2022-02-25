@@ -34,7 +34,7 @@ com.maochd.cloud
 │       └── maochd-order                     // 订单服务 [19001]
 │       └── maochd-account                   // 账户服务 [19002]
 │       └── maochd-third-party               // 第三方服务 [19006]
-│       └── maochd-email                     // 第三方服务 [19007]
+│       └── maochd-email                     // 邮件服务 [19007]
 ~~~
 
 ### 架构图
