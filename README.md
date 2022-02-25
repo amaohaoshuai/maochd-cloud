@@ -38,7 +38,7 @@ com.maochd.cloud
 ~~~
 
 ### 架构图
-![输入图片说明](maochd%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
+![输入图片说明](maochd-cloud%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 ### 使用主要组件
 ~~~
