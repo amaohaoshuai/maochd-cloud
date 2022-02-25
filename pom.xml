@@ -107,6 +107,8 @@
         <module>maochd-job</module>
         <!-- 消息队列服务 -->
         <module>maochd-mq</module>
+        <!-- Websocket服务 -->
+        <module>maochd-websocket</module>
     </modules>
 
     <dependencies>

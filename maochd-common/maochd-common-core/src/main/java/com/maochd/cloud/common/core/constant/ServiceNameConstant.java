@@ -36,4 +36,9 @@ public interface ServiceNameConstant {
      * 邮件服务名
      */
     String EMAIL_SERVER = "maochd-email";
+
+    /**
+     * Websocket服务名
+     */
+    String WEBSOCKET_SERVER = "maochd-websocket";
 }

@@ -30,7 +30,5 @@
         <module>maochd-third-party</module>
         <!-- 邮件服务 -->
         <module>maochd-email</module>
-        <!-- Websocket服务 -->
-        <module>maochd-websocket</module>
     </modules>
 </project>

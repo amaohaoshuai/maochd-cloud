@@ -3,4 +3,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.maochd.cloud.api.account.fallback.RemoteAccountFallbackFactory,\
   com.maochd.cloud.api.goods.fallback.RemoteGoodsFallbackFactory,\
   com.maochd.cloud.api.mq.fallback.RemoteMqFallbackFactory,\
-  com.maochd.cloud.api.email.fallback.RemoteEmailFallbackFactory
+  com.maochd.cloud.api.email.fallback.RemoteEmailFallbackFactory,\
+  com.maochd.cloud.api.websocket.fallback.RemoteWebsocketFallbackFactory
+
