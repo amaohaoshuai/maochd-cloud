@@ -27,15 +27,3 @@ spring:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         # 动态刷新
         refresh-enabled: true
-
-# 不校验白名单
-ignore:
-  whites:
-    - /auth/oauth/**
-    - /user/logout
-#    - /goods/**
-    - /**/v2/api-docs
-    - /swagger-resources/**
-    - /swagger-ui.html
-    - /webjars/**
-    - /ws/**

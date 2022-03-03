@@ -25,15 +25,3 @@ spring:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         # 动态刷新
         refresh-enabled: true
-
-client:
-  client-id: maochd-client
-  secret: 123456
-  scopes: all
-  authorizedGrantTypes:
-    - password
-    - refresh_token
-key-pair:
-  type: jwt
-  filename: jwt.jks
-  value: 123456
