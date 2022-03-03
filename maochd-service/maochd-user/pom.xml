@@ -5,14 +5,14 @@
 
     <parent>
         <groupId>com.maochd.cloud</groupId>
-        <artifactId>maochd-cloud</artifactId>
+        <artifactId>maochd-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>maochd-auth</artifactId>
+    <artifactId>maochd-user</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>maochd-auth</name>
-    <description>认证中心</description>
+    <name>maochd-user</name>
+    <description>用户服务</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -30,6 +30,48 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- API调用模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-api</artifactId>
+        </dependency>
+
+        <!-- 公共核心模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-core</artifactId>
+        </dependency>
+
+        <!-- API文档模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-swagger</artifactId>
+        </dependency>
+
+        <!-- 数据源模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-datasource</artifactId>
+        </dependency>
+
+        <!-- Redis缓存模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-redis</artifactId>
+        </dependency>
+
+        <!-- 日志模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-log</artifactId>
+        </dependency>
+
+        <!-- 远程调用模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-feign</artifactId>
         </dependency>
 
         <!-- Mybatis Plus 代码生成 -->
@@ -85,58 +127,30 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
-
-        <!-- 公共核心模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-core</artifactId>
-        </dependency>
-
-        <!-- API文档模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-swagger</artifactId>
-        </dependency>
-
-        <!-- 数据源模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-datasource</artifactId>
-        </dependency>
-
-        <!-- Redis缓存模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-redis</artifactId>
-        </dependency>
-
-        <!-- 日志模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-log</artifactId>
-        </dependency>
-
-        <!-- 远程调用模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-common-feign</artifactId>
-        </dependency>
-
-        <!-- API调用模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-api</artifactId>
-        </dependency>
-
-        <!-- OAuth2 认证服务器-->
-        <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-jose</artifactId>
-        </dependency>
     </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

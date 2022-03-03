@@ -72,7 +72,7 @@ public class MaochdAuthApplicationTests {
     public void add() {
         User user = new User();
         user.setUserId(UUID.randomUUID().toString());
-        user.setUserName("maochd");
+        user.setUsername("maochd");
         user.setPassword("88888888");
         user.setPhone("17640313075");
         System.out.println(userService.add(user));
@@ -82,7 +82,7 @@ public class MaochdAuthApplicationTests {
     public void modify() {
         User user = new User();
         user.setId(1L);
-        user.setUserName("maochd1");
+        user.setUsername("maochd1");
         user.setPassword("88888888");
         user.setPhone("17640313075");
         System.out.println(userService.modify(user));

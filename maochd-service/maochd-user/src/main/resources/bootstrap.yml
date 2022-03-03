@@ -1,11 +1,9 @@
-## 端口
 server:
-  port: 18080
+  port: 19009
 
 spring:
   application:
-    ## 服务名
-    name: maochd-gateway
+    name: maochd-user
   profiles:
     active: dev
   main:
@@ -27,9 +25,3 @@ spring:
           - application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         # 动态刷新
         refresh-enabled: true
-
-# 不校验白名单
-ignore:
-  whites:
-    - /auth/**
-    - /rsa/**

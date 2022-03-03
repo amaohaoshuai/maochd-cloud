@@ -33,7 +33,7 @@ public class GoodsInfoController {
         return R.ok(goodsInfoService.page(cond));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     @ApiOperation(value = "根据ID查询商品信息", notes = "根据ID查询商品信息")
     public R<GoodsInfo> getById(@PathVariable Long id) {
         return R.ok(goodsInfoService.getById(id));
