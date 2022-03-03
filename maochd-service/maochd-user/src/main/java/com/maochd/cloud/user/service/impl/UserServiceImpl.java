@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.maochd.cloud.common.core.constant.SecurityConstants;
 import com.maochd.cloud.common.core.exception.BaseException;
 import com.maochd.cloud.common.redis.annotation.RedisLock;
 import com.maochd.cloud.common.redis.annotation.RedisRemove;
@@ -17,6 +18,7 @@ import com.maochd.cloud.user.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -66,4 +68,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return this.removeById(id);
     }
 
+    @Override
+    public boolean logout(HttpServletRequest request) {
+        String token = request.getHeader(SecurityConstants.AUTHORIZATION_KEY)
+                .replaceAll(SecurityConstants.JWT_PREFIX, StrUtil.EMPTY);
+        redisService.del(SecurityConstants.ACCESS_TOKEN + token);
+        return true;
+    }
 }

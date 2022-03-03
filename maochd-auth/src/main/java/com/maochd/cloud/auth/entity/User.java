@@ -29,10 +29,6 @@ public class User implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "用户ID")
-    @TableField("user_id")
-    private String userId;
-
     @ApiModelProperty(value = "用户名")
     @TableField("username")
     private String username;
@@ -54,6 +50,6 @@ public class User implements Serializable {
     private Integer status;
 
     @ApiModelProperty(value = "角色")
-    @TableField("roles")
+    @TableField(exist = false)
     private String roles;
 }

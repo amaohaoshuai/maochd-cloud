@@ -1,11 +1,15 @@
 package com.maochd.cloud.auth.config;
 
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpStatus;
 import cn.hutool.json.JSONUtil;
+import com.maochd.cloud.auth.entity.SysUserDetails;
+import com.maochd.cloud.auth.properties.ClientProperties;
+import com.maochd.cloud.auth.properties.KeyPairProperties;
+import com.maochd.cloud.auth.service.UserService;
+import com.maochd.cloud.common.core.constant.CommonConstant;
 import com.maochd.cloud.common.core.constant.ResultCode;
-import com.maochd.cloud.auth.core.userdetails.user.SysUserDetails;
+import com.maochd.cloud.common.core.constant.SecurityConstants;
 import com.maochd.cloud.common.core.domain.R;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -48,7 +52,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     private final PasswordEncoder passwordEncoder;
 
+    private final ClientProperties clientProperties;
 
+    private final KeyPairProperties keyPairProperties;
+
+    private final UserService userService;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
@@ -63,12 +71,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @SneakyThrows
     public void configure(ClientDetailsServiceConfigurer clients) {
         clients.inMemory()
-                .withClient("maochd-client")
-                .secret(passwordEncoder.encode("123456"))
-                .scopes("all")
-                .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(60)
-                .refreshTokenValiditySeconds(60);
+                .withClient(clientProperties.getClientId())
+                .secret(passwordEncoder.encode(clientProperties.getSecret()))
+                .scopes(clientProperties.getScopes())
+                .authorizedGrantTypes(clientProperties.getAuthorizedGrantTypesArray())
+                .accessTokenValiditySeconds(SecurityConstants.TOKEN_EXPIRE_TIME)
+                .refreshTokenValiditySeconds(SecurityConstants.TOKEN_REFRESH_TIME);
     }
 
     /**
@@ -88,7 +96,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenEnhancer(tokenEnhancerChain);
     }
 
-
     /**
      * 使用非对称加密算法对token签名
      */
@@ -104,8 +111,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Bean
     public KeyPair keyPair() {
-        KeyStoreKeyFactory factory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
-        return factory.getKeyPair("jwt", "123456".toCharArray());
+        KeyStoreKeyFactory factory = new KeyStoreKeyFactory(new ClassPathResource(
+                keyPairProperties.getFilename()), keyPairProperties.getValue().toCharArray());
+        return factory.getKeyPair(keyPairProperties.getType(), keyPairProperties.getValue().toCharArray());
     }
 
     /**
@@ -118,32 +126,28 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             Object principal = authentication.getUserAuthentication().getPrincipal();
             if (principal instanceof SysUserDetails) {
                 SysUserDetails sysUserDetails = (SysUserDetails) principal;
-                additionalInfo.put("userId", sysUserDetails.getUserId());
                 additionalInfo.put("username", sysUserDetails.getUsername());
-                if (StrUtil.isNotBlank(sysUserDetails.getAuthenticationMethod())) {
-                    additionalInfo.put("authenticationMethod", sysUserDetails.getAuthenticationMethod());
-                }
             }
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
             return accessToken;
         };
     }
 
-
     /**
      * 自定义认证异常响应数据
      */
-//    @Bean
-//    public AuthenticationEntryPoint authenticationEntryPoint() {
-//        return (request, response, e) -> {
-//            response.setStatus(HttpStatus.HTTP_OK);
-//            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-//            response.setHeader("Access-Control-Allow-Origin", "*");
-//            response.setHeader("Cache-Control", "no-cache");
-//            response.getWriter().print(JSONUtil.toJsonStr(R.fail(ResultCode.CLIENT_AUTHENTICATION_FAILED)));
-//            response.getWriter().flush();
-//        };
-//    }
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return (request, response, e) -> {
+            response.setStatus(HttpStatus.HTTP_OK);
+            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Cache-Control", "no-cache");
+            response.getWriter().print(JSONUtil.toJsonStr(R.fail(ResultCode.CLIENT_AUTHENTICATION_FAILED.getCode(),
+                    ResultCode.CLIENT_AUTHENTICATION_FAILED.getMsg())));
+            response.getWriter().flush();
+        };
+    }
 
 
 }

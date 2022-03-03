@@ -2,6 +2,8 @@ package com.maochd.cloud.gateway.handler;
 
 import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.GatewayCallbackManager;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.maochd.cloud.common.core.constant.ResultCode;
+import com.maochd.cloud.gateway.util.ResponseUtils;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -18,11 +20,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class SentinelFallbackHandler implements WebExceptionHandler {
     private Mono<Void> writeResponse(ServerResponse response, ServerWebExchange exchange) {
-        ServerHttpResponse serverHttpResponse = exchange.getResponse();
-        serverHttpResponse.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
-        byte[] datas = "{\"code\":500,\"msg\":\"请求超过最大数，请稍后再试\"}".getBytes(StandardCharsets.UTF_8);
-        DataBuffer buffer = serverHttpResponse.bufferFactory().wrap(datas);
-        return serverHttpResponse.writeWith(Mono.just(buffer));
+        return ResponseUtils.writeErrorInfo(exchange.getResponse(), ResultCode.FLOW_LIMITING);
     }
 
     @Override

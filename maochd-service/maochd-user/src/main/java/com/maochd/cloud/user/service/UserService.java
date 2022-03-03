@@ -5,6 +5,7 @@ import com.maochd.cloud.user.condition.UserQueryCondition;
 import com.maochd.cloud.user.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -50,4 +51,5 @@ public interface UserService extends IService<User> {
      */
     boolean remove(Long id);
 
+    boolean logout(HttpServletRequest request);
 }

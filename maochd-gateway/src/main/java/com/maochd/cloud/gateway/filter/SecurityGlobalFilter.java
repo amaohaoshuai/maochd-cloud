@@ -43,18 +43,15 @@ public class SecurityGlobalFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
-
         PathMatcher pathMatcher = new AntPathMatcher();
-        String method = request.getMethodValue();
         String path = request.getURI().getPath();
         for (String url : ignoreUrls.getWhites()) {
             if (pathMatcher.match(url, path)) {
                 return chain.filter(exchange);
             }
         }
-
         String token = request.getHeaders().getFirst(SecurityConstants.AUTHORIZATION_KEY);
-        String redisToken = redisService.get("authToken:" + token);
+        String redisToken = redisService.get(SecurityConstants.ACCESS_TOKEN + token);
         if (StrUtil.isNotBlank(redisToken)) {
             return chain.filter(exchange);
         }

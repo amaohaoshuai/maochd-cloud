@@ -15,6 +15,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -48,20 +49,22 @@ public class ResourceServerConfig {
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-        http.oauth2ResourceServer().jwt().jwtAuthenticationConverter(jwtAuthenticationConverter())
-                .publicKey(rsaPublicKey()) // 本地获取公钥
-                //.jwkSetUri() // 远程获取公钥
+        http.oauth2ResourceServer().jwt()
+                .jwtAuthenticationConverter(jwtAuthenticationConverter())
+                // 本地获取公钥
+                .publicKey(rsaPublicKey())
         ;
         http.oauth2ResourceServer().authenticationEntryPoint(authenticationEntryPoint());
         http.authorizeExchange()
-                .pathMatchers(Convert.toStrArray(ignoreUrls)).permitAll()
+                .pathMatchers(Convert.toStrArray(ignoreUrls.getWhites())).permitAll()
                 .anyExchange().access(resourceServerManager)
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler()) // 处理未授权
-                .authenticationEntryPoint(authenticationEntryPoint()) //处理未认证
+                // 处理未授权
+                .accessDeniedHandler(accessDeniedHandler())
+                // 处理未认证
+                .authenticationEntryPoint(authenticationEntryPoint())
                 .and().csrf().disable();
-
         return http.build();
     }
 
@@ -110,7 +113,6 @@ public class ResourceServerConfig {
         InputStream is = resource.getInputStream();
         String publicKeyData = IoUtil.read(is).toString();
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec((Base64.decode(publicKeyData)));
-
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         return (RSAPublicKey)keyFactory.generatePublic(keySpec);
     }

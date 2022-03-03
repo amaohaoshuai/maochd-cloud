@@ -1,6 +1,7 @@
-package com.maochd.cloud.auth.core.userdetails.user;
+package com.maochd.cloud.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.maochd.cloud.auth.entity.SysUserDetails;
 import com.maochd.cloud.auth.entity.User;
 import com.maochd.cloud.auth.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,6 @@ import javax.annotation.Resource;
 
 /**
  * 系统用户体系业务类
- *
- * @author <a href="mailto:xianrui0365@163.com">haoxr</a>
  */
 @Service("sysUserDetailsService")
 @Slf4j
@@ -33,7 +32,7 @@ public class SysUserDetailsServiceImpl implements UserDetailsService {
         SysUserDetails userDetails = null;
         User user = userService.getOne(Wrappers.<User>lambdaQuery().eq(User::getUsername, username));
         if (null != user) {
-            userDetails = new SysUserDetails(user);
+            userDetails = new SysUserDetails(user,  userService.getUserRoles(username));
         }
         if (userDetails == null) {
             throw new UsernameNotFoundException("用户不匹配");

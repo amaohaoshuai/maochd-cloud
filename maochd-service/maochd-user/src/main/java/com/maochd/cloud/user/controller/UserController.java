@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -55,6 +56,12 @@ public class UserController {
     @ApiOperation(value = "删除指定用户", notes = "删除指定用户")
     public R<Boolean> remove(@PathVariable Long id) {
         return R.ok(userService.remove(id));
+    }
+
+    @DeleteMapping(value = "/logout")
+    @ApiOperation(value = "退出登录", notes = "退出登录")
+    public R<?> logout(HttpServletRequest request) {
+        return R.ok(userService.logout(request));
     }
 
 }

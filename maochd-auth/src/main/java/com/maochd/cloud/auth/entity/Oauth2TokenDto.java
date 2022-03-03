@@ -23,4 +23,5 @@ public class Oauth2TokenDto {
 
     @ApiModelProperty(value = "有效时间（秒）")
     private int expiresIn;
+
 }

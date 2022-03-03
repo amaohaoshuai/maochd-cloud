@@ -13,10 +13,6 @@ import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
 
-/**
- * @Author hxr
- * @Date 2021-01-29 13:30
- */
 public class ResponseUtils {
 
     public static Mono<Void> writeErrorInfo(ServerHttpResponse response, ResultCode resultCode) {
@@ -35,7 +31,7 @@ public class ResponseUtils {
         response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         response.getHeaders().set("Access-Control-Allow-Origin", "*");
         response.getHeaders().set("Cache-Control", "no-cache");
-        String body = JSONUtil.toJsonStr(R.fail(resultCode));
+        String body = JSONUtil.toJsonStr(R.fail(resultCode.getCode(), resultCode.getMsg()));
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
         return response.writeWith(Mono.just(buffer))
                 .doOnError(error -> DataBufferUtils.release(buffer));
