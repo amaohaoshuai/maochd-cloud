@@ -31,8 +31,6 @@ import java.util.stream.Collectors;
 
 /**
  * 网关自定义鉴权管理器
- *
- * @author <a href="mailto:xianrui0365@163.com">haoxr</a>
  */
 @Component
 @RequiredArgsConstructor
@@ -79,12 +77,12 @@ public class ResourceServerManager implements ReactiveAuthorizationManager<Autho
         JSONObject payload = JSONObject.parseObject(StrUtil.toString(JWSObject.parse(token).getPayload()));
         // 把用户信息放入header
         request = exchange.getRequest().mutate()
-                .header("userInfo", payload.getString("userInfo"))
+                .header(SecurityConstants.USER_INFO, payload.getString(SecurityConstants.USER_INFO))
                 .build();
         exchange.mutate().request(request).build();
         // 获取角色权限映射数据
         List<PermRoleDto> rolePermMap = JSON.parseArray(JSON.toJSONString(payload
-                .getJSONArray("rolePermMap")), PermRoleDto.class);
+                .getJSONArray(SecurityConstants.ROLE_PERM_MAP)), PermRoleDto.class);
         // 拼接权限标识 -> 请求方式:路径
         String method = request.getMethodValue();
         String restfulPath = method + ":" + path;

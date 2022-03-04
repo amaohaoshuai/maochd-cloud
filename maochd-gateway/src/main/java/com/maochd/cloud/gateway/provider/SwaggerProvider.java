@@ -12,9 +12,6 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Sywd
- */
 @Component
 @Primary
 @AllArgsConstructor
