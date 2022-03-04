@@ -17,4 +17,5 @@ public interface CommonConstant {
      * 统一返回对象失败状态码
      */
     int R_FAIL = HttpStatus.HTTP_INTERNAL_ERROR;
+
 }

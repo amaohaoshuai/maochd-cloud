@@ -1,11 +1,5 @@
 package com.maochd.cloud.auth;
 
-import com.maochd.cloud.api.websocket.service.RemoteWebsocketService;
-import com.maochd.cloud.auth.condition.UserQueryCondition;
-import com.maochd.cloud.auth.entity.User;
-import com.maochd.cloud.auth.service.UserService;
-import com.maochd.cloud.common.core.domain.EmailInfo;
-import com.maochd.cloud.common.core.domain.SmsInfo;
 import com.maochd.cloud.api.account.domain.condition.AccountQueryCondition;
 import com.maochd.cloud.api.account.domain.entity.AccountInfo;
 import com.maochd.cloud.api.account.service.RemoteAccountService;
@@ -16,6 +10,11 @@ import com.maochd.cloud.api.mq.service.RemoteMqService;
 import com.maochd.cloud.api.order.domain.condition.OrderQueryCondition;
 import com.maochd.cloud.api.order.domain.entity.OrderInfo;
 import com.maochd.cloud.api.order.service.RemoteOrderService;
+import com.maochd.cloud.api.websocket.service.RemoteWebsocketService;
+import com.maochd.cloud.auth.entity.User;
+import com.maochd.cloud.auth.service.UserService;
+import com.maochd.cloud.common.core.domain.EmailInfo;
+import com.maochd.cloud.common.core.domain.SmsInfo;
 import com.maochd.cloud.common.core.domain.WsMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,47 +50,46 @@ public class MaochdAuthApplicationTests {
     private RemoteWebsocketService remoteWebsocketService;
 
 
-    @Test
-    public void list() {
-        UserQueryCondition condition = new UserQueryCondition();
-        System.out.println(userService.list(condition));
-    }
+//    @Test
+//    public void list() {
+//        UserQueryCondition condition = new UserQueryCondition();
+//        System.out.println(userService.list(condition));
+//    }
+//
+//    @Test
+//    public void getById() {
+//        System.out.println(userService.getById(1));
+//    }
+//
+//    @Test
+//    public void page() {
+//        UserQueryCondition condition = new UserQueryCondition();
+//        System.out.println(userService.list(condition));
+//    }
 
-    @Test
-    public void getById() {
-        System.out.println(userService.getById(1));
-    }
+//    @Test
+//    public void add() {
+//        User user = new User();
+//        user.setUsername("maochd");
+//        user.setPassword("88888888");
+//        user.setPhone("17640313075");
+//        System.out.println(userService.add(user));
+//    }
+//
+//    @Test
+//    public void modify() {
+//        User user = new User();
+//        user.setId(1L);
+//        user.setUsername("maochd1");
+//        user.setPassword("88888888");
+//        user.setPhone("17640313075");
+//        System.out.println(userService.modify(user));
+//    }
 
-    @Test
-    public void page() {
-        UserQueryCondition condition = new UserQueryCondition();
-        System.out.println(userService.list(condition));
-    }
-
-    @Test
-    public void add() {
-        User user = new User();
-        user.setUserId(UUID.randomUUID().toString());
-        user.setUserName("maochd");
-        user.setPassword("88888888");
-        user.setPhone("17640313075");
-        System.out.println(userService.add(user));
-    }
-
-    @Test
-    public void modify() {
-        User user = new User();
-        user.setId(1L);
-        user.setUserName("maochd1");
-        user.setPassword("88888888");
-        user.setPhone("17640313075");
-        System.out.println(userService.modify(user));
-    }
-
-    @Test
-    public void remove() {
-        System.out.println(userService.remove(1L));
-    }
+//    @Test
+//    public void remove() {
+//        System.out.println(userService.remove(1L));
+//    }
 
 
     @Test
@@ -222,7 +220,7 @@ public class MaochdAuthApplicationTests {
     public void wsSendOne() {
         System.out.println(remoteWebsocketService.sendMessageToOne(WsMessage.builder()
                 .type("one")
-                .message(User.builder().userId("maochd").build())
+                .message(User.builder().build())
                 .to("zhy")
                 .from("maochd")
                 .build()));
@@ -232,7 +230,7 @@ public class MaochdAuthApplicationTests {
     public void wsSendAll() {
         System.out.println(remoteWebsocketService.sendMessageToAll(WsMessage.builder()
                 .type("all")
-                .message(User.builder().userId("maochd&zhy").build())
+                .message(User.builder().build())
                 .from("maochd")
                 .build()));
     }

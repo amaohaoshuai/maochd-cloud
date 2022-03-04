@@ -30,5 +30,7 @@
         <module>maochd-third-party</module>
         <!-- 邮件服务 -->
         <module>maochd-email</module>
+        <!-- 用户服务 -->
+        <module>maochd-user</module>
     </modules>
 </project>

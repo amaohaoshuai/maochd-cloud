@@ -35,6 +35,7 @@ com.maochd.cloud
 │       └── maochd-account                   // 账户服务 [19002]
 │       └── maochd-third-party               // 第三方服务 [19006]
 │       └── maochd-email                     // 邮件服务 [19007]
+│       └── maochd-user                      // 用户服务 [19009]
 ~~~
 
 ### 架构图
@@ -54,6 +55,7 @@ Zikpin              [服务链路追踪]
 Sleuth              [服务链路追踪]
 Xxl-Job             [分布式定时任务]
 Kafka               [消息队列]
+OAuth2              [认证框架]
 ~~~
 
 ### 组件部署步骤（默认Linux系统，并在root目录下）
