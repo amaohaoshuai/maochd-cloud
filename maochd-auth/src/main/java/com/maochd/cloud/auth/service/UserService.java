@@ -17,5 +17,11 @@ public interface UserService extends IService<User> {
      */
     List<String> getUserRoles(String username);
 
+    /**
+     * 根据用户名获取用户权限
+     *
+     * @param username 用户名
+     * @return
+     */
     List<PermRoleDto> getUserPerm(String username);
 }
