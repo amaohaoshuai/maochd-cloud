@@ -13,29 +13,6 @@ public interface SecurityConstants {
     String JWT_PREFIX = "Bearer ";
 
     /**
-     * Basic认证前缀
-     */
-    String BASIC_PREFIX = "Basic ";
-
-    /**
-     * JWT载体key
-     */
-    String JWT_PAYLOAD_KEY = "payload";
-
-    /**
-     * JWT ID 唯一标识
-     */
-    String JWT_JTI = "jti";
-
-    /**
-     * JWT ID 唯一标识
-     */
-    String JWT_EXP = "exp";
-
-
-    String USER_NAME_KEY = "username";
-
-    /**
      * JWT存储权限前缀
      */
     String AUTHORITY_PREFIX = "ROLE_";
@@ -45,36 +22,39 @@ public interface SecurityConstants {
      */
     String JWT_AUTHORITIES_KEY = "authorities";
 
-    String GRANT_TYPE_KEY = "grant_type";
-
-    String REFRESH_TOKEN_KEY = "refresh_token";
     /**
      * Token缓存key值
      */
     String ACCESS_TOKEN = "accessToken:";
 
     /**
-     * 超级管理员角色编码
-     */
-    String ROOT_ROLE_CODE = "ROOT";
-
-    /**
-     * [ {接口路径:[角色编码]},...]
-     */
-    String URL_PERM_ROLES_KEY = "system:perm_roles_rule:url";
-
-    /**
-     * [{按钮权限:[角色编码]},...]
-     */
-    String BTN_PERM_ROLES_KEY = "system:perm_roles_rule:btn";
-
-    /**
      * 全局状态-是
      */
     Integer STATUS_YES = 1;
 
+    /**
+     * token过期时间
+     */
     int TOKEN_EXPIRE_TIME = 7200;
 
+    /**
+     * token刷新时间
+     */
     int TOKEN_REFRESH_TIME = 7200;
+
+    /**
+     * 用户信息
+     */
+    String USER_INFO = "userInfo";
+
+    /**
+     * 角色权限映射
+     */
+    String ROLE_PERM_MAP = "rolePermMap";
+
+    /**
+     * 非对称加密
+     */
+    String KEY_RSA = "RSA";
 
 }

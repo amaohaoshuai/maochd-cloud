@@ -1,6 +1,7 @@
 package com.maochd.cloud.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.maochd.cloud.common.core.domain.PermRoleDto;
 import com.maochd.cloud.auth.entity.User;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface UserService extends IService<User> {
      * @return
      */
     List<String> getUserRoles(String username);
+
+    List<PermRoleDto> getUserPerm(String username);
 }

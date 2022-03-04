@@ -2,6 +2,7 @@ package com.maochd.cloud.goods.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.maochd.cloud.common.core.constant.SecurityConstants;
 import com.maochd.cloud.common.core.domain.R;
 import com.maochd.cloud.api.goods.domain.condition.GoodsQueryCondition;
 import com.maochd.cloud.api.goods.domain.entity.GoodsInfo;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 

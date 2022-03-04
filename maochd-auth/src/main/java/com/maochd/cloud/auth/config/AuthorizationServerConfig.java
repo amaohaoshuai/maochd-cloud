@@ -3,11 +3,12 @@ package com.maochd.cloud.auth.config;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.http.HttpStatus;
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.maochd.cloud.auth.entity.SysUserDetails;
+import com.maochd.cloud.auth.entity.User;
 import com.maochd.cloud.auth.properties.ClientProperties;
 import com.maochd.cloud.auth.properties.KeyPairProperties;
 import com.maochd.cloud.auth.service.UserService;
-import com.maochd.cloud.common.core.constant.CommonConstant;
 import com.maochd.cloud.common.core.constant.ResultCode;
 import com.maochd.cloud.common.core.constant.SecurityConstants;
 import com.maochd.cloud.common.core.domain.R;
@@ -126,7 +127,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             Object principal = authentication.getUserAuthentication().getPrincipal();
             if (principal instanceof SysUserDetails) {
                 SysUserDetails sysUserDetails = (SysUserDetails) principal;
-                additionalInfo.put("username", sysUserDetails.getUsername());
+                additionalInfo.put(SecurityConstants.USER_INFO, userService.getOne(Wrappers.<User>lambdaQuery()
+                        .eq(User::getUsername, sysUserDetails.getUsername())));
+                additionalInfo.put(SecurityConstants.ROLE_PERM_MAP, userService.getUserPerm(sysUserDetails.getUsername()));
             }
             ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
             return accessToken;
@@ -148,6 +151,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             response.getWriter().flush();
         };
     }
-
-
 }

@@ -5,7 +5,8 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.IoUtil;
 import com.maochd.cloud.common.core.constant.ResultCode;
 import com.maochd.cloud.common.core.constant.SecurityConstants;
-import com.maochd.cloud.gateway.config.properties.IgnoreWhiteProperties;
+import com.maochd.cloud.gateway.properties.IgnoreWhiteProperties;
+import com.maochd.cloud.gateway.properties.JwtProperties;
 import com.maochd.cloud.gateway.util.ResponseUtils;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -15,7 +16,6 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -34,9 +34,6 @@ import java.security.spec.X509EncodedKeySpec;
 
 /**
  * 资源服务器配置
- *
- * @author <a href="mailto:xianrui0365@163.com">haoxr</a>
- * @date 2020-05-01
  */
 @AllArgsConstructor
 @Configuration
@@ -45,7 +42,9 @@ public class ResourceServerConfig {
 
     private ResourceServerManager resourceServerManager;
 
-    private IgnoreWhiteProperties ignoreUrls;
+    private IgnoreWhiteProperties ignoreWhiteProperties;
+
+    private JwtProperties jwtProperties;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
@@ -56,7 +55,7 @@ public class ResourceServerConfig {
         ;
         http.oauth2ResourceServer().authenticationEntryPoint(authenticationEntryPoint());
         http.authorizeExchange()
-                .pathMatchers(Convert.toStrArray(ignoreUrls.getWhites())).permitAll()
+                .pathMatchers(Convert.toStrArray(ignoreWhiteProperties.getWhites())).permitAll()
                 .anyExchange().access(resourceServerManager)
                 .and()
                 .exceptionHandling()
@@ -109,12 +108,12 @@ public class ResourceServerConfig {
     @SneakyThrows
     @Bean
     public RSAPublicKey rsaPublicKey() {
-        Resource resource = new ClassPathResource("public.key");
+        Resource resource = new ClassPathResource(jwtProperties.getPublicKey());
         InputStream is = resource.getInputStream();
         String publicKeyData = IoUtil.read(is).toString();
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec((Base64.decode(publicKeyData)));
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        return (RSAPublicKey)keyFactory.generatePublic(keySpec);
+        KeyFactory keyFactory = KeyFactory.getInstance(jwtProperties.getKeyFactory());
+        return (RSAPublicKey) keyFactory.generatePublic(keySpec);
     }
 
 }
