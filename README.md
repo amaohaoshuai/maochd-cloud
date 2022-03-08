@@ -1,11 +1,14 @@
 ## 墨鱼~圈微服务 [maochd-cloud]
+
 ### 简介
+
 ~~~
 提供了一套拆箱即用的微服务框架，包含注册中心、配置中心、统一入口（网关）、认证中心、服务监控、服务链路追踪、分布式事务、
 分布式任务、分布式定时任务、消息队列的功能，极大简化项目前期的构建。
 ~~~
 
 ### 系统模块
+
 ~~~
 com.maochd.cloud     
 ├── maochd-gateway                           // 网关服务 [18080]
@@ -13,7 +16,7 @@ com.maochd.cloud
 ├── maochd-job                               // 定时任务服务 [19004]
 ├── maochd-monitor                           // 监控服务 [18083]
 ├── maochd-mq                                // 消息队列服务 [19005]
-├── maochd-websocket                         // 消息队列服务 [19008]
+├── maochd-websocket                         // Websocket服务 [19008]
 ├── middleware                               // 配置文件
         └── application                      // Nacos配置中心文件
         └── loki                             // 日志配置
@@ -39,9 +42,11 @@ com.maochd.cloud
 ~~~
 
 ### 架构图
+
 ![输入图片说明](maochd-cloud%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 ### 使用主要组件
+
 ~~~
 SpringCloud         [微服务]
 SpringCloud Alibaba [阿里巴巴微服务]
@@ -56,10 +61,13 @@ Sleuth              [服务链路追踪]
 Xxl-Job             [分布式定时任务]
 Kafka               [消息队列]
 OAuth2              [认证框架]
+Websocket           [Websocket]
 ~~~
 
 ### 组件部署步骤（默认Linux系统，并在root目录下）
+
 #### Linux系统配置
+
 ~~~
 1、查看防火墙
 [CMD]: firewall-cmd --state
@@ -72,12 +80,14 @@ OAuth2              [认证框架]
 ~~~
 
 #### 安装Git
+
 ~~~
 [CMD]: yum install -y git
 [当前目录]: /root
 ~~~
 
 #### 安装、运行Docker
+
 ~~~
 1、安装Docker
 [CMD]: curl -fsSL https://get.docker.com | bash -s docker --mirror aliyun
@@ -89,6 +99,7 @@ OAuth2              [认证框架]
 ~~~
 
 #### 安装Mysql（推荐使用5.7）
+
 ~~~
 安装Mysql5.7
 [CMD]: docker run --name maochd-mysql -v /opt/mysql5.7/conf:/etc/mysql/conf.d -v /opt/mysql5.7/data:/var/lib/mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7.32
@@ -98,24 +109,28 @@ OAuth2              [认证框架]
 ~~~
 
 #### 安装Redis
+
 ~~~
 [CMD]: docker run -p 6379:6379 --name maochd-redis -v /opt/redis6/conf:/etc/redis/redis.conf -v /opt/redis6/data:/data -d redis redis-server /etc/redis/redis.conf --appendonly yes
 [当前目录]: /root
 ~~~
 
 #### 安装Nacos Server
+
 ~~~
 [CMD]: docker run --name maochd-nacos -e MODE=standalone -p 8848:8848 -d nacos/nacos-server:1.4.1
 [当前目录]: /root
 ~~~
 
 #### 安装Sentinel Dashboard
+
 ~~~
 [CMD]: docker run --name maochd-sentinel  -d -p 8858:8858 -d  bladex/sentinel-dashboard
 [当前目录]: /root
 ~~~
 
 #### 安装Seata
+
 ~~~
 1、下载seata源码
 [CMD]: git clone https://gitee.com/seata-io/seata.git -b v1.4.2
@@ -138,12 +153,14 @@ OAuth2              [认证框架]
 ~~~
 
 #### 安装Zipkin
+
 ~~~
 [CMD]: docker run -d --name maochd-zipkin -p 9411:9411 -e STORAGE_TYPE=mysql -e MYSQL_DB=zipkin -e MYSQL_USER=root -e MYSQL_PASS=root -e MYSQL_HOST=10.10.3.81 -e MYSQL_TCP_PORT=3306 openzipkin/zipkin:2.23.4
 [当前目录]: /root
 ~~~
 
 #### 安装Xxl-job-admin
+
 ~~~
 [CMD]: docker  run -d  --name maochd-xxl-job -p 9000:8080 \
 -v /opt/job/logs:/data/applogs \
@@ -152,6 +169,7 @@ OAuth2              [认证框架]
 ~~~
 
 #### 安装zookeeper、kafka
+
 ~~~
 1、 安装zookeeper
 [CMD]: docker run -d --name zookeeper -p 2181:2181 --restart=always -v /home/data/zookeeper_data/data:/data -v /home/data/zookeeper_data/conf:/conf wurstmeister/zookeeper
@@ -169,6 +187,7 @@ OAuth2              [认证框架]
 ~~~
 
 #### 安装loki日志（当前未对服务制作镜像，可先不安装）
+
 ~~~
 1、安装loki-docker插件
 [CMD]: docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
