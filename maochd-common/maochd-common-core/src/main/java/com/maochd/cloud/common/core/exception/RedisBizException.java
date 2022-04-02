@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class RedisBizException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("错误信息")
+    @ApiModelProperty(value = "错误信息")
     private String message;
 
     @Override

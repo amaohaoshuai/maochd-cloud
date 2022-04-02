@@ -12,6 +12,7 @@ public class MessageProducerImpl implements MessageProducer {
     @Resource
     private StreamBridge streamBridge;
 
+    @Override
     public boolean pushMessage(String topic, Object obj) {
         return streamBridge.send(topic, obj);
     }

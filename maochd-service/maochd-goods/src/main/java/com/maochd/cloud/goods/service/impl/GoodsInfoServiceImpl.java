@@ -63,7 +63,7 @@ public class GoodsInfoServiceImpl extends ServiceImpl<GoodsInfoMapper, GoodsInfo
 
     @Override
     @RedisLock(value = "id", asObject = false)
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @RedisRemove(key = RedisConstant.KEY_GOODS_LIST)
     public boolean reduceInventory(Long id, Integer count) {
         GoodsInfo goodsInfo = this.getById(id);

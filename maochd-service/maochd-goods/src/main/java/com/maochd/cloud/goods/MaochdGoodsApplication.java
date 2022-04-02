@@ -16,6 +16,7 @@ public class MaochdGoodsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MaochdGoodsApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  商品服务启动成功   ლ(´ڡ`ლ)ﾞ");
     }
 
 }

@@ -1,27 +1,22 @@
-package com.maochd.cloud.common.core.constant;
+package com.maochd.cloud.common.core.domain;
 
+import com.maochd.cloud.common.core.constant.IResultCode;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * @author haoxr
- * @date 2020-06-23
- **/
 @AllArgsConstructor
 @NoArgsConstructor
-public enum ResultCode implements IResultCode, Serializable {
+public enum BizResultCode implements IResultCode, Serializable {
 
-    SUCCESS("00000", "一切ok"),
+    SUCCESS("00000", "一切正常"),
+    ERROR("99999", "对不起，出错了"),
 
-    USER_ERROR("A0001", "用户端错误"),
     USER_LOGIN_ERROR("A0200", "用户登录异常"),
-
     USER_NOT_EXIST("A0201", "用户不存在"),
     USER_ACCOUNT_LOCKED("A0202", "用户账户被冻结"),
     USER_ACCOUNT_INVALID("A0203", "用户账户已作废"),
-
     USERNAME_OR_PASSWORD_ERROR("A0210", "用户名或密码错误"),
     PASSWORD_ENTER_EXCEED_LIMIT("A0211", "用户输入密码次数超限"),
     CLIENT_AUTHENTICATION_FAILED("A0212", "客户端认证失败"),
@@ -31,7 +26,6 @@ public enum ResultCode implements IResultCode, Serializable {
     AUTHORIZED_ERROR("A0300", "访问权限异常"),
     ACCESS_UNAUTHORIZED("A0301", "访问未授权"),
     FORBIDDEN_OPERATION("A0302", "演示环境禁止修改、删除重要数据，请本地部署后测试"),
-
 
     PARAM_ERROR("A0400", "用户请求参数错误"),
     RESOURCE_NOT_FOUND("A0401", "请求资源不存在"),
@@ -72,35 +66,28 @@ public enum ResultCode implements IResultCode, Serializable {
     DATABASE_DEADLOCK("C0331", "数据库死锁"),
     DATABASE_PRIMARY_KEY_CONFLICT("C0341", "主键冲突");
 
-    @Override
-    public String getCode() {
-        return code;
-    }
-
-    @Override
-    public String getMsg() {
-        return msg;
-    }
 
     private String code;
 
     private String msg;
 
     @Override
-    public String toString() {
-        return "{" +
-                "\"code\":\"" + code + '\"' +
-                ", \"msg\":\"" + msg + '\"' +
-                '}';
+    public String getCode() {
+        return this.code;
     }
 
+    @Override
+    public String getMsg() {
+        return this.msg;
+    }
 
-    public static ResultCode getValue(String code){
-        for (ResultCode value : values()) {
+    public static BizResultCode getValue(String code) {
+        for (BizResultCode value : values()) {
             if (value.getCode().equals(code)) {
                 return value;
             }
         }
-        return SYSTEM_EXECUTION_ERROR; // 默认系统执行错误
+        // 默认系统执行错误
+        return ERROR;
     }
 }

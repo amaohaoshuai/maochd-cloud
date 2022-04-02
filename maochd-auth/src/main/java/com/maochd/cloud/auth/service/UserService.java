@@ -13,7 +13,7 @@ public interface UserService extends IService<User> {
      * 根据用户名获取用户角色
      *
      * @param username 用户名
-     * @return
+     * @return 当前用户的角色列表
      */
     List<String> getUserRoles(String username);
 
@@ -21,7 +21,7 @@ public interface UserService extends IService<User> {
      * 根据用户名获取用户权限
      *
      * @param username 用户名
-     * @return
+     * @return 当前用户的权限列表
      */
     List<PermRoleDto> getUserPerm(String username);
 }

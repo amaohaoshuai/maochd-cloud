@@ -82,7 +82,7 @@ public class RedisLockAspect {
             log.error(LockConst.BUSINESS_ERROR_MSG, threadName, e);
             throw new RedisBizException(e.getMessage());
         } finally {
-            //如果该线程还持有该锁，那么释放该锁。如果该线程不持有该锁，说明该线程的锁已到过期时间，自动释放锁
+            // 如果该线程还持有该锁，那么释放该锁。如果该线程不持有该锁，说明该线程的锁已到过期时间，自动释放锁
             if (redissonService.isHeldByCurrentThread(lockName)) {
                 redissonService.unlock(lockName);
                 log.info(LockConst.UNLOCK_COMPLETE_MSG, threadName);

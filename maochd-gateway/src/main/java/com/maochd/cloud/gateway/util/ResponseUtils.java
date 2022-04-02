@@ -1,7 +1,7 @@
 package com.maochd.cloud.gateway.util;
 
 import cn.hutool.json.JSONUtil;
-import com.maochd.cloud.common.core.constant.ResultCode;
+import com.maochd.cloud.common.core.domain.BizResultCode;
 import com.maochd.cloud.common.core.domain.R;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ResponseUtils {
 
-    public static Mono<Void> writeErrorInfo(ServerHttpResponse response, ResultCode resultCode) {
+    public static Mono<Void> writeErrorInfo(ServerHttpResponse response, BizResultCode resultCode) {
         switch (resultCode) {
             case ACCESS_UNAUTHORIZED:
             case TOKEN_INVALID_OR_EXPIRED:
@@ -31,7 +31,7 @@ public class ResponseUtils {
         response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         response.getHeaders().set("Access-Control-Allow-Origin", "*");
         response.getHeaders().set("Cache-Control", "no-cache");
-        String body = JSONUtil.toJsonStr(R.fail(resultCode.getCode(), resultCode.getMsg()));
+        String body = JSONUtil.toJsonStr(R.fail(response.getStatusCode(), resultCode));
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
         return response.writeWith(Mono.just(buffer))
                 .doOnError(error -> DataBufferUtils.release(buffer));

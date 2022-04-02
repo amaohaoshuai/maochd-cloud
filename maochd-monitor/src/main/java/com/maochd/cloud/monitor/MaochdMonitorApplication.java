@@ -10,6 +10,7 @@ public class MaochdMonitorApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MaochdMonitorApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  监控中心启动成功   ლ(´ڡ`ლ)ﾞ");
     }
 
 }

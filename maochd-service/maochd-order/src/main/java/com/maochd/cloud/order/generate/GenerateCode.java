@@ -59,7 +59,7 @@ public class GenerateCode {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         // 建议直接使用项目绝对路径，以防相对路径找不到出错
-        gc.setOutputDir(projectPath + PARENT_MODULE_NAME + MODULE_NAME +JAVA_PATH);
+        gc.setOutputDir(projectPath + PARENT_MODULE_NAME + MODULE_NAME + JAVA_PATH);
         gc.setAuthor(AUTHOR);
         // 生成后是否打开资源管理器
         gc.setOpen(false);

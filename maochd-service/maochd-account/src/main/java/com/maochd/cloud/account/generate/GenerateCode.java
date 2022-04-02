@@ -39,11 +39,6 @@ public class GenerateCode {
     public static String MAPPER_PATH = "/src/main/resources/mapper/";
 
 
-    /**
-     * <p>
-     * 读取控制台内容
-     * </p>
-     */
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("请输入" + tip + "：");
@@ -64,7 +59,7 @@ public class GenerateCode {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         // 建议直接使用项目绝对路径，以防相对路径找不到出错
-        gc.setOutputDir(projectPath + PARENT_MODULE_NAME + MODULE_NAME +JAVA_PATH);
+        gc.setOutputDir(projectPath + PARENT_MODULE_NAME + MODULE_NAME + JAVA_PATH);
         gc.setAuthor(AUTHOR);
         // 生成后是否打开资源管理器
         gc.setOpen(false);

@@ -3,8 +3,8 @@ package com.maochd.cloud.gateway.config;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.IoUtil;
-import com.maochd.cloud.common.core.constant.ResultCode;
 import com.maochd.cloud.common.core.constant.SecurityConstants;
+import com.maochd.cloud.common.core.domain.BizResultCode;
 import com.maochd.cloud.gateway.properties.IgnoreWhiteProperties;
 import com.maochd.cloud.gateway.properties.JwtProperties;
 import com.maochd.cloud.gateway.util.ResponseUtils;
@@ -73,7 +73,7 @@ public class ResourceServerConfig {
     @Bean
     ServerAccessDeniedHandler accessDeniedHandler() {
         return (exchange, denied) -> Mono.defer(() -> Mono.just(exchange.getResponse()))
-                .flatMap(response -> ResponseUtils.writeErrorInfo(response, ResultCode.ACCESS_UNAUTHORIZED));
+                .flatMap(response -> ResponseUtils.writeErrorInfo(response, BizResultCode.ACCESS_UNAUTHORIZED));
     }
 
     /**
@@ -82,7 +82,7 @@ public class ResourceServerConfig {
     @Bean
     ServerAuthenticationEntryPoint authenticationEntryPoint() {
         return (exchange, e) -> Mono.defer(() -> Mono.just(exchange.getResponse()))
-                .flatMap(response -> ResponseUtils.writeErrorInfo(response, ResultCode.TOKEN_INVALID_OR_EXPIRED));
+                .flatMap(response -> ResponseUtils.writeErrorInfo(response, BizResultCode.TOKEN_INVALID_OR_EXPIRED));
     }
 
     /**

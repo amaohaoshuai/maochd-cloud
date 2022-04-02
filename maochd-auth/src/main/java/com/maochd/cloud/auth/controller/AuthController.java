@@ -42,6 +42,6 @@ public class AuthController {
                 .token(oAuth2AccessToken.getValue())
                 .refreshToken(oAuth2AccessToken.getRefreshToken().getValue())
                 .expiresIn(oAuth2AccessToken.getExpiresIn())
-                .tokenHead("Bearer").build());
+                .tokenHead(SecurityConstants.JWT_PREFIX.trim()).build());
     }
 }

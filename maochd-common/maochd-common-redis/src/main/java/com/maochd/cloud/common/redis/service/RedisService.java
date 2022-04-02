@@ -185,7 +185,7 @@ public class RedisService {
     /**
      * 删除所有指定数据库的数据
      */
-    public Boolean flushDB() {
+    public Boolean flushDb() {
         return redisTemplate.execute((RedisCallback<Boolean>) connection -> {
             connection.flushDb();
             return true;
@@ -217,7 +217,7 @@ public class RedisService {
      * @param key   键
      * @param value 值
      */
-    public Boolean setNX(String key, String value) {
+    public Boolean setNx(String key, String value) {
         return redisTemplate.execute((RedisCallback<Boolean>) connection -> {
             RedisSerializer<String> serializer = redisTemplate.getStringSerializer();
             final byte[] keyByte = serializer.serialize(key);

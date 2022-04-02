@@ -14,6 +14,7 @@ public class MaochdEmailApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MaochdEmailApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  邮件服务启动成功   ლ(´ڡ`ლ)ﾞ");
     }
 
 }

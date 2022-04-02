@@ -43,13 +43,13 @@ public class AccountInfoController {
 
     @PutMapping("/recharge/{accountCode}/{amount}")
     @ApiOperation(value = "账户充值", notes = "账户充值")
-    public R<Boolean> recharge(@PathVariable("accountCode") String accountCode, @PathVariable("amount") BigDecimal amount){
+    public R<Boolean> recharge(@PathVariable("accountCode") String accountCode, @PathVariable("amount") BigDecimal amount) {
         return R.ok(accountInfoService.changeAmount(accountCode, amount, CommonConstant.AMOUNT_RECHARGE));
     }
 
     @PutMapping("/deduct/{accountCode}/{amount}")
     @ApiOperation(value = "账户扣费", notes = "账户扣费")
-    public R<Boolean> deduct(@PathVariable("accountCode") String accountCode, @PathVariable("amount") BigDecimal amount){
+    public R<Boolean> deduct(@PathVariable("accountCode") String accountCode, @PathVariable("amount") BigDecimal amount) {
         return R.ok(accountInfoService.changeAmount(accountCode, amount, CommonConstant.AMOUNT_DEDUCT));
     }
 }

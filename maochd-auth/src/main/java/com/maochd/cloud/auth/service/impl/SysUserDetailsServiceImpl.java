@@ -32,15 +32,18 @@ public class SysUserDetailsServiceImpl implements UserDetailsService {
         SysUserDetails userDetails = null;
         User user = userService.getOne(Wrappers.<User>lambdaQuery().eq(User::getUsername, username));
         if (null != user) {
-            userDetails = new SysUserDetails(user,  userService.getUserRoles(username));
+            userDetails = new SysUserDetails(user, userService.getUserRoles(username));
         }
         if (userDetails == null) {
             throw new UsernameNotFoundException("用户不匹配");
-        } else if (!userDetails.isEnabled()) {
+        }
+        if (!userDetails.isEnabled()) {
             throw new DisabledException("该账户已被禁用!");
-        } else if (!userDetails.isAccountNonLocked()) {
+        }
+        if (!userDetails.isAccountNonLocked()) {
             throw new LockedException("该账号已被锁定!");
-        } else if (!userDetails.isAccountNonExpired()) {
+        }
+        if (!userDetails.isAccountNonExpired()) {
             throw new AccountExpiredException("该账号已过期!");
         }
         return userDetails;
