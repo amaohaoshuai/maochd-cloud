@@ -20,7 +20,6 @@ public class RedissonService {
     @SneakyThrows
     public void getRedissonClient() {
         Config config = redissonClient.getConfig();
-        System.out.println(config.toJSON());
     }
 
     /**

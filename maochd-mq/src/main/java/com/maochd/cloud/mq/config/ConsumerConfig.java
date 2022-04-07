@@ -17,15 +17,11 @@ public class ConsumerConfig {
 
     @Bean
     public Consumer<EmailInfo> receiveEmail() {
-        return input -> {
-            messageConsumer.sendEmail(input);
-        };
+        return input -> messageConsumer.sendEmail(input);
     }
 
     @Bean
     public Consumer<SmsInfo> receiveSms() {
-        return input -> {
-            System.out.println("sms receive:"  + input.toString());
-        };
+        return input -> System.out.println("sms receive:" + input.toString());
     }
 }

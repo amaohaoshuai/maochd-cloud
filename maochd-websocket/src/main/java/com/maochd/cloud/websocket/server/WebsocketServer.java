@@ -18,24 +18,24 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ServerEndpoint("/websocket/{id}")
 public class WebsocketServer {
 
-    private static final AtomicInteger onlineCount = new AtomicInteger(0);
+    private static final AtomicInteger ONLINE_COUNT = new AtomicInteger(0);
 
-    private static final Map<String, Session> clients = new ConcurrentHashMap<>();
+    private static final Map<String, Session> CLIENTS = new ConcurrentHashMap<>();
 
     @OnOpen
     public void onOpen(Session session, @PathParam("id") String userId) {
         // 在线数加1
-        onlineCount.incrementAndGet();
-        clients.put(userId, session);
-        log.info("有新连接加入：{}，当前在线人数为：{}", userId, onlineCount.get());
+        ONLINE_COUNT.incrementAndGet();
+        CLIENTS.put(userId, session);
+        log.info("有新连接加入：{}，当前在线人数为：{}", userId, ONLINE_COUNT.get());
     }
 
     @OnClose
     public void onClose(Session session, @PathParam("id") String userId) {
         // 在线数减1
-        onlineCount.decrementAndGet();
-        clients.remove(session.getId());
-        log.info("有一连接关闭：{}，当前在线人数为：{}", userId, onlineCount.get());
+        ONLINE_COUNT.decrementAndGet();
+        CLIENTS.remove(session.getId());
+        log.info("有一连接关闭：{}，当前在线人数为：{}", userId, ONLINE_COUNT.get());
     }
 
     @OnMessage
@@ -60,7 +60,7 @@ public class WebsocketServer {
      * @param wsMessage 消息实体
      */
     public void sendMessageToOne(WsMessage<?> wsMessage) {
-        Session session = clients.get(wsMessage.getTo());
+        Session session = CLIENTS.get(wsMessage.getTo());
         if (session == null) {
             log.error("当前用户{}已掉线", wsMessage.getTo());
             return;
@@ -79,7 +79,7 @@ public class WebsocketServer {
      * @param wsMessage 消息实体
      */
     public void sendMessageToAll(WsMessage<?> wsMessage) {
-        for (Map.Entry<String, Session> entry : clients.entrySet()) {
+        for (Map.Entry<String, Session> entry : CLIENTS.entrySet()) {
             Session session = entry.getValue();
             String message = (wsMessage.getMessage() instanceof String)
                     ? (String) wsMessage.getMessage()

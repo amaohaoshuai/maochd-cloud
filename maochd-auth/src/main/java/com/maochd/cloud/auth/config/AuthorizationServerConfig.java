@@ -9,8 +9,8 @@ import com.maochd.cloud.auth.entity.User;
 import com.maochd.cloud.auth.properties.ClientProperties;
 import com.maochd.cloud.auth.properties.KeyPairProperties;
 import com.maochd.cloud.auth.service.UserService;
-import com.maochd.cloud.common.core.constant.ResultCode;
 import com.maochd.cloud.common.core.constant.SecurityConstants;
+import com.maochd.cloud.common.core.domain.BizResultCode;
 import com.maochd.cloud.common.core.domain.R;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -146,8 +146,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().print(JSONUtil.toJsonStr(R.fail(ResultCode.CLIENT_AUTHENTICATION_FAILED.getCode(),
-                    ResultCode.CLIENT_AUTHENTICATION_FAILED.getMsg())));
+            response.getWriter().print(JSONUtil.toJsonStr(
+                    R.fail(HttpStatus.HTTP_UNAUTHORIZED, BizResultCode.CLIENT_AUTHENTICATION_FAILED)));
             response.getWriter().flush();
         };
     }

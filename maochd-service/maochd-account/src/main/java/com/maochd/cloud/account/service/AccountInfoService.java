@@ -38,7 +38,7 @@ public interface AccountInfoService extends IService<AccountInfo> {
     /**
      * 账户充值/账户扣费
      *
-     * @param accountCode 账户帐号
+     * @param accountCode 账户账号
      * @param amount      金额
      * @param type        类型（充值/扣费）
      * @return boolean

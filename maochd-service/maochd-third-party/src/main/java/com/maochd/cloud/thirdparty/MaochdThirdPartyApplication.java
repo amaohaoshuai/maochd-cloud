@@ -14,6 +14,7 @@ public class MaochdThirdPartyApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MaochdThirdPartyApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  第三方服务启动成功   ლ(´ڡ`ლ)ﾞ");
     }
 
 }

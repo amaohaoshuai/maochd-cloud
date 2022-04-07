@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.maochd.cloud</groupId>
         <artifactId>maochd-service</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>maochd-account</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>maochd-account</name>
     <description>帐号服务</description>
 

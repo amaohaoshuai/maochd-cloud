@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MaochdMqApplication {
     public static void main(String[] args) {
         SpringApplication.run(MaochdMqApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  消息队列启动成功   ლ(´ڡ`ლ)ﾞ");
     }
 
 }

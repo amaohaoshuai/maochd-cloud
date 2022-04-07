@@ -2,7 +2,7 @@ package com.maochd.cloud.gateway.handler;
 
 import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.GatewayCallbackManager;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
-import com.maochd.cloud.common.core.constant.ResultCode;
+import com.maochd.cloud.common.core.domain.BizResultCode;
 import com.maochd.cloud.gateway.util.ResponseUtils;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ServerWebExchange;
@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
  */
 public class SentinelFallbackHandler implements WebExceptionHandler {
     private Mono<Void> writeResponse(ServerResponse response, ServerWebExchange exchange) {
-        return ResponseUtils.writeErrorInfo(exchange.getResponse(), ResultCode.FLOW_LIMITING);
+        return ResponseUtils.writeErrorInfo(exchange.getResponse(), BizResultCode.FLOW_LIMITING);
     }
 
     @Override

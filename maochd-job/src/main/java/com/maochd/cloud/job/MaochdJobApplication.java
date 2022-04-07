@@ -13,6 +13,7 @@ public class MaochdJobApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MaochdJobApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  定时任务启动成功   ლ(´ڡ`ლ)ﾞ");
     }
 
 }

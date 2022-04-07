@@ -46,7 +46,7 @@ public class AccountInfoServiceImpl extends ServiceImpl<AccountInfoMapper, Accou
 
     @Override
     @RedisLock(value = "accountCode", asObject = false)
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @RedisRemove(key = RedisConstant.KEY_ACCOUNT_LIST)
     public boolean changeAmount(String accountCode, BigDecimal amount, String type) {
         AccountInfo accountInfo = this.getOne(Wrappers.<AccountInfo>lambdaQuery()

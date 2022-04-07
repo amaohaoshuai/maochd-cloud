@@ -17,6 +17,7 @@ public class MaochdAuthApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MaochdAuthApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  认证中心启动成功   ლ(´ڡ`ლ)ﾞ");
     }
 
 }

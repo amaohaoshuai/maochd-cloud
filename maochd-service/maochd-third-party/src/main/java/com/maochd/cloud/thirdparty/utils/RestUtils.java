@@ -1,5 +1,6 @@
 package com.maochd.cloud.thirdparty.utils;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.net.URI;
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -140,12 +142,12 @@ public class RestUtils {
     }
 
     private <T> T post(String url, HttpEntity<Object> entity, Class<T> clazz) {
-        return request(url, new HashMap<>(), HttpMethod.POST, entity, clazz);
+        return request(url, CollUtil.createMap(AbstractMap.class), HttpMethod.POST, entity, clazz);
     }
 
     private <T> T post(String url,
                        HttpEntity<Object> entity, ParameterizedTypeReference<T> reference) {
-        return request(url, new HashMap<>(), HttpMethod.POST, entity, reference);
+        return request(url, CollUtil.createMap(AbstractMap.class), HttpMethod.POST, entity, reference);
     }
 
     private <T> T get(String url, Map<String, String> paramMap, HttpEntity<Object> entity, Class<T> clazz) {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
         value = ServiceNameConstant.EMAIL_SERVER,
         fallbackFactory = RemoteEmailFallbackFactory.class)
 public interface RemoteEmailService {
+
     @PostMapping("/send/text")
     @ApiOperation(value = "发送文本邮件", notes = "发送文本邮件")
     R<?> sendTextEmail(@RequestBody EmailInfo emailInfo);

@@ -16,6 +16,7 @@ public class MaochdAccountApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MaochdAccountApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  帐号服务启动成功   ლ(´ڡ`ლ)ﾞ");
     }
 
 }

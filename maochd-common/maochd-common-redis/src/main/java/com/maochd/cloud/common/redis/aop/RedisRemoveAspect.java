@@ -27,9 +27,9 @@ public class RedisRemoveAspect {
     @SneakyThrows
     @AfterReturning(pointcut = "servicePointCut()")
     public void afterMethod(JoinPoint joinPoint) {
-        //从切面织入点处通过反射机制获取织入点处的方法
+        // 从切面织入点处通过反射机制获取织入点处的方法
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        //获取切入点所在的方法
+        // 获取切入点所在的方法
         Method method = signature.getMethod();
         // 拿到注解
         RedisRemove redisRemove = method.getAnnotation(RedisRemove.class);

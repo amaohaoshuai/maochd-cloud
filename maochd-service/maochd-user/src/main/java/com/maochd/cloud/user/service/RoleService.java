@@ -1,11 +1,9 @@
 package com.maochd.cloud.user.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.maochd.cloud.user.condition.PermQueryCondition;
-import com.maochd.cloud.user.condition.RoleQueryCondition;
-import com.maochd.cloud.user.entity.Perm;
-import com.maochd.cloud.user.entity.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.maochd.cloud.user.condition.RoleQueryCondition;
+import com.maochd.cloud.user.entity.Role;
 
 import java.util.List;
 

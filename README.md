@@ -149,6 +149,7 @@ Websocket           [Websocket]
 4、安装seata server
 [CMD]: docker run -d --name maochd-seata -p 8091:8091 -e STORE_MODE=db -e SEATA_IP=10.10.3.81 -e SEATA_PORT=8091 -e SEATA_CONFIG_NAME=file:/root/seata-config/registry -v /opt/seata-config:/root/seata-config seataio/seata-server:1.4.2
 [CMD]: cd
+[说明]: 需要把middleware中的registry.conf放到/opt/seata-config下
 [当前目录]: /root
 ~~~
 
@@ -172,11 +173,11 @@ Websocket           [Websocket]
 
 ~~~
 1、 安装zookeeper
-[CMD]: docker run -d --name zookeeper -p 2181:2181 --restart=always -v /home/data/zookeeper_data/data:/data -v /home/data/zookeeper_data/conf:/conf wurstmeister/zookeeper
+[CMD]: docker run -d --name maochd-zookeeper -p 2181:2181 --restart=always -v /home/data/zookeeper_data/data:/data -v /home/data/zookeeper_data/conf:/conf wurstmeister/zookeeper
 [当前目录]: /root
 
 2、安装kafka
-[CMD]: docker run --name kafka \
+[CMD]: docker run --name maochd-kafka \
 -p 9092:9092 \
 -e KAFKA_BROKER_ID=0 \
 -e KAFKA_ZOOKEEPER_CONNECT=10.10.3.81:2181 \
@@ -195,11 +196,11 @@ Websocket           [Websocket]
 
 2、安装loki
 [CMD]: docker run -d  -u root \
--p 3100:3100 --name loki  \
+-p 3100:3100 --name maochd-loki  \
 -v /opt/loki/conf:/mnt/config \
 -v /opt/loki/tmp:/tmp/loki \
 grafana/loki:2.0.0 -config.file=/mnt/config/loki-config.yaml
-[说明]: 需要把middleware中的loki文件放到/opt.loki/conf下面，路径可以自定义，只要能和容器内部地址挂载就行
+[说明]: 需要把middleware中的loki文件放到/opt/loki/conf下面，路径可以自定义，只要能和容器内部地址挂载就行
 [当前目录]: /root
 
 3、安装grafana

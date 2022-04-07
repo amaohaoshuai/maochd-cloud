@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.maochd.cloud</groupId>
         <artifactId>maochd-cloud</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>maochd-job</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>maochd-job</name>
     <description>定时任务服务</description>
 

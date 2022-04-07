@@ -11,7 +11,7 @@
 
     <groupId>com.maochd.cloud</groupId>
     <artifactId>maochd-cloud</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>maochd-cloud</name>
     <description>maochd微服务项目</description>
     <packaging>pom</packaging>
@@ -19,6 +19,19 @@
     <properties>
         <!-- java版本 -->
         <java.version>1.8</java.version>
+
+        <!-- 总版本 -->
+        <total.version>1.0.0</total.version>
+
+        <!-- 模块版本 -->
+        <api.version>1.0.0</api.version>
+        <common.version>1.0.0</common.version>
+        <common-core.version>1.0.0</common-core.version>
+        <common-datasource.version>1.0.0</common-datasource.version>
+        <common-feign.version>1.0.0</common-feign.version>
+        <common-log.version>1.0.0</common-log.version>
+        <common-redis.version>1.0.0</common-redis.version>
+        <common-swagger.version>1.0.0</common-swagger.version>
 
         <!-- 微服务 -->
         <!-- springboot版本 -->
@@ -283,49 +296,49 @@
             <dependency>
                 <groupId>com.maochd.cloud</groupId>
                 <artifactId>maochd-api</artifactId>
-                <version>${project.version}</version>
+                <version>${api.version}</version>
             </dependency>
 
             <!-- 公共核心模块 -->
             <dependency>
                 <groupId>com.maochd.cloud</groupId>
                 <artifactId>maochd-common-core</artifactId>
-                <version>${project.version}</version>
+                <version>${common-core.version}</version>
             </dependency>
 
             <!-- API文档模块 -->
             <dependency>
                 <groupId>com.maochd.cloud</groupId>
                 <artifactId>maochd-common-swagger</artifactId>
-                <version>${project.version}</version>
+                <version>${common-swagger.version}</version>
             </dependency>
 
             <!-- 数据源模块 -->
             <dependency>
                 <groupId>com.maochd.cloud</groupId>
                 <artifactId>maochd-common-datasource</artifactId>
-                <version>${project.version}</version>
+                <version>${common-datasource.version}</version>
             </dependency>
 
             <!-- Redis缓存模块 -->
             <dependency>
                 <groupId>com.maochd.cloud</groupId>
                 <artifactId>maochd-common-redis</artifactId>
-                <version>${project.version}</version>
+                <version>${common-redis.version}</version>
             </dependency>
 
             <!-- 日志模块 -->
             <dependency>
                 <groupId>com.maochd.cloud</groupId>
                 <artifactId>maochd-common-log</artifactId>
-                <version>${project.version}</version>
+                <version>${common-log.version}</version>
             </dependency>
 
             <!-- 远程调用模块 -->
             <dependency>
                 <groupId>com.maochd.cloud</groupId>
                 <artifactId>maochd-common-feign</artifactId>
-                <version>${project.version}</version>
+                <version>${common-feign.version}</version>
             </dependency>
 
             <!-- Redisson -->

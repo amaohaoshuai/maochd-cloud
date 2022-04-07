@@ -47,8 +47,7 @@ public class SwaggerConfig {
         if (swaggerProperties.getBasePath().isEmpty()) {
             swaggerProperties.getBasePath().add(BASE_PATH);
         }
-        // noinspection unchecked
-        List<Predicate<String>> basePath = new ArrayList<Predicate<String>>();
+        List<Predicate<String>> basePath = new ArrayList<>();
         swaggerProperties.getBasePath().forEach(path -> basePath.add(PathSelectors.ant(path)));
 
         // exclude-path处理
@@ -74,7 +73,7 @@ public class SwaggerConfig {
      * 安全模式，这里指定token通过Authorization头请求头传递
      */
     private List<ApiKey> securitySchemes() {
-        List<ApiKey> apiKeyList = new ArrayList<ApiKey>();
+        List<ApiKey> apiKeyList = new ArrayList<>();
         apiKeyList.add(new ApiKey("Authorization", "Authorization", "header"));
         return apiKeyList;
     }
@@ -95,7 +94,7 @@ public class SwaggerConfig {
     /**
      * 默认的全局鉴权策略
      *
-     * @return
+     * @return list
      */
     private List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");

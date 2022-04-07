@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>maochd-gateway</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>maochd-gateway</name>
     <description>网关服务</description>
 
     <parent>
         <groupId>com.maochd.cloud</groupId>
         <artifactId>maochd-cloud</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <properties>
