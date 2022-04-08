@@ -1,6 +1,5 @@
 package com.maochd.cloud.common.redis.aop;
 
-import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.maochd.cloud.common.core.exception.RedisBizException;
@@ -9,7 +8,6 @@ import com.maochd.cloud.common.redis.constants.LockConst;
 import com.maochd.cloud.common.redis.service.RedissonService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.ArrayUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,7 +17,11 @@ import org.redisson.api.RLock;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Aspect
@@ -46,34 +48,36 @@ public class RedisLockAspect {
         long leaseTime = redisLock.leaseTime();
         // 获取参数值列表
         Object[] args = joinPoint.getArgs();
-        // 获取参数列表拼接成字符串
-        String lockName = JSON.toJSONString(args);
-        // 获取自定义锁名
-        String paramName = redisLock.value();
-        boolean asObject = redisLock.asObject();
-        // 如果注解中包含lockName值，则按lockName值加锁
-        if (StrUtil.isNotBlank(paramName)) {
-            String value;
-            if (asObject) {
-                JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(args[redisLock.index()]));
-                value = String.valueOf(jsonObject.get(paramName));
-            } else {
-                int index = ArrayUtils.indexOf(signature.getParameterNames(), paramName);
-                if (index < 0) {
-                    log.error(LockConst.NO_MATCH_LOCK_NAME_MSG, threadName);
-                    throw new RedisBizException(LockConst.NO_MATCH_LOCK_NAME);
+        StringBuffer lockNameBuff = new StringBuffer(redisLock.prefix());
+        if (redisLock.asObject()) {
+            lockNameBuff.append(JSON.toJSONString(args));
+        } else {
+            // 取出参数名称
+            List<String> parameterNames = Arrays.asList(signature.getParameterNames());
+            // 取出自定义key值名称
+            List<String> keys = Arrays.stream(redisLock.value().split(","))
+                    .map(String::trim).collect(Collectors.toList());
+            parameterNames.forEach(f -> {
+                if (keys.indexOf(f) > 0) {
+                    int index = parameterNames.indexOf(f);
+                    args[index] = new HashMap<String, String>() {{
+                        put(parameterNames.get(index), (String) args[index]);
+                    }};
                 }
-                value = String.valueOf(args[index]);
-            }
-            lockName = String.format(LockConst.CUSTOM_LOCK_NAME, paramName, value);
+            });
+            // 把参数合并到一个map中
+            JSONObject argMap = new JSONObject();
+            Arrays.stream(args).forEach(f -> argMap.putAll(JSONObject.parseObject(JSONObject.toJSONString(f))));
+            keys.forEach(f -> lockNameBuff.append(argMap.getString(f.trim())));
         }
+        String lockName = lockNameBuff.toString();
         RLock lock = redissonService.getLock(lockName);
         // 根据释放时间判断是否启用watchDog
         boolean lockFlag = leaseTime < 0 ? lock.tryLock(redisLock.waitTime(), TimeUnit.SECONDS)
                 : lock.tryLock(redisLock.waitTime(), redisLock.leaseTime(), TimeUnit.SECONDS);
         if (!lockFlag) {
             log.error(LockConst.LOCK_FAIL_MSG, threadName);
-            throw new RedisBizException(LockConst.TIME_OUT);
+            throw new RedisBizException(redisLock.errMsg());
         }
         log.info(LockConst.LOCK_COMPLETED_MSG, threadName);
         try {

@@ -22,13 +22,6 @@ public @interface RedisLock {
     boolean asObject() default true;
 
     /**
-     * 锁名所在参数的索引
-     *
-     * @return int
-     */
-    int index() default 0;
-
-    /**
      * 锁释放时间
      *
      * @return long
@@ -41,5 +34,19 @@ public @interface RedisLock {
      * @return long
      */
     long waitTime() default 1;
+
+    /**
+     * 自定义错误提示
+     *
+     * @return string
+     */
+    String errMsg() default "当前接口正在被其他线程访问";
+
+    /**
+     * 前置Key
+     *
+     * @return string
+     */
+    String prefix() default "redisLock:";
 
 }
