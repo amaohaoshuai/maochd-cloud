@@ -6,12 +6,14 @@ import com.maochd.cloud.common.swagger.annotation.EnableSwagger2Config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @EnableDiscoveryClient
 @EnableFeignConfig
 @SpringBootApplication
 @EnableSwagger2Config
 @EnableMybatisConfig
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class MaochdAccountApplication {
 
     public static void main(String[] args) {

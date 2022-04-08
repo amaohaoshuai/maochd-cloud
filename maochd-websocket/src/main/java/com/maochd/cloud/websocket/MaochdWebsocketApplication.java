@@ -14,6 +14,7 @@ public class MaochdWebsocketApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MaochdWebsocketApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  WebSocket服务启动成功   ლ(´ڡ`ლ)ﾞ");
     }
 
 }
