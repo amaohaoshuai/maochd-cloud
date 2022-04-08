@@ -187,7 +187,7 @@ Websocket           [Websocket]
 [当前目录]: /root
 ~~~
 
-#### 安装loki日志（当前未对服务制作镜像，可先不安装）
+#### 安装loki日志
 
 ~~~
 1、安装loki-docker插件
@@ -209,4 +209,26 @@ grafana/loki:2.0.0 -config.file=/mnt/config/loki-config.yaml
 -v /opt/grafana:/var/lib/grafana \
 grafana/grafana:8.1.2
 [当前目录]: /root
+~~~
+
+#### 服务部署（这里使用maochd-gateway这个服务举例|这里没有搞CI/CD,有需要可在issue中留言）
+
+~~~
+[步骤1]: 
+    使用maven打包项目
+[步骤2]: 
+    把需要部署的jar包和Dockerfile文件放在一个目录下
+[步骤3]: 
+    打包docker镜像 
+    [CMD]: docker build --build-arg SERVICE_NAME=maochd-gateway.jar -t maochd-gateway:1.0.0 .
+    [说明]: SERVICE_NAME 是jar包名， 1.0.0是版本号
+[步骤4]:
+    运行容器
+    [CMD]: docker run -itd --restart always --name maochd-gateway -p 18080:18080 \
+    --log-driver=loki --log-opt loki-url="http://192.168.98.128:3100/loki/api/v1/push" \
+     --log-opt max-size=1024m --log-opt max-file=3 maochd-gateway:1.0.0
+    [说明]: 
+        --restart always : 服务挂掉时会重启，但是服务本身有问题会一直重启
+        --log-driver=loki --log-opt loki-url="http://192.168.98.128:3100/loki/api/v1/push" \
+     --log-opt max-size=1024m --log-opt max-file=3 : 使用loki搜集日志，需要结合上文的loki和grafana使用
 ~~~
