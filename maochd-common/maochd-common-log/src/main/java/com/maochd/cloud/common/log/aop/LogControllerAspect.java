@@ -1,5 +1,7 @@
 package com.maochd.cloud.common.log.aop;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.maochd.cloud.common.log.constant.LogConst;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -38,10 +40,15 @@ public class LogControllerAspect {
     public Object interceptor(ProceedingJoinPoint joinPoint) {
         HttpServletRequest request = ((ServletRequestAttributes)
                 RequestContextHolder.currentRequestAttributes()).getRequest();
-        //从切面织入点处通过反射机制获取织入点处的方法
+        // 从切面织入点处通过反射机制获取织入点处的方法
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        //获取切入点所在的方法
+        // 获取切入点所在的方法
         Method method = signature.getMethod();
+        // 读取Deprecated注解，如果存在则打印warn日志，后续需要抛出异常（因为无法确定线上是否使用废弃接口，先观察一段时间）
+        Deprecated deprecatedAnnotation = method.getAnnotation(Deprecated.class);
+        if (deprecatedAnnotation != null) {
+            log.warn(LogConst.LOG_DEPRECATED_MSG, method.getName(), request.getRequestURI());
+        }
         // 获取参数名称
         LocalVariableTableParameterNameDiscoverer paramNames = new LocalVariableTableParameterNameDiscoverer();
         String[] params = paramNames.getParameterNames(method);
@@ -51,13 +58,30 @@ public class LogControllerAspect {
         Map<String, Object> reqParams = IntStream.range(0, args.size())
                 .boxed()
                 .collect(Collectors.toMap(k -> Objects.requireNonNull(params)[k], args::get));
-        log.info(LogConst.LOG_START_MSG, method.getName(), request.getMethod(), reqParams);
+        // 打印方法开始日志
+        log.info(LogConst.LOG_START_MSG, method.getName(), request.getRequestURI(), request.getMethod(),
+                JSONObject.toJSONString(reqParams, SerializerFeature.DisableCircularReferenceDetect));
         // 获取开始时间
         LocalDateTime startTime = LocalDateTime.now();
-        Object result = joinPoint.proceed();
+        Object result;
+        try {
+            result = joinPoint.proceed();
+        } catch (Throwable e) {
+            // 打印方法异常日志
+            log.error(LogConst.LOG_ERROR_MSG, method.getName(), request.getRequestURI(), request.getMethod(),
+                    JSONObject.toJSONString(reqParams, SerializerFeature.DisableCircularReferenceDetect));
+            throw e;
+        }
         // 计算方法耗时
         long diffTime = Duration.between(startTime, LocalDateTime.now()).toMillis();
-        log.info(LogConst.LOG_END_MSG, method.getName(), diffTime, result);
+        // 打印方法结束日志
+        log.info(LogConst.LOG_END_MSG, method.getName(), diffTime,
+                JSONObject.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect));
+        // 打印慢方法日志
+        long slowMethodTime = 2000L;
+        if (diffTime > slowMethodTime) {
+            log.warn(LogConst.LOG_SLOW_METHOD_MSG, method.getName(), request.getRequestURI(), diffTime);
+        }
         return result;
     }
 }
