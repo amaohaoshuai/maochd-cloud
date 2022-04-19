@@ -60,7 +60,7 @@ public class RedisLockAspect {
             parameterNames.forEach(f -> {
                 if (keys.indexOf(f) > 0) {
                     int index = parameterNames.indexOf(f);
-                    args[index] = new HashMap<String, String>() {{
+                    args[index] = new HashMap<String, String>(16) {{
                         put(parameterNames.get(index), (String) args[index]);
                     }};
                 }

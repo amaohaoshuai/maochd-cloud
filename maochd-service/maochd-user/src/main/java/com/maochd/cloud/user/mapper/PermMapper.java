@@ -9,5 +9,11 @@ import java.util.List;
 
 public interface PermMapper extends BaseMapper<Perm> {
 
+    /**
+     * 根据角色获取权限列表
+     *
+     * @param roleId 角色ID
+     * @return perm list
+     */
     List<Perm> getPermsByRole(@Param("roleId") Long roleId);
 }
