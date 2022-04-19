@@ -18,12 +18,12 @@ com.maochd.cloud
 ├── maochd-mq                                // 消息队列服务 [19005]
 ├── maochd-websocket                         // Websocket服务 [19008]
 ├── middleware                               // 配置文件
-        └── application                      // Nacos配置中心文件
-        └── loki                             // 日志配置
-        └── seata                            // Seata配置
-        └── sentinel                         // 限流配置
-        └── sql                              // 数据库文件 
-        └── html                             // HTML文件 
+│       └── application                      // Nacos配置中心文件
+│       └── loki                             // 日志配置
+│       └── seata                            // Seata配置
+│       └── sentinel                         // 限流配置
+│       └── sql                              // 数据库文件 
+│       └── html                             // HTML文件 
 ├── maochd-api                               // API调用模块
 ├── maochd-common                            // 公共组件模块
 │       └── maochd-common-core               // 公共核心模块
