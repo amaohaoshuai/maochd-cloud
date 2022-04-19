@@ -32,7 +32,7 @@ public class GoodsInfoServiceImpl extends ServiceImpl<GoodsInfoMapper, GoodsInfo
 
     @Override
     public Page<GoodsInfo> page(GoodsQueryCondition cond) {
-        return this.page(new Page<>(cond.current(), cond.size()), Wrappers.<GoodsInfo>lambdaQuery()
+        return this.page(cond.orderWithPage(), Wrappers.<GoodsInfo>lambdaQuery()
                 .eq(StrUtil.isNotBlank(cond.getGoodsCode()), GoodsInfo::getGoodsCode, cond.getGoodsCode())
                 .like(StrUtil.isNotBlank(cond.getGoodsName()), GoodsInfo::getGoodsName, cond.getGoodsName()));
     }

@@ -33,7 +33,7 @@ public class AccountInfoServiceImpl extends ServiceImpl<AccountInfoMapper, Accou
 
     @Override
     public Page<AccountInfo> page(AccountQueryCondition cond) {
-        return this.page(new Page<>(cond.current(), cond.size()), Wrappers.<AccountInfo>lambdaQuery()
+        return this.page(cond.orderWithPage(), Wrappers.<AccountInfo>lambdaQuery()
                 .like(StrUtil.isNotBlank(cond.getAccountName()), AccountInfo::getAccountName, cond.getAccountName()));
     }
 

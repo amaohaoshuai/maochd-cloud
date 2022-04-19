@@ -1,12 +1,17 @@
-package com.maochd.cloud.common.core.domain;
+package com.maochd.cloud.common.datasource.domain;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -20,11 +25,11 @@ public class QueryCondition implements Serializable {
     @ApiModelProperty(value = "当前页码")
     private Integer pageNum;
 
-    @ApiModelProperty(value = "是否按创建时间降序(字符串)")
-    private String timeDesc;
-
     @ApiModelProperty(value = "关键字(模糊搜索)")
     private String keyword;
+
+    @ApiModelProperty(value = "排序字段数组")
+    private List<OrderItem> orderItems;
 
     private static Map<String, String> kwMap = new LinkedHashMap<String, String>() {{
         put("\\", "\\\\");
@@ -46,5 +51,34 @@ public class QueryCondition implements Serializable {
 
     public Integer current() {
         return pageNum == null ? 1 : pageNum;
+    }
+
+    /**
+     * 分页+排序封装
+     *
+     * @return 分页对象
+     */
+    public <T> Page<T> orderWithPage() {
+        Page<T> page = new Page<>(current(), size());
+        if (CollUtil.isNotEmpty(orderItems)) {
+            orderItems.forEach(f-> f.setColumn(StrUtil.toUnderlineCase(f.getColumn()).toLowerCase(Locale.ROOT)));
+            page.addOrder(orderItems);
+        }
+        return page;
+    }
+
+    /**
+     * 不分页+排序封装
+     *
+     * @return 分页对象
+     */
+    public <T> Page<T> orderWithoutPage() {
+        Page<T> page = new Page<>();
+        page.setSize(-1);
+        if (CollUtil.isNotEmpty(orderItems)) {
+            orderItems.forEach(f-> f.setColumn(StrUtil.toUnderlineCase(f.getColumn()).toLowerCase(Locale.ROOT)));
+            page.addOrder(orderItems);
+        }
+        return page;
     }
 }

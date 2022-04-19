@@ -49,5 +49,11 @@
             <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatis-plus.generator.version}</version>
         </dependency>
+
+        <!-- 数据源模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-datasource</artifactId>
+        </dependency>
     </dependencies>
 </project>

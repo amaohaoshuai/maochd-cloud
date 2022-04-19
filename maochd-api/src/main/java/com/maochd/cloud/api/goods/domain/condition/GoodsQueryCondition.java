@@ -1,6 +1,6 @@
 package com.maochd.cloud.api.goods.domain.condition;
 
-import com.maochd.cloud.common.core.domain.QueryCondition;
+import com.maochd.cloud.common.datasource.domain.QueryCondition;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
