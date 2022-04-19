@@ -23,14 +23,21 @@
         <!-- 总版本 -->
         <total.version>1.0.0</total.version>
 
-        <!-- 模块版本 -->
+        <!-- API调用模块总版本 -->
         <api.version>1.0.0</api.version>
+        <!-- common模块总版本 -->
         <common.version>1.0.0</common.version>
+        <!-- 公共核心模块版本 -->
         <common-core.version>1.0.0</common-core.version>
+        <!-- 数据源模块版本 -->
         <common-datasource.version>1.0.0</common-datasource.version>
+        <!-- 远程调用模块版本 -->
         <common-feign.version>1.0.0</common-feign.version>
+        <!-- 日志模块版本 -->
         <common-log.version>1.0.0</common-log.version>
+        <!-- Redis缓存模块版本 -->
         <common-redis.version>1.0.0</common-redis.version>
+        <!-- API文档模块版本 -->
         <common-swagger.version>1.0.0</common-swagger.version>
 
         <!-- 微服务 -->
