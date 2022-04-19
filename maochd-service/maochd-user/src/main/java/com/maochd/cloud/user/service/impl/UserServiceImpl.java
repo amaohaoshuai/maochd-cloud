@@ -38,7 +38,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public Page<User> page(UserQueryCondition cond) {
-        return this.page(new Page<>(cond.current(), cond.size()), Wrappers.<User>lambdaQuery()
+        return this.page(cond.orderWithPage(), Wrappers.<User>lambdaQuery()
                 .like(StrUtil.isNotBlank(cond.getUsername()), User::getUsername, cond.getUsername())
                 .eq(StrUtil.isNotBlank(cond.getPhone()), User::getPhone, cond.getPhone())
                 .eq(cond.getStatus() != null, User::getStatus, cond.getStatus()));

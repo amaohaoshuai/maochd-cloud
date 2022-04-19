@@ -46,7 +46,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
 
     @Override
     public Page<OrderInfo> page(OrderQueryCondition cond) {
-        return this.page(new Page<>(cond.current(), cond.size()), Wrappers.<OrderInfo>lambdaQuery()
+        return this.page(cond.orderWithPage(), Wrappers.<OrderInfo>lambdaQuery()
                 .eq(StrUtil.isNotBlank(cond.getOrderId()), OrderInfo::getOrderId, cond.getOrderId())
                 .eq(StrUtil.isNotBlank(cond.getAccountCode()), OrderInfo::getAccountCode, cond.getAccountCode())
                 .eq(cond.getUserId() != null, OrderInfo::getUserId, cond.getUserId()));

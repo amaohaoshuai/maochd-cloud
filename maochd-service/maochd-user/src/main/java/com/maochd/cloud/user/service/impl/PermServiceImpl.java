@@ -29,7 +29,7 @@ public class PermServiceImpl extends ServiceImpl<PermMapper, Perm> implements Pe
 
     @Override
     public Page<Perm> page(PermQueryCondition condition) {
-        return this.page(new Page<>(condition.current(), condition.size()), Wrappers.<Perm>lambdaQuery()
+        return this.page(condition.orderWithPage(), Wrappers.<Perm>lambdaQuery()
                 .like(StrUtil.isNotBlank(condition.getInterfaceName()), Perm::getInterfaceName, condition.getInterfaceName())
                 .eq(StrUtil.isNotBlank(condition.getRequestType()), Perm::getRequestType, condition.getRequestType()));
     }

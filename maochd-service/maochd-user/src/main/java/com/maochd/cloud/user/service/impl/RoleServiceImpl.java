@@ -28,7 +28,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Override
     public Page<Role> page(RoleQueryCondition condition) {
-        return this.page(new Page<>(condition.current(), condition.size()), Wrappers.<Role>lambdaQuery()
+        return this.page(condition.orderWithPage(), Wrappers.<Role>lambdaQuery()
                 .like(StrUtil.isNotBlank(condition.getRoleName()), Role::getRoleName, condition.getRoleName())
                 .like(StrUtil.isNotBlank(condition.getRoleMark()), Role::getRoleMark, condition.getRoleMark()));
     }
