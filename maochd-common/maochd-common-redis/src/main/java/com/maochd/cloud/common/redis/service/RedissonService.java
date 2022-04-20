@@ -3,7 +3,6 @@ package com.maochd.cloud.common.redis.service;
 import lombok.SneakyThrows;
 import org.redisson.Redisson;
 import org.redisson.api.*;
-import org.redisson.config.Config;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,8 +17,8 @@ public class RedissonService {
     private Redisson redisson;
 
     @SneakyThrows
-    public void getRedissonClient() {
-        Config config = redissonClient.getConfig();
+    public RedissonClient getRedissonClient() {
+        return redissonClient;
     }
 
     /**

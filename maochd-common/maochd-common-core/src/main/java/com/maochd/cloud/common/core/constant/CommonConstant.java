@@ -10,4 +10,6 @@ public interface CommonConstant {
 
     String FAIL_MSG = "操作失败";
 
+    String BASE_PACKAGE = "com.maochd.cloud";
+
 }

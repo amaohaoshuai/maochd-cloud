@@ -1,7 +1,9 @@
 package com.maochd.cloud.common.redis.aop;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.maochd.cloud.common.core.constant.CommonConstant;
 import com.maochd.cloud.common.core.exception.RedisBizException;
 import com.maochd.cloud.common.redis.annotation.RedisLock;
 import com.maochd.cloud.common.redis.constants.LockConst;
@@ -42,13 +44,24 @@ public class RedisLockAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         // 获取切入点所在的方法
         Method method = signature.getMethod();
+        // 获取切入点方法所在的类
+        String className = joinPoint.getTarget().getClass().getName();
         // 拿到注解
         RedisLock redisLock = method.getAnnotation(RedisLock.class);
+        // 获取看门狗时间
+        long watchDogTime = redisLock.watchDogTime();
+        // 如果与默认时间不同，则覆盖
+        if (watchDogTime != LockConst.DEFAULT_WATCH_DOG_TIME) {
+            redissonService.getRedissonClient().getConfig().setLockWatchdogTimeout(watchDogTime);
+        }
         // 获取锁释放时间
         long leaseTime = redisLock.leaseTime();
         // 获取参数值列表
         Object[] args = joinPoint.getArgs();
-        StringBuffer lockNameBuff = new StringBuffer(redisLock.prefix());
+        // 初始化锁名
+        StringBuffer lockNameBuff = new StringBuffer(redisLock.prefix())
+                .append(className.replaceAll(CommonConstant.BASE_PACKAGE, StrUtil.EMPTY).substring(1))
+                .append(":").append(method.getName()).append(":");
         if (redisLock.asObject()) {
             lockNameBuff.append(JSON.toJSONString(args));
         } else {
@@ -76,20 +89,21 @@ public class RedisLockAspect {
         boolean lockFlag = leaseTime < 0 ? lock.tryLock(redisLock.waitTime(), TimeUnit.SECONDS)
                 : lock.tryLock(redisLock.waitTime(), redisLock.leaseTime(), TimeUnit.SECONDS);
         if (!lockFlag) {
-            log.error(LockConst.LOCK_FAIL_MSG, threadName);
+            log.error(LockConst.LOCK_FAIL_MSG, threadName, lockName);
             throw new RedisBizException(redisLock.errMsg());
         }
-        log.info(LockConst.LOCK_COMPLETED_MSG, threadName);
+        log.info(LockConst.LOCK_COMPLETED_MSG, threadName, lockName, redisLock.waitTime(), leaseTime,
+                redissonService.getRedissonClient().getConfig().getLockWatchdogTimeout());
         try {
             return joinPoint.proceed();
         } catch (Throwable e) {
-            log.error(LockConst.BUSINESS_ERROR_MSG, threadName, e);
+            log.error(LockConst.BUSINESS_ERROR_MSG, threadName, lockName, e);
             throw new RedisBizException(e.getMessage());
         } finally {
             // 如果该线程还持有该锁，那么释放该锁。如果该线程不持有该锁，说明该线程的锁已到过期时间，自动释放锁
             if (redissonService.isHeldByCurrentThread(lockName)) {
                 redissonService.unlock(lockName);
-                log.info(LockConst.UNLOCK_COMPLETE_MSG, threadName);
+                log.info(LockConst.UNLOCK_COMPLETE_MSG, threadName, lockName);
             }
         }
     }
