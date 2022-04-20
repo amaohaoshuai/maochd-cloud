@@ -48,6 +48,12 @@
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.maochd.cloud</groupId>
+                    <artifactId>maochd-common-datasource</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- 公共核心模块 -->

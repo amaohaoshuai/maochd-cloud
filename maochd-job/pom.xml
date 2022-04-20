@@ -19,6 +19,18 @@
     </properties>
 
     <dependencies>
+        <!-- API调用模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <!-- 公共核心模块 -->
         <dependency>
             <groupId>com.maochd.cloud</groupId>
@@ -29,6 +41,18 @@
         <dependency>
             <groupId>com.maochd.cloud</groupId>
             <artifactId>maochd-common-feign</artifactId>
+        </dependency>
+
+        <!-- API文档模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-swagger</artifactId>
+        </dependency>
+
+        <!-- 日志模块 -->
+        <dependency>
+            <groupId>com.maochd.cloud</groupId>
+            <artifactId>maochd-common-log</artifactId>
         </dependency>
 
         <!-- Xxl Job Core -->
@@ -48,12 +72,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-
-        <!-- API调用模块 -->
-        <dependency>
-            <groupId>com.maochd.cloud</groupId>
-            <artifactId>maochd-api</artifactId>
         </dependency>
 
         <!-- SpringCloud Ailibaba Nacos -->

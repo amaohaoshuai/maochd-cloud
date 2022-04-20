@@ -11,7 +11,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -19,12 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Slf4j
 @Aspect
@@ -49,18 +42,8 @@ public class LogControllerAspect {
         if (deprecatedAnnotation != null) {
             log.warn(LogConst.LOG_DEPRECATED_MSG, method.getName(), request.getRequestURI());
         }
-        // 获取参数名称
-        LocalVariableTableParameterNameDiscoverer paramNames = new LocalVariableTableParameterNameDiscoverer();
-        String[] params = paramNames.getParameterNames(method);
-        // 获取参数
-        List<Object> args = Arrays.asList(joinPoint.getArgs());
-        // 拼接参数
-        Map<String, Object> reqParams = IntStream.range(0, args.size())
-                .boxed()
-                .collect(Collectors.toMap(k -> Objects.requireNonNull(params)[k], args::get));
         // 打印方法开始日志
-        log.info(LogConst.LOG_START_MSG, method.getName(), request.getRequestURI(), request.getMethod(),
-                JSONObject.toJSONString(reqParams, SerializerFeature.DisableCircularReferenceDetect));
+        log.info(LogConst.LOG_START_MSG, method.getName(), request.getRequestURI(), request.getMethod(), joinPoint.getArgs());
         // 获取开始时间
         LocalDateTime startTime = LocalDateTime.now();
         Object result;
@@ -68,8 +51,7 @@ public class LogControllerAspect {
             result = joinPoint.proceed();
         } catch (Throwable e) {
             // 打印方法异常日志
-            log.error(LogConst.LOG_ERROR_MSG, method.getName(), request.getRequestURI(), request.getMethod(),
-                    JSONObject.toJSONString(reqParams, SerializerFeature.DisableCircularReferenceDetect));
+            log.error(LogConst.LOG_ERROR_MSG, method.getName(), request.getRequestURI(), request.getMethod(), joinPoint.getArgs());
             throw e;
         }
         // 计算方法耗时

@@ -49,4 +49,11 @@ public @interface RedisLock {
      */
     String prefix() default "redisLock:";
 
+    /**
+     * watchDog时间
+     *
+     * @return long
+     */
+    long watchDogTime() default 30000;
+
 }
