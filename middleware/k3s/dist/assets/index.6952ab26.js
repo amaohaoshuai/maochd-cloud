@@ -1,0 +1,1 @@
+import"./index.ab904951.js";import{a as r}from"./axios.7b768d2b.js";function a(a){return r.get("/gateway/chain-store/order/report/query/abnormal",{params:a})}function e(a){return r.get(`/gateway/chain-store/order/report/query/abnormal/detail/${a}`)}export{e as a,a as g};

@@ -1,0 +1,11 @@
+mirrors:
+  "hub.maochd.com:444":
+    endpoint:
+      - "https://hub.maochd.com:444"
+configs:
+  "hub.maochd.com:444":
+    auth:
+      username: admin # 这是私有镜像仓库的用户名
+      password: 123456 # 这是私有镜像仓库的密码
+    tls:
+      insecure_skip_verify: true

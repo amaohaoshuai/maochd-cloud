@@ -1,0 +1,1 @@
+import"./index.ab904951.js";import{a as e}from"./axios.7b768d2b.js";function t(t){return e.get("/gateway/chain-store/rushRed/queryPage",{params:t})}function a(){return e.get("/gateway/chain-store/supplier/find/supplierSelectList")}function r(t){return e.get(`/gateway/chain-store/rushRed/get/${t}`)}export{r as a,t as g,a as s};
